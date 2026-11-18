@@ -1,0 +1,2795 @@
+{
+  "schema": "benchtwin/circuit-v1",
+  "project": "FlightCore Telemetry & Sensor Expansion Board",
+  "version": "1.0.0",
+  "safety_constraint": "STRICTLY TELEMETRY ONLY \u2014 NO MOTOR/ESC PWM OUTPUTS",
+  "board": {
+    "width_mm": 96.0,
+    "height_mm": 68.0,
+    "layers": 2
+  },
+  "power_rails": {
+    "VBAT_IN": "7.4V - 25.2V (2S-6S LiPo)",
+    "+5V_BUS": "5.0V (3A Buck BEC)",
+    "+3V3_BUS": "3.3V (AMS1117-3.3 1A Dedicated Sensor/RF Rail)"
+  },
+  "components": [
+    {
+      "ref": "U1",
+      "name": "MCU Module",
+      "value": "ESP32-DevKit-V1-30P",
+      "package": "FlightCore:ESP32_DevKit_V1_30P",
+      "x_mm": 35.0,
+      "y_mm": 32.0,
+      "simulation_support": "mcu_gpio_bus",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "EN",
+          "net": "NC_EN"
+        },
+        {
+          "pin": "2",
+          "name": "VP/GPIO36",
+          "net": "NTC_ADC"
+        },
+        {
+          "pin": "3",
+          "name": "VN/GPIO39",
+          "net": "NC_VN"
+        },
+        {
+          "pin": "4",
+          "name": "D34/GPIO34",
+          "net": "VBAT_ADC"
+        },
+        {
+          "pin": "5",
+          "name": "D35/GPIO35",
+          "net": "IBAT_ADC"
+        },
+        {
+          "pin": "6",
+          "name": "D32/GPIO32",
+          "net": "MPU_INT"
+        },
+        {
+          "pin": "7",
+          "name": "D33/GPIO33",
+          "net": "HALL_SIG"
+        },
+        {
+          "pin": "8",
+          "name": "D25/GPIO25",
+          "net": "TOF_INT"
+        },
+        {
+          "pin": "9",
+          "name": "D26/GPIO26",
+          "net": "TOF_XSHUT"
+        },
+        {
+          "pin": "10",
+          "name": "D27/GPIO27",
+          "net": "LORA_DIO0"
+        },
+        {
+          "pin": "11",
+          "name": "D14/GPIO14",
+          "net": "LORA_RST"
+        },
+        {
+          "pin": "12",
+          "name": "D12/GPIO12",
+          "net": "NC_D12"
+        },
+        {
+          "pin": "13",
+          "name": "D13/GPIO13",
+          "net": "NC_D13"
+        },
+        {
+          "pin": "14",
+          "name": "GND",
+          "net": "GND"
+        },
+        {
+          "pin": "15",
+          "name": "VIN",
+          "net": "+5V_BUS"
+        },
+        {
+          "pin": "16",
+          "name": "3V3",
+          "net": "ESP32_3V3"
+        },
+        {
+          "pin": "17",
+          "name": "GND",
+          "net": "GND"
+        },
+        {
+          "pin": "18",
+          "name": "D15/GPIO15",
+          "net": "NC_D15"
+        },
+        {
+          "pin": "19",
+          "name": "D2/GPIO2",
+          "net": "STATUS_LED"
+        },
+        {
+          "pin": "20",
+          "name": "D4/GPIO4",
+          "net": "CAL_BTN"
+        },
+        {
+          "pin": "21",
+          "name": "RX2/GPIO16",
+          "net": "CAM_UART_RX"
+        },
+        {
+          "pin": "22",
+          "name": "TX2/GPIO17",
+          "net": "CAM_UART_TX"
+        },
+        {
+          "pin": "23",
+          "name": "D5/GPIO5",
+          "net": "LORA_CS"
+        },
+        {
+          "pin": "24",
+          "name": "D18/GPIO18",
+          "net": "VSPI_SCK"
+        },
+        {
+          "pin": "25",
+          "name": "D19/GPIO19",
+          "net": "VSPI_MISO"
+        },
+        {
+          "pin": "26",
+          "name": "D21/GPIO21",
+          "net": "I2C_SDA"
+        },
+        {
+          "pin": "27",
+          "name": "RX0/GPIO3",
+          "net": "NC_RX0"
+        },
+        {
+          "pin": "28",
+          "name": "TX0/GPIO1",
+          "net": "NC_TX0"
+        },
+        {
+          "pin": "29",
+          "name": "D22/GPIO22",
+          "net": "I2C_SCL"
+        },
+        {
+          "pin": "30",
+          "name": "D23/GPIO23",
+          "net": "VSPI_MOSI"
+        }
+      ]
+    },
+    {
+      "ref": "U2",
+      "name": "6-Axis IMU",
+      "value": "MPU6050-GY521",
+      "package": "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical",
+      "x_mm": 54.0,
+      "y_mm": 26.0,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "VCC",
+          "net": "+3V3_BUS"
+        },
+        {
+          "pin": "2",
+          "name": "GND",
+          "net": "GND"
+        },
+        {
+          "pin": "3",
+          "name": "SCL",
+          "net": "I2C_SCL"
+        },
+        {
+          "pin": "4",
+          "name": "SDA",
+          "net": "I2C_SDA"
+        },
+        {
+          "pin": "5",
+          "name": "XDA",
+          "net": "NC_XDA"
+        },
+        {
+          "pin": "6",
+          "name": "XCL",
+          "net": "NC_XCL"
+        },
+        {
+          "pin": "7",
+          "name": "AD0",
+          "net": "GND"
+        },
+        {
+          "pin": "8",
+          "name": "INT",
+          "net": "MPU_INT"
+        }
+      ]
+    },
+    {
+      "ref": "U3",
+      "name": "ToF Laser Ranging",
+      "value": "VL53L0X-ToF",
+      "package": "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical",
+      "x_mm": 63.0,
+      "y_mm": 28.0,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "VIN",
+          "net": "+3V3_BUS"
+        },
+        {
+          "pin": "2",
+          "name": "GND",
+          "net": "GND"
+        },
+        {
+          "pin": "3",
+          "name": "SCL",
+          "net": "I2C_SCL"
+        },
+        {
+          "pin": "4",
+          "name": "SDA",
+          "net": "I2C_SDA"
+        },
+        {
+          "pin": "5",
+          "name": "GPIO1",
+          "net": "TOF_INT"
+        },
+        {
+          "pin": "6",
+          "name": "XSHUT",
+          "net": "TOF_XSHUT"
+        }
+      ]
+    },
+    {
+      "ref": "U4",
+      "name": "433MHz LoRa RF",
+      "value": "SX1278-Ra02-433MHz",
+      "package": "RF_Module:Ai-Thinker_Ra-02",
+      "x_mm": 80.0,
+      "y_mm": 27.0,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "GND1",
+          "net": "GND"
+        },
+        {
+          "pin": "2",
+          "name": "GND2",
+          "net": "GND"
+        },
+        {
+          "pin": "3",
+          "name": "3V3",
+          "net": "+3V3_BUS"
+        },
+        {
+          "pin": "4",
+          "name": "RST",
+          "net": "LORA_RST"
+        },
+        {
+          "pin": "5",
+          "name": "DIO0",
+          "net": "LORA_DIO0"
+        },
+        {
+          "pin": "6",
+          "name": "DIO1",
+          "net": "NC_DIO1"
+        },
+        {
+          "pin": "7",
+          "name": "DIO2",
+          "net": "NC_DIO2"
+        },
+        {
+          "pin": "8",
+          "name": "DIO3",
+          "net": "NC_DIO3"
+        },
+        {
+          "pin": "9",
+          "name": "DIO4",
+          "net": "NC_DIO4"
+        },
+        {
+          "pin": "10",
+          "name": "DIO5",
+          "net": "NC_DIO5"
+        },
+        {
+          "pin": "11",
+          "name": "GND3",
+          "net": "GND"
+        },
+        {
+          "pin": "12",
+          "name": "SCK",
+          "net": "VSPI_SCK"
+        },
+        {
+          "pin": "13",
+          "name": "MISO",
+          "net": "VSPI_MISO"
+        },
+        {
+          "pin": "14",
+          "name": "MOSI",
+          "net": "VSPI_MOSI"
+        },
+        {
+          "pin": "15",
+          "name": "NSS",
+          "net": "LORA_CS"
+        },
+        {
+          "pin": "16",
+          "name": "GND4",
+          "net": "GND"
+        },
+        {
+          "pin": "17",
+          "name": "ANT_RF",
+          "net": "LORA_RF_ANT"
+        }
+      ]
+    },
+    {
+      "ref": "U5",
+      "name": "Current Sense Amp",
+      "value": "INA180A2IDBVR",
+      "package": "Package_TO_SOT_SMD:SOT-23-5",
+      "x_mm": 14.0,
+      "y_mm": 26.0,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "OUT",
+          "net": "IBAT_SENSE_RAW"
+        },
+        {
+          "pin": "2",
+          "name": "GND",
+          "net": "GND"
+        },
+        {
+          "pin": "3",
+          "name": "IN+",
+          "net": "VBAT_IN"
+        },
+        {
+          "pin": "4",
+          "name": "IN-",
+          "net": "VBAT_LOAD"
+        },
+        {
+          "pin": "5",
+          "name": "VS",
+          "net": "+3V3_BUS"
+        }
+      ]
+    },
+    {
+      "ref": "U6",
+      "name": "LDO Regulator",
+      "value": "AMS1117-3.3",
+      "package": "Package_TO_SOT_SMD:SOT-223-3_TabPin2",
+      "x_mm": 53.0,
+      "y_mm": 58.0,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "GND",
+          "net": "GND"
+        },
+        {
+          "pin": "2",
+          "name": "VOUT",
+          "net": "+3V3_BUS"
+        },
+        {
+          "pin": "3",
+          "name": "VIN",
+          "net": "+5V_BUS"
+        }
+      ]
+    },
+    {
+      "ref": "U7",
+      "name": "DC-DC Buck Module",
+      "value": "MP1584-5V-3A-Buck",
+      "package": "FlightCore:Buck_5V_3A_Module",
+      "x_mm": 35.0,
+      "y_mm": 59.0,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "VIN+",
+          "net": "VBAT_PROT"
+        },
+        {
+          "pin": "2",
+          "name": "GND_IN",
+          "net": "GND"
+        },
+        {
+          "pin": "3",
+          "name": "GND_OUT",
+          "net": "GND"
+        },
+        {
+          "pin": "4",
+          "name": "VOUT_5V",
+          "net": "+5V_BUS"
+        }
+      ]
+    },
+    {
+      "ref": "J1",
+      "name": "Power Input Conn",
+      "value": "XT60-VBAT-IN",
+      "package": "Connector_AMASS:AMASS_XT60-M_1x02_P7.20mm_Vertical",
+      "x_mm": 6.0,
+      "y_mm": 14.0,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "VBAT+",
+          "net": "VBAT_IN"
+        },
+        {
+          "pin": "2",
+          "name": "GND",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "J2",
+      "name": "PDB Pass-Through",
+      "value": "XT60-PDB-OUT",
+      "package": "Connector_AMASS:AMASS_XT60-F_1x02_P7.20mm_Vertical",
+      "x_mm": 6.0,
+      "y_mm": 38.0,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "VBAT_OUT+",
+          "net": "VBAT_LOAD"
+        },
+        {
+          "pin": "2",
+          "name": "GND",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "J3",
+      "name": "Hall RPM Harness",
+      "value": "JST-XH-3P-HALL",
+      "package": "Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical",
+      "x_mm": 56.0,
+      "y_mm": 43.0,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "VCC_5V",
+          "net": "+5V_BUS"
+        },
+        {
+          "pin": "2",
+          "name": "SIG",
+          "net": "HALL_SIG_EXT"
+        },
+        {
+          "pin": "3",
+          "name": "GND",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "J4",
+      "name": "NTC Probe Header",
+      "value": "JST-XH-2P-NTC",
+      "package": "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical",
+      "x_mm": 68.0,
+      "y_mm": 43.0,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "NTC_SENSE",
+          "net": "NTC_ADC"
+        },
+        {
+          "pin": "2",
+          "name": "GND",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "J5",
+      "name": "RF Edge SMA",
+      "value": "SMA-433MHz-ANT",
+      "package": "Connector_Coaxial:SMA_Amphenol_132289_EdgeMount",
+      "x_mm": 93.5,
+      "y_mm": 18.5,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "RF_IN",
+          "net": "LORA_RF_ANT"
+        },
+        {
+          "pin": "2",
+          "name": "GND1",
+          "net": "GND"
+        },
+        {
+          "pin": "3",
+          "name": "GND2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "J6",
+      "name": "ESP32-CAM UART2",
+      "value": "JST-XH-4P-CAM",
+      "package": "Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical",
+      "x_mm": 88.0,
+      "y_mm": 52.0,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "VCC_5V",
+          "net": "+5V_BUS"
+        },
+        {
+          "pin": "2",
+          "name": "GND",
+          "net": "GND"
+        },
+        {
+          "pin": "3",
+          "name": "TX2",
+          "net": "CAM_UART_TX"
+        },
+        {
+          "pin": "4",
+          "name": "RX2",
+          "net": "CAM_UART_RX"
+        }
+      ]
+    },
+    {
+      "ref": "F1",
+      "name": "PTC Fuse",
+      "value": "1.5A-Polyfuse",
+      "package": "Fuse:Fuse_1206_3216Metric",
+      "x_mm": 14.0,
+      "y_mm": 13.0,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "VBAT_IN"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "VBAT_FUSED"
+        }
+      ]
+    },
+    {
+      "ref": "D1",
+      "name": "Reverse Polarity",
+      "value": "SS34-Schottky",
+      "package": "Diode_SMD:D_SMA",
+      "x_mm": 14.0,
+      "y_mm": 18.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "K",
+          "net": "VBAT_PROT"
+        },
+        {
+          "pin": "2",
+          "name": "A",
+          "net": "VBAT_FUSED"
+        }
+      ]
+    },
+    {
+      "ref": "D2",
+      "name": "ADC Clamp Diode",
+      "value": "BAT54S-Clamp",
+      "package": "Package_TO_SOT_SMD:SOT-23",
+      "x_mm": 13.0,
+      "y_mm": 55.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "A",
+          "net": "GND"
+        },
+        {
+          "pin": "2",
+          "name": "K",
+          "net": "+3V3_BUS"
+        },
+        {
+          "pin": "3",
+          "name": "COM",
+          "net": "VBAT_ADC"
+        }
+      ]
+    },
+    {
+      "ref": "D3",
+      "name": "TVS Surge Clamp",
+      "value": "SMBJ28A-TVS",
+      "package": "Diode_SMD:D_SMB",
+      "x_mm": 14.0,
+      "y_mm": 6.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "K",
+          "net": "VBAT_PROT"
+        },
+        {
+          "pin": "2",
+          "name": "A",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "D4",
+      "name": "Status LED",
+      "value": "LED-Green-0805",
+      "package": "LED_SMD:LED_0805_2012Metric",
+      "x_mm": 33.0,
+      "y_mm": 5.5,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "A",
+          "net": "STATUS_LED"
+        },
+        {
+          "pin": "2",
+          "name": "K",
+          "net": "STATUS_LED_K"
+        }
+      ]
+    },
+    {
+      "ref": "SW1",
+      "name": "Calibrate Button",
+      "value": "Tactile-CAL-Btn",
+      "package": "Button_Switch_SMD:SW_SPST_PTS645",
+      "x_mm": 48.0,
+      "y_mm": 5.5,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "CAL_BTN"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "JP1",
+      "name": "Bench 3V3 Jumper",
+      "value": "Jumper-2P-3V3-Bench",
+      "package": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+      "x_mm": 25.0,
+      "y_mm": 5.5,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "ESP_3V3",
+          "net": "ESP32_3V3"
+        },
+        {
+          "pin": "2",
+          "name": "BUS_3V3",
+          "net": "+3V3_BUS"
+        }
+      ]
+    },
+    {
+      "ref": "R11",
+      "name": "Current Shunt",
+      "value": "0.001R-3W-Shunt",
+      "package": "Resistor_SMD:R_2512_6332Metric",
+      "x_mm": 6.0,
+      "y_mm": 26.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "IN+",
+          "net": "VBAT_IN"
+        },
+        {
+          "pin": "2",
+          "name": "IN-",
+          "net": "VBAT_LOAD"
+        }
+      ]
+    },
+    {
+      "ref": "R1",
+      "name": "Resistor 0805 1%",
+      "value": "4.7k",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "x_mm": 56.0,
+      "y_mm": 5.5,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "I2C_SDA"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "+3V3_BUS"
+        }
+      ]
+    },
+    {
+      "ref": "R2",
+      "name": "Resistor 0805 1%",
+      "value": "4.7k",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "x_mm": 62.0,
+      "y_mm": 5.5,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "I2C_SCL"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "+3V3_BUS"
+        }
+      ]
+    },
+    {
+      "ref": "R3",
+      "name": "Resistor 0805 1%",
+      "value": "10k",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "x_mm": 68.0,
+      "y_mm": 5.5,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "TOF_XSHUT"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "+3V3_BUS"
+        }
+      ]
+    },
+    {
+      "ref": "R4",
+      "name": "Resistor 0805 1%",
+      "value": "10k",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "x_mm": 74.0,
+      "y_mm": 5.5,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "LORA_CS"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "+3V3_BUS"
+        }
+      ]
+    },
+    {
+      "ref": "R5",
+      "name": "Resistor 0805 1%",
+      "value": "10k",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "x_mm": 55.0,
+      "y_mm": 48.5,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "HALL_SIG"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "+3V3_BUS"
+        }
+      ]
+    },
+    {
+      "ref": "R6",
+      "name": "Resistor 0805 1%",
+      "value": "1k",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "x_mm": 61.0,
+      "y_mm": 48.5,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "HALL_SIG_EXT"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "HALL_SIG"
+        }
+      ]
+    },
+    {
+      "ref": "R7",
+      "name": "Resistor 0805 1%",
+      "value": "100k",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "x_mm": 7.0,
+      "y_mm": 48.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "VBAT_PROT"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "VBAT_ADC"
+        }
+      ]
+    },
+    {
+      "ref": "R8",
+      "name": "Resistor 0805 1%",
+      "value": "10k",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "x_mm": 13.0,
+      "y_mm": 48.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "VBAT_ADC"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "R9",
+      "name": "Resistor 0805 1%",
+      "value": "10k",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "x_mm": 68.0,
+      "y_mm": 48.5,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "+3V3_BUS"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "NTC_ADC"
+        }
+      ]
+    },
+    {
+      "ref": "R10",
+      "name": "Resistor 0805 1%",
+      "value": "100R",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "x_mm": 14.0,
+      "y_mm": 36.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "IBAT_SENSE_RAW"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "IBAT_ADC"
+        }
+      ]
+    },
+    {
+      "ref": "R12",
+      "name": "Resistor 0805 1%",
+      "value": "330R",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "x_mm": 39.0,
+      "y_mm": 5.5,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "STATUS_LED_K"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "C1",
+      "name": "Capacitor",
+      "value": "100uF-35V",
+      "package": "Capacitor_THT:CP_Radial_D6.3mm_P2.50mm",
+      "x_mm": 23.0,
+      "y_mm": 59.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "+",
+          "net": "VBAT_PROT"
+        },
+        {
+          "pin": "2",
+          "name": "-",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "C2",
+      "name": "Capacitor",
+      "value": "10uF-16V",
+      "package": "Capacitor_SMD:C_0805_2012Metric",
+      "x_mm": 46.5,
+      "y_mm": 55.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "+5V_BUS"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "C3",
+      "name": "Capacitor",
+      "value": "10uF-16V",
+      "package": "Capacitor_SMD:C_0805_2012Metric",
+      "x_mm": 60.0,
+      "y_mm": 56.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "+5V_BUS"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "C4",
+      "name": "Capacitor",
+      "value": "22uF-10V",
+      "package": "Capacitor_SMD:C_0805_2012Metric",
+      "x_mm": 60.0,
+      "y_mm": 61.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "+3V3_BUS"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "C5",
+      "name": "Capacitor",
+      "value": "100nF-25V",
+      "package": "Capacitor_SMD:C_0805_2012Metric",
+      "x_mm": 58.0,
+      "y_mm": 38.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "HALL_SIG"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "C6",
+      "name": "Capacitor",
+      "value": "100nF-25V",
+      "package": "Capacitor_SMD:C_0805_2012Metric",
+      "x_mm": 7.0,
+      "y_mm": 55.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "VBAT_ADC"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "C7",
+      "name": "Capacitor",
+      "value": "100nF-25V",
+      "package": "Capacitor_SMD:C_0805_2012Metric",
+      "x_mm": 14.0,
+      "y_mm": 41.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "IBAT_ADC"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "C8",
+      "name": "Capacitor",
+      "value": "100nF-25V",
+      "package": "Capacitor_SMD:C_0805_2012Metric",
+      "x_mm": 68.0,
+      "y_mm": 54.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "NTC_ADC"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "C9",
+      "name": "Capacitor",
+      "value": "100nF-25V",
+      "package": "Capacitor_SMD:C_0805_2012Metric",
+      "x_mm": 58.5,
+      "y_mm": 14.5,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "+3V3_BUS"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "C10",
+      "name": "Capacitor",
+      "value": "100nF-25V",
+      "package": "Capacitor_SMD:C_0805_2012Metric",
+      "x_mm": 65.0,
+      "y_mm": 14.5,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "+3V3_BUS"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "C11",
+      "name": "Capacitor",
+      "value": "10uF-10V",
+      "package": "Capacitor_SMD:C_0805_2012Metric",
+      "x_mm": 76.0,
+      "y_mm": 40.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "+3V3_BUS"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "C12",
+      "name": "Capacitor",
+      "value": "100nF-25V",
+      "package": "Capacitor_SMD:C_0805_2012Metric",
+      "x_mm": 82.0,
+      "y_mm": 40.0,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "+3V3_BUS"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "C13",
+      "name": "Capacitor",
+      "value": "100nF-25V",
+      "package": "Capacitor_SMD:C_0805_2012Metric",
+      "x_mm": 14.0,
+      "y_mm": 31.5,
+      "simulation_support": "native",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "1",
+          "net": "+3V3_BUS"
+        },
+        {
+          "pin": "2",
+          "name": "2",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "H1",
+      "name": "Mounting Hole",
+      "value": "M3-Mount-Hole",
+      "package": "MountingHole:MountingHole_3.2mm_M3_Pad_Via",
+      "x_mm": 3.5,
+      "y_mm": 3.5,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "GND",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "H2",
+      "name": "Mounting Hole",
+      "value": "M3-Mount-Hole",
+      "package": "MountingHole:MountingHole_3.2mm_M3_Pad_Via",
+      "x_mm": 92.5,
+      "y_mm": 3.5,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "GND",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "H3",
+      "name": "Mounting Hole",
+      "value": "M3-Mount-Hole",
+      "package": "MountingHole:MountingHole_3.2mm_M3_Pad_Via",
+      "x_mm": 92.5,
+      "y_mm": 64.5,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "GND",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "H4",
+      "name": "Mounting Hole",
+      "value": "M3-Mount-Hole",
+      "package": "MountingHole:MountingHole_3.2mm_M3_Pad_Via",
+      "x_mm": 3.5,
+      "y_mm": 64.5,
+      "simulation_support": "behavioral_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "GND",
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "U8",
+      "name": "Hall-Effect Sensor IC",
+      "value": "A3144EUA-T",
+      "package": "TO-92-3",
+      "x_mm": 56.0,
+      "y_mm": 74.0,
+      "simulation_support": "pulse_generator_stub",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "VCC",
+          "net": "+5V_BUS"
+        },
+        {
+          "pin": "2",
+          "name": "GND",
+          "net": "GND"
+        },
+        {
+          "pin": "3",
+          "name": "OUT",
+          "net": "HALL_SIG_EXT"
+        }
+      ]
+    },
+    {
+      "ref": "RT1",
+      "name": "NTC Thermistor 10k B3950",
+      "value": "10k_NTC_B3950",
+      "package": "Probe_2P",
+      "x_mm": 68.0,
+      "y_mm": 74.0,
+      "simulation_support": "native_variable_resistor",
+      "pins": [
+        {
+          "pin": "1",
+          "name": "T1",
+          "net": "NTC_ADC"
+        },
+        {
+          "pin": "2",
+          "name": "T2",
+          "net": "GND"
+        }
+      ]
+    }
+  ],
+  "nets": {
+    "NTC_ADC": [
+      {
+        "ref": "U1",
+        "pin": "2",
+        "name": "VP/GPIO36"
+      },
+      {
+        "ref": "J4",
+        "pin": "1",
+        "name": "NTC_SENSE"
+      },
+      {
+        "ref": "R9",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "C8",
+        "pin": "1",
+        "name": "1"
+      },
+      {
+        "ref": "RT1",
+        "pin": "1",
+        "name": "T1"
+      }
+    ],
+    "VBAT_ADC": [
+      {
+        "ref": "U1",
+        "pin": "4",
+        "name": "D34/GPIO34"
+      },
+      {
+        "ref": "D2",
+        "pin": "3",
+        "name": "COM"
+      },
+      {
+        "ref": "R7",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "R8",
+        "pin": "1",
+        "name": "1"
+      },
+      {
+        "ref": "C6",
+        "pin": "1",
+        "name": "1"
+      }
+    ],
+    "IBAT_ADC": [
+      {
+        "ref": "U1",
+        "pin": "5",
+        "name": "D35/GPIO35"
+      },
+      {
+        "ref": "R10",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "C7",
+        "pin": "1",
+        "name": "1"
+      }
+    ],
+    "MPU_INT": [
+      {
+        "ref": "U1",
+        "pin": "6",
+        "name": "D32/GPIO32"
+      },
+      {
+        "ref": "U2",
+        "pin": "8",
+        "name": "INT"
+      }
+    ],
+    "HALL_SIG": [
+      {
+        "ref": "U1",
+        "pin": "7",
+        "name": "D33/GPIO33"
+      },
+      {
+        "ref": "R5",
+        "pin": "1",
+        "name": "1"
+      },
+      {
+        "ref": "R6",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "C5",
+        "pin": "1",
+        "name": "1"
+      }
+    ],
+    "TOF_INT": [
+      {
+        "ref": "U1",
+        "pin": "8",
+        "name": "D25/GPIO25"
+      },
+      {
+        "ref": "U3",
+        "pin": "5",
+        "name": "GPIO1"
+      }
+    ],
+    "TOF_XSHUT": [
+      {
+        "ref": "U1",
+        "pin": "9",
+        "name": "D26/GPIO26"
+      },
+      {
+        "ref": "U3",
+        "pin": "6",
+        "name": "XSHUT"
+      },
+      {
+        "ref": "R3",
+        "pin": "1",
+        "name": "1"
+      }
+    ],
+    "LORA_DIO0": [
+      {
+        "ref": "U1",
+        "pin": "10",
+        "name": "D27/GPIO27"
+      },
+      {
+        "ref": "U4",
+        "pin": "5",
+        "name": "DIO0"
+      }
+    ],
+    "LORA_RST": [
+      {
+        "ref": "U1",
+        "pin": "11",
+        "name": "D14/GPIO14"
+      },
+      {
+        "ref": "U4",
+        "pin": "4",
+        "name": "RST"
+      }
+    ],
+    "GND": [
+      {
+        "ref": "U1",
+        "pin": "14",
+        "name": "GND"
+      },
+      {
+        "ref": "U1",
+        "pin": "17",
+        "name": "GND"
+      },
+      {
+        "ref": "U2",
+        "pin": "2",
+        "name": "GND"
+      },
+      {
+        "ref": "U2",
+        "pin": "7",
+        "name": "AD0"
+      },
+      {
+        "ref": "U3",
+        "pin": "2",
+        "name": "GND"
+      },
+      {
+        "ref": "U4",
+        "pin": "1",
+        "name": "GND1"
+      },
+      {
+        "ref": "U4",
+        "pin": "2",
+        "name": "GND2"
+      },
+      {
+        "ref": "U4",
+        "pin": "11",
+        "name": "GND3"
+      },
+      {
+        "ref": "U4",
+        "pin": "16",
+        "name": "GND4"
+      },
+      {
+        "ref": "U5",
+        "pin": "2",
+        "name": "GND"
+      },
+      {
+        "ref": "U6",
+        "pin": "1",
+        "name": "GND"
+      },
+      {
+        "ref": "U7",
+        "pin": "2",
+        "name": "GND_IN"
+      },
+      {
+        "ref": "U7",
+        "pin": "3",
+        "name": "GND_OUT"
+      },
+      {
+        "ref": "J1",
+        "pin": "2",
+        "name": "GND"
+      },
+      {
+        "ref": "J2",
+        "pin": "2",
+        "name": "GND"
+      },
+      {
+        "ref": "J3",
+        "pin": "3",
+        "name": "GND"
+      },
+      {
+        "ref": "J4",
+        "pin": "2",
+        "name": "GND"
+      },
+      {
+        "ref": "J5",
+        "pin": "2",
+        "name": "GND1"
+      },
+      {
+        "ref": "J5",
+        "pin": "3",
+        "name": "GND2"
+      },
+      {
+        "ref": "J6",
+        "pin": "2",
+        "name": "GND"
+      },
+      {
+        "ref": "D2",
+        "pin": "1",
+        "name": "A"
+      },
+      {
+        "ref": "D3",
+        "pin": "2",
+        "name": "A"
+      },
+      {
+        "ref": "SW1",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "R8",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "R12",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "C1",
+        "pin": "2",
+        "name": "-"
+      },
+      {
+        "ref": "C2",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "C3",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "C4",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "C5",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "C6",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "C7",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "C8",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "C9",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "C10",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "C11",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "C12",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "C13",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "H1",
+        "pin": "1",
+        "name": "GND"
+      },
+      {
+        "ref": "H2",
+        "pin": "1",
+        "name": "GND"
+      },
+      {
+        "ref": "H3",
+        "pin": "1",
+        "name": "GND"
+      },
+      {
+        "ref": "H4",
+        "pin": "1",
+        "name": "GND"
+      },
+      {
+        "ref": "U8",
+        "pin": "2",
+        "name": "GND"
+      },
+      {
+        "ref": "RT1",
+        "pin": "2",
+        "name": "T2"
+      }
+    ],
+    "+5V_BUS": [
+      {
+        "ref": "U1",
+        "pin": "15",
+        "name": "VIN"
+      },
+      {
+        "ref": "U6",
+        "pin": "3",
+        "name": "VIN"
+      },
+      {
+        "ref": "U7",
+        "pin": "4",
+        "name": "VOUT_5V"
+      },
+      {
+        "ref": "J3",
+        "pin": "1",
+        "name": "VCC_5V"
+      },
+      {
+        "ref": "J6",
+        "pin": "1",
+        "name": "VCC_5V"
+      },
+      {
+        "ref": "C2",
+        "pin": "1",
+        "name": "1"
+      },
+      {
+        "ref": "C3",
+        "pin": "1",
+        "name": "1"
+      },
+      {
+        "ref": "U8",
+        "pin": "1",
+        "name": "VCC"
+      }
+    ],
+    "ESP32_3V3": [
+      {
+        "ref": "U1",
+        "pin": "16",
+        "name": "3V3"
+      },
+      {
+        "ref": "JP1",
+        "pin": "1",
+        "name": "ESP_3V3"
+      }
+    ],
+    "STATUS_LED": [
+      {
+        "ref": "U1",
+        "pin": "19",
+        "name": "D2/GPIO2"
+      },
+      {
+        "ref": "D4",
+        "pin": "1",
+        "name": "A"
+      }
+    ],
+    "CAL_BTN": [
+      {
+        "ref": "U1",
+        "pin": "20",
+        "name": "D4/GPIO4"
+      },
+      {
+        "ref": "SW1",
+        "pin": "1",
+        "name": "1"
+      }
+    ],
+    "CAM_UART_RX": [
+      {
+        "ref": "U1",
+        "pin": "21",
+        "name": "RX2/GPIO16"
+      },
+      {
+        "ref": "J6",
+        "pin": "4",
+        "name": "RX2"
+      }
+    ],
+    "CAM_UART_TX": [
+      {
+        "ref": "U1",
+        "pin": "22",
+        "name": "TX2/GPIO17"
+      },
+      {
+        "ref": "J6",
+        "pin": "3",
+        "name": "TX2"
+      }
+    ],
+    "LORA_CS": [
+      {
+        "ref": "U1",
+        "pin": "23",
+        "name": "D5/GPIO5"
+      },
+      {
+        "ref": "U4",
+        "pin": "15",
+        "name": "NSS"
+      },
+      {
+        "ref": "R4",
+        "pin": "1",
+        "name": "1"
+      }
+    ],
+    "VSPI_SCK": [
+      {
+        "ref": "U1",
+        "pin": "24",
+        "name": "D18/GPIO18"
+      },
+      {
+        "ref": "U4",
+        "pin": "12",
+        "name": "SCK"
+      }
+    ],
+    "VSPI_MISO": [
+      {
+        "ref": "U1",
+        "pin": "25",
+        "name": "D19/GPIO19"
+      },
+      {
+        "ref": "U4",
+        "pin": "13",
+        "name": "MISO"
+      }
+    ],
+    "I2C_SDA": [
+      {
+        "ref": "U1",
+        "pin": "26",
+        "name": "D21/GPIO21"
+      },
+      {
+        "ref": "U2",
+        "pin": "4",
+        "name": "SDA"
+      },
+      {
+        "ref": "U3",
+        "pin": "4",
+        "name": "SDA"
+      },
+      {
+        "ref": "R1",
+        "pin": "1",
+        "name": "1"
+      }
+    ],
+    "I2C_SCL": [
+      {
+        "ref": "U1",
+        "pin": "29",
+        "name": "D22/GPIO22"
+      },
+      {
+        "ref": "U2",
+        "pin": "3",
+        "name": "SCL"
+      },
+      {
+        "ref": "U3",
+        "pin": "3",
+        "name": "SCL"
+      },
+      {
+        "ref": "R2",
+        "pin": "1",
+        "name": "1"
+      }
+    ],
+    "VSPI_MOSI": [
+      {
+        "ref": "U1",
+        "pin": "30",
+        "name": "D23/GPIO23"
+      },
+      {
+        "ref": "U4",
+        "pin": "14",
+        "name": "MOSI"
+      }
+    ],
+    "+3V3_BUS": [
+      {
+        "ref": "U2",
+        "pin": "1",
+        "name": "VCC"
+      },
+      {
+        "ref": "U3",
+        "pin": "1",
+        "name": "VIN"
+      },
+      {
+        "ref": "U4",
+        "pin": "3",
+        "name": "3V3"
+      },
+      {
+        "ref": "U5",
+        "pin": "5",
+        "name": "VS"
+      },
+      {
+        "ref": "U6",
+        "pin": "2",
+        "name": "VOUT"
+      },
+      {
+        "ref": "D2",
+        "pin": "2",
+        "name": "K"
+      },
+      {
+        "ref": "JP1",
+        "pin": "2",
+        "name": "BUS_3V3"
+      },
+      {
+        "ref": "R1",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "R2",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "R3",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "R4",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "R5",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "R9",
+        "pin": "1",
+        "name": "1"
+      },
+      {
+        "ref": "C4",
+        "pin": "1",
+        "name": "1"
+      },
+      {
+        "ref": "C9",
+        "pin": "1",
+        "name": "1"
+      },
+      {
+        "ref": "C10",
+        "pin": "1",
+        "name": "1"
+      },
+      {
+        "ref": "C11",
+        "pin": "1",
+        "name": "1"
+      },
+      {
+        "ref": "C12",
+        "pin": "1",
+        "name": "1"
+      },
+      {
+        "ref": "C13",
+        "pin": "1",
+        "name": "1"
+      }
+    ],
+    "LORA_RF_ANT": [
+      {
+        "ref": "U4",
+        "pin": "17",
+        "name": "ANT_RF"
+      },
+      {
+        "ref": "J5",
+        "pin": "1",
+        "name": "RF_IN"
+      }
+    ],
+    "IBAT_SENSE_RAW": [
+      {
+        "ref": "U5",
+        "pin": "1",
+        "name": "OUT"
+      },
+      {
+        "ref": "R10",
+        "pin": "1",
+        "name": "1"
+      }
+    ],
+    "VBAT_IN": [
+      {
+        "ref": "U5",
+        "pin": "3",
+        "name": "IN+"
+      },
+      {
+        "ref": "J1",
+        "pin": "1",
+        "name": "VBAT+"
+      },
+      {
+        "ref": "F1",
+        "pin": "1",
+        "name": "1"
+      },
+      {
+        "ref": "R11",
+        "pin": "1",
+        "name": "IN+"
+      }
+    ],
+    "VBAT_LOAD": [
+      {
+        "ref": "U5",
+        "pin": "4",
+        "name": "IN-"
+      },
+      {
+        "ref": "J2",
+        "pin": "1",
+        "name": "VBAT_OUT+"
+      },
+      {
+        "ref": "R11",
+        "pin": "2",
+        "name": "IN-"
+      }
+    ],
+    "VBAT_PROT": [
+      {
+        "ref": "U7",
+        "pin": "1",
+        "name": "VIN+"
+      },
+      {
+        "ref": "D1",
+        "pin": "1",
+        "name": "K"
+      },
+      {
+        "ref": "D3",
+        "pin": "1",
+        "name": "K"
+      },
+      {
+        "ref": "R7",
+        "pin": "1",
+        "name": "1"
+      },
+      {
+        "ref": "C1",
+        "pin": "1",
+        "name": "+"
+      }
+    ],
+    "HALL_SIG_EXT": [
+      {
+        "ref": "J3",
+        "pin": "2",
+        "name": "SIG"
+      },
+      {
+        "ref": "R6",
+        "pin": "1",
+        "name": "1"
+      },
+      {
+        "ref": "U8",
+        "pin": "3",
+        "name": "OUT"
+      }
+    ],
+    "VBAT_FUSED": [
+      {
+        "ref": "F1",
+        "pin": "2",
+        "name": "2"
+      },
+      {
+        "ref": "D1",
+        "pin": "2",
+        "name": "A"
+      }
+    ],
+    "STATUS_LED_K": [
+      {
+        "ref": "D4",
+        "pin": "2",
+        "name": "K"
+      },
+      {
+        "ref": "R12",
+        "pin": "1",
+        "name": "1"
+      }
+    ]
+  },
+  "wires": [
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "U3.1 (VIN)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "U4.3 (3V3)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "U5.5 (VS)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "U6.2 (VOUT)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "D2.2 (K)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "JP1.2 (BUS_3V3)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "R1.2 (2)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "R2.2 (2)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "R3.2 (2)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "R4.2 (2)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "R5.2 (2)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "R9.1 (1)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "C4.1 (1)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "C9.1 (1)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "C10.1 (1)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "C11.1 (1)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "C12.1 (1)"
+    },
+    {
+      "net": "+3V3_BUS",
+      "from": "U2.1 (VCC)",
+      "to": "C13.1 (1)"
+    },
+    {
+      "net": "+5V_BUS",
+      "from": "U1.15 (VIN)",
+      "to": "U6.3 (VIN)"
+    },
+    {
+      "net": "+5V_BUS",
+      "from": "U1.15 (VIN)",
+      "to": "U7.4 (VOUT_5V)"
+    },
+    {
+      "net": "+5V_BUS",
+      "from": "U1.15 (VIN)",
+      "to": "J3.1 (VCC_5V)"
+    },
+    {
+      "net": "+5V_BUS",
+      "from": "U1.15 (VIN)",
+      "to": "J6.1 (VCC_5V)"
+    },
+    {
+      "net": "+5V_BUS",
+      "from": "U1.15 (VIN)",
+      "to": "C2.1 (1)"
+    },
+    {
+      "net": "+5V_BUS",
+      "from": "U1.15 (VIN)",
+      "to": "C3.1 (1)"
+    },
+    {
+      "net": "+5V_BUS",
+      "from": "U1.15 (VIN)",
+      "to": "U8.1 (VCC)"
+    },
+    {
+      "net": "CAL_BTN",
+      "from": "U1.20 (D4/GPIO4)",
+      "to": "SW1.1 (1)"
+    },
+    {
+      "net": "CAM_UART_RX",
+      "from": "U1.21 (RX2/GPIO16)",
+      "to": "J6.4 (RX2)"
+    },
+    {
+      "net": "CAM_UART_TX",
+      "from": "U1.22 (TX2/GPIO17)",
+      "to": "J6.3 (TX2)"
+    },
+    {
+      "net": "ESP32_3V3",
+      "from": "U1.16 (3V3)",
+      "to": "JP1.1 (ESP_3V3)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "U1.17 (GND)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "U2.2 (GND)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "U2.7 (AD0)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "U3.2 (GND)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "U4.1 (GND1)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "U4.2 (GND2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "U4.11 (GND3)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "U4.16 (GND4)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "U5.2 (GND)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "U6.1 (GND)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "U7.2 (GND_IN)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "U7.3 (GND_OUT)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "J1.2 (GND)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "J2.2 (GND)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "J3.3 (GND)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "J4.2 (GND)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "J5.2 (GND1)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "J5.3 (GND2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "J6.2 (GND)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "D2.1 (A)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "D3.2 (A)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "SW1.2 (2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "R8.2 (2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "R12.2 (2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "C1.2 (-)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "C2.2 (2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "C3.2 (2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "C4.2 (2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "C5.2 (2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "C6.2 (2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "C7.2 (2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "C8.2 (2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "C9.2 (2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "C10.2 (2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "C11.2 (2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "C12.2 (2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "C13.2 (2)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "H1.1 (GND)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "H2.1 (GND)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "H3.1 (GND)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "H4.1 (GND)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "U8.2 (GND)"
+    },
+    {
+      "net": "GND",
+      "from": "U1.14 (GND)",
+      "to": "RT1.2 (T2)"
+    },
+    {
+      "net": "HALL_SIG",
+      "from": "U1.7 (D33/GPIO33)",
+      "to": "R5.1 (1)"
+    },
+    {
+      "net": "HALL_SIG",
+      "from": "U1.7 (D33/GPIO33)",
+      "to": "R6.2 (2)"
+    },
+    {
+      "net": "HALL_SIG",
+      "from": "U1.7 (D33/GPIO33)",
+      "to": "C5.1 (1)"
+    },
+    {
+      "net": "HALL_SIG_EXT",
+      "from": "J3.2 (SIG)",
+      "to": "R6.1 (1)"
+    },
+    {
+      "net": "HALL_SIG_EXT",
+      "from": "J3.2 (SIG)",
+      "to": "U8.3 (OUT)"
+    },
+    {
+      "net": "I2C_SCL",
+      "from": "U1.29 (D22/GPIO22)",
+      "to": "U2.3 (SCL)"
+    },
+    {
+      "net": "I2C_SCL",
+      "from": "U1.29 (D22/GPIO22)",
+      "to": "U3.3 (SCL)"
+    },
+    {
+      "net": "I2C_SCL",
+      "from": "U1.29 (D22/GPIO22)",
+      "to": "R2.1 (1)"
+    },
+    {
+      "net": "I2C_SDA",
+      "from": "U1.26 (D21/GPIO21)",
+      "to": "U2.4 (SDA)"
+    },
+    {
+      "net": "I2C_SDA",
+      "from": "U1.26 (D21/GPIO21)",
+      "to": "U3.4 (SDA)"
+    },
+    {
+      "net": "I2C_SDA",
+      "from": "U1.26 (D21/GPIO21)",
+      "to": "R1.1 (1)"
+    },
+    {
+      "net": "IBAT_ADC",
+      "from": "U1.5 (D35/GPIO35)",
+      "to": "R10.2 (2)"
+    },
+    {
+      "net": "IBAT_ADC",
+      "from": "U1.5 (D35/GPIO35)",
+      "to": "C7.1 (1)"
+    },
+    {
+      "net": "IBAT_SENSE_RAW",
+      "from": "U5.1 (OUT)",
+      "to": "R10.1 (1)"
+    },
+    {
+      "net": "LORA_CS",
+      "from": "U1.23 (D5/GPIO5)",
+      "to": "U4.15 (NSS)"
+    },
+    {
+      "net": "LORA_CS",
+      "from": "U1.23 (D5/GPIO5)",
+      "to": "R4.1 (1)"
+    },
+    {
+      "net": "LORA_DIO0",
+      "from": "U1.10 (D27/GPIO27)",
+      "to": "U4.5 (DIO0)"
+    },
+    {
+      "net": "LORA_RF_ANT",
+      "from": "U4.17 (ANT_RF)",
+      "to": "J5.1 (RF_IN)"
+    },
+    {
+      "net": "LORA_RST",
+      "from": "U1.11 (D14/GPIO14)",
+      "to": "U4.4 (RST)"
+    },
+    {
+      "net": "MPU_INT",
+      "from": "U1.6 (D32/GPIO32)",
+      "to": "U2.8 (INT)"
+    },
+    {
+      "net": "NTC_ADC",
+      "from": "U1.2 (VP/GPIO36)",
+      "to": "J4.1 (NTC_SENSE)"
+    },
+    {
+      "net": "NTC_ADC",
+      "from": "U1.2 (VP/GPIO36)",
+      "to": "R9.2 (2)"
+    },
+    {
+      "net": "NTC_ADC",
+      "from": "U1.2 (VP/GPIO36)",
+      "to": "C8.1 (1)"
+    },
+    {
+      "net": "NTC_ADC",
+      "from": "U1.2 (VP/GPIO36)",
+      "to": "RT1.1 (T1)"
+    },
+    {
+      "net": "STATUS_LED",
+      "from": "U1.19 (D2/GPIO2)",
+      "to": "D4.1 (A)"
+    },
+    {
+      "net": "STATUS_LED_K",
+      "from": "D4.2 (K)",
+      "to": "R12.1 (1)"
+    },
+    {
+      "net": "TOF_INT",
+      "from": "U1.8 (D25/GPIO25)",
+      "to": "U3.5 (GPIO1)"
+    },
+    {
+      "net": "TOF_XSHUT",
+      "from": "U1.9 (D26/GPIO26)",
+      "to": "U3.6 (XSHUT)"
+    },
+    {
+      "net": "TOF_XSHUT",
+      "from": "U1.9 (D26/GPIO26)",
+      "to": "R3.1 (1)"
+    },
+    {
+      "net": "VBAT_ADC",
+      "from": "U1.4 (D34/GPIO34)",
+      "to": "D2.3 (COM)"
+    },
+    {
+      "net": "VBAT_ADC",
+      "from": "U1.4 (D34/GPIO34)",
+      "to": "R7.2 (2)"
+    },
+    {
+      "net": "VBAT_ADC",
+      "from": "U1.4 (D34/GPIO34)",
+      "to": "R8.1 (1)"
+    },
+    {
+      "net": "VBAT_ADC",
+      "from": "U1.4 (D34/GPIO34)",
+      "to": "C6.1 (1)"
+    },
+    {
+      "net": "VBAT_FUSED",
+      "from": "F1.2 (2)",
+      "to": "D1.2 (A)"
+    },
+    {
+      "net": "VBAT_IN",
+      "from": "U5.3 (IN+)",
+      "to": "J1.1 (VBAT+)"
+    },
+    {
+      "net": "VBAT_IN",
+      "from": "U5.3 (IN+)",
+      "to": "F1.1 (1)"
+    },
+    {
+      "net": "VBAT_IN",
+      "from": "U5.3 (IN+)",
+      "to": "R11.1 (IN+)"
+    },
+    {
+      "net": "VBAT_LOAD",
+      "from": "U5.4 (IN-)",
+      "to": "J2.1 (VBAT_OUT+)"
+    },
+    {
+      "net": "VBAT_LOAD",
+      "from": "U5.4 (IN-)",
+      "to": "R11.2 (IN-)"
+    },
+    {
+      "net": "VBAT_PROT",
+      "from": "U7.1 (VIN+)",
+      "to": "D1.1 (K)"
+    },
+    {
+      "net": "VBAT_PROT",
+      "from": "U7.1 (VIN+)",
+      "to": "D3.1 (K)"
+    },
+    {
+      "net": "VBAT_PROT",
+      "from": "U7.1 (VIN+)",
+      "to": "R7.1 (1)"
+    },
+    {
+      "net": "VBAT_PROT",
+      "from": "U7.1 (VIN+)",
+      "to": "C1.1 (+)"
+    },
+    {
+      "net": "VSPI_MISO",
+      "from": "U1.25 (D19/GPIO19)",
+      "to": "U4.13 (MISO)"
+    },
+    {
+      "net": "VSPI_MOSI",
+      "from": "U1.30 (D23/GPIO23)",
+      "to": "U4.14 (MOSI)"
+    },
+    {
+      "net": "VSPI_SCK",
+      "from": "U1.24 (D18/GPIO18)",
+      "to": "U4.12 (SCK)"
+    }
+  ]
+}

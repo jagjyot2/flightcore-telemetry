@@ -1,0 +1,50 @@
+Designator,Component,Value/Spec,Package/Footprint,Voltage/Current Rating,Datasheet Notes,Est. Qty,Available/Verify
+U1,MCU Module,ESP32-DevKit-V1-30P,FlightCore:ESP32_DevKit_V1_30P,3.3V IO / 5V VIN,DOIT ESP32-WROOM-32 DevKit v1 (30-pin). Strapping pins GPIO0/12/15 kept safe.,1,Available
+U2,6-Axis IMU,MPU6050-GY521,Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical,3.3V / I2C 400kHz,GY-521 MPU6050 breakout (AD0=GND -> 0x68). Use 3.3V native or LDO-bypass.,1,Available
+U3,ToF Laser Ranging,VL53L0X-ToF,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical,2.8V-3.3V / I2C 0x29,"GY-VL53L0XV2 carrier, 30-2000 mm ranging, XSHUT controlled via GPIO26.",1,Available
+U4,433MHz LoRa RF,SX1278-Ra02-433MHz,RF_Module:Ai-Thinker_Ra-02,3.3V / +20dBm max (120mA),AI-Thinker Ra-02 SX1278 433MHz SPI LoRa module; keep 433MHz antenna attached.,1,Available
+U5,Current Sense Amp,INA180A2IDBVR,Package_TO_SOT_SMD:SOT-23-5,"50V/V, Vcm -0.2..26V",High-side current sense amp across 1mOhm shunt (50 mV/A output to GPIO35).,1,Verify Stock (LCSC C478852)
+U6,LDO Regulator,AMS1117-3.3,Package_TO_SOT_SMD:SOT-223-3_TabPin2,3.3V / 1.0A max,Dedicated 3.3V sensor/RF rail isolated from DevKit LDO (thermal tab -> +3V3_BUS).,1,Available
+U7,DC-DC Buck Module,MP1584-5V-3A-Buck,FlightCore:Buck_5V_3A_Module,7-28V in -> 5.0V / 3A,Step-down BEC supplying +5V_BUS from protected 2S-6S LiPo VBAT_PROT.,1,Available
+J1,Power Input Conn,XT60-VBAT-IN,Connector_AMASS:AMASS_XT60-M_1x02_P7.20mm_Vertical,60A / 6S LiPo (25.2V),Main LiPo battery XT60 input feeding high-side 1mOhm shunt.,1,Available
+J2,PDB Pass-Through,XT60-PDB-OUT,Connector_AMASS:AMASS_XT60-F_1x02_P7.20mm_Vertical,60A / 6S LiPo (25.2V),Pass-through XT60 to drone PDB/ESCs (telemetry inline sense only).,1,Available
+J3,Hall RPM Harness,JST-XH-3P-HALL,Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical,5V / 1A,"3-pin JST-XH to remote A3144EUA-T Hall-effect RPM sensor (5V supply, 3.3V pull-up sig).",1,Available
+J4,NTC Probe Header,JST-XH-2P-NTC,Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical,3.3V / 1A,2-pin JST-XH for external 10k B3950 NTC probe (RT1).,1,Available
+J5,RF Edge SMA,SMA-433MHz-ANT,Connector_Coaxial:SMA_Amphenol_132289_EdgeMount,50 Ohm / 433MHz,50-ohm edge SMA connector for quarter-wave 433MHz telemetry antenna.,1,Available
+J6,ESP32-CAM UART2,JST-XH-4P-CAM,Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical,5V / 500mA,"4-pin UART2 bridge to ESP32-CAM (5V, GND, TX2->RX, RX2<-TX).",1,Available
+F1,PTC Fuse,1.5A-Polyfuse,Fuse:Fuse_1206_3216Metric,30V / 1.5A hold,Protects FlightCore buck & divider tap against downstream shorts.,1,Available
+D1,Reverse Polarity,SS34-Schottky,Diode_SMD:D_SMA,40V / 3A,Reverse-polarity protection on FlightCore power tap.,1,Available
+D2,ADC Clamp Diode,BAT54S-Clamp,Package_TO_SOT_SMD:SOT-23,30V / 200mA,"Dual Schottky clamping VBAT_ADC within [GND, +3V3_BUS] against surge.",1,Available
+D3,TVS Surge Clamp,SMBJ28A-TVS,Diode_SMD:D_SMB,28V Vrwm / 600W,Suppresses hot-plug LiPo inductive transients on VBAT_PROT.,1,Available
+D4,Status LED,LED-Green-0805,LED_SMD:LED_0805_2012Metric,2.1V / 20mA,Heartbeat & calibration visual indicator driven by GPIO2.,1,Available
+SW1,Calibrate Button,Tactile-CAL-Btn,Button_Switch_SMD:SW_SPST_PTS645,12V / 50mA,Momentary tactile button on GPIO4 for on-ground IMU re-calibration.,1,Available
+JP1,Bench 3V3 Jumper,Jumper-2P-3V3-Bench,Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical,3.3V / 1A,OPEN for battery BEC mode; close ONLY for USB-only bench testing without 5V BEC.,1,Available
+R11,Current Shunt,0.001R-3W-Shunt,Resistor_SMD:R_2512_6332Metric,1mOhm / 3W / 1% (54A cont),Kelvin-connected 2512 high-side shunt between VBAT_IN (J1) and VBAT_LOAD (J2).,1,Available
+R1,Resistor 0805 1%,4.7k,Resistor_SMD:R_0805_2012Metric,50V / 0.125W / 1%,I2C SDA pull-up (400kHz),1,Available
+R2,Resistor 0805 1%,4.7k,Resistor_SMD:R_0805_2012Metric,50V / 0.125W / 1%,I2C SCL pull-up (400kHz),1,Available
+R3,Resistor 0805 1%,10k,Resistor_SMD:R_0805_2012Metric,50V / 0.125W / 1%,VL53L0X XSHUT boot pull-up,1,Available
+R4,Resistor 0805 1%,10k,Resistor_SMD:R_0805_2012Metric,50V / 0.125W / 1%,SX1278 NSS pull-up,1,Available
+R5,Resistor 0805 1%,10k,Resistor_SMD:R_0805_2012Metric,50V / 0.125W / 1%,A3144 open-collector pull-up to 3.3V,1,Available
+R6,Resistor 0805 1%,1k,Resistor_SMD:R_0805_2012Metric,50V / 0.125W / 1%,Hall sensor RC filter & ESD limit,1,Available
+R7,Resistor 0805 1%,100k,Resistor_SMD:R_0805_2012Metric,50V / 0.125W / 1%,"VBAT divider top leg (1%, 100k/10k = 11:1)",1,Available
+R8,Resistor 0805 1%,10k,Resistor_SMD:R_0805_2012Metric,50V / 0.125W / 1%,VBAT divider bottom leg (1%),1,Available
+R9,Resistor 0805 1%,10k,Resistor_SMD:R_0805_2012Metric,50V / 0.125W / 1%,NTC thermistor reference pull-up (1%),1,Available
+R10,Resistor 0805 1%,100R,Resistor_SMD:R_0805_2012Metric,50V / 0.125W / 1%,INA180 output RC anti-alias resistor,1,Available
+R12,Resistor 0805 1%,330R,Resistor_SMD:R_0805_2012Metric,50V / 0.125W / 1%,Status LED D4 current limiter (~5mA),1,Available
+C1,Capacitor,100uF-35V,Capacitor_THT:CP_Radial_D6.3mm_P2.50mm,35V / 100uF Low-ESR,Buck converter input bulk electrolytic,1,Available
+C2,Capacitor,10uF-16V,Capacitor_SMD:C_0805_2012Metric,16V / X7R,5V buck output decoupling,1,Available
+C3,Capacitor,10uF-16V,Capacitor_SMD:C_0805_2012Metric,16V / X7R,AMS1117-3.3 input capacitor,1,Available
+C4,Capacitor,22uF-10V,Capacitor_SMD:C_0805_2012Metric,10V / X5R,AMS1117-3.3 output stability capacitor,1,Available
+C5,Capacitor,100nF-25V,Capacitor_SMD:C_0805_2012Metric,25V / X7R,Hall RPM RC debounce cap,1,Available
+C6,Capacitor,100nF-25V,Capacitor_SMD:C_0805_2012Metric,25V / X7R,VBAT ADC anti-aliasing filter cap,1,Available
+C7,Capacitor,100nF-25V,Capacitor_SMD:C_0805_2012Metric,25V / X7R,IBAT ADC anti-aliasing filter cap,1,Available
+C8,Capacitor,100nF-25V,Capacitor_SMD:C_0805_2012Metric,25V / X7R,NTC ADC noise filter cap,1,Available
+C9,Capacitor,100nF-25V,Capacitor_SMD:C_0805_2012Metric,25V / X7R,MPU6050 local VCC bypass,1,Available
+C10,Capacitor,100nF-25V,Capacitor_SMD:C_0805_2012Metric,25V / X7R,VL53L0X local VCC bypass,1,Available
+C11,Capacitor,10uF-10V,Capacitor_SMD:C_0805_2012Metric,10V / X7R,SX1278 PA TX burst bulk bypass,1,Available
+C12,Capacitor,100nF-25V,Capacitor_SMD:C_0805_2012Metric,25V / X7R,SX1278 HF VCC decoupling,1,Available
+C13,Capacitor,100nF-25V,Capacitor_SMD:C_0805_2012Metric,25V / X7R,INA180A2 VS supply bypass,1,Available
+U8,Hall-Effect Sensor IC,A3144EUA-T,TO-92-3 (Remote Harness via J3),VCC 4.5-24V / Open-Collector 25mA,"Mounted on motor arm/hub; powered via +5V_BUS (J3.1), pulled up to +3V3_BUS on carrier.",1,Available
+RT1,NTC Thermistor Probe,10k Ohm B3950 (NTCLE100E3103),Axial Probe (Harness via J4),3.3V / 0.33mW max,Wired to J4 (NTC_ADC / GND); Steinhart-Hart A=1.127e-3 B=2.344e-4 C=8.649e-8.,1,Available
+ANT1,433MHz Helical/Whip Antenna,433MHz 50-Ohm SMA Male,SMA-Male Whip (164mm),50 Ohm / +20dBm,Connects to J5 SMA before powering SX1278 TX.,1,Available
+MOD_CAM,ESP32-CAM Telemetry Partner (Optional),AI-Thinker ESP32-CAM,External via J6 UART2,5V / 350mA,Receives FC:TELEM lines & sends CAM:READY/CAM:STREAM over UART2 stub.,1,Optional / External

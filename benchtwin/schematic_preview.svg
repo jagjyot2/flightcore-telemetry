@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 680" width="1120" height="680">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; }
+      .card { fill: #161b22; stroke: #30363d; stroke-width: 2; rx: 8; }
+      .mcu { fill: #1b2838; stroke: #58a6ff; stroke-width: 2.5; rx: 10; }
+      .pwr { fill: #251b1b; stroke: #f85149; stroke-width: 2; rx: 8; }
+      .rf { fill: #1f1b2e; stroke: #a371f7; stroke-width: 2; rx: 8; }
+      .title { fill: #f0f6fc; font-family: Segoe UI, Arial, sans-serif; font-size: 20px; font-weight: bold; }
+      .sub { fill: #8b949e; font-family: Consolas, monospace; font-size: 12px; }
+      .blk { fill: #e6edf3; font-family: Segoe UI, Arial, sans-serif; font-size: 14px; font-weight: bold; }
+      .pin { fill: #c9d1d9; font-family: Consolas, monospace; font-size: 11px; }
+      .wire-i2c { stroke: #3fb950; stroke-width: 2.2; fill: none; }
+      .wire-spi { stroke: #a371f7; stroke-width: 2.2; fill: none; }
+      .wire-pwr { stroke: #f85149; stroke-width: 2.4; fill: none; }
+      .wire-ana { stroke: #d29922; stroke-width: 2.2; fill: none; }
+      .wire-dig { stroke: #58a6ff; stroke-width: 2.2; fill: none; }
+      .badge { fill: #21262d; stroke: #f85149; stroke-width: 1.5; rx: 6; }
+      .warn { fill: #ffa657; font-family: Consolas, monospace; font-size: 12px; font-weight: bold; }
+    </style>
+  </defs>
+  <rect class="bg" width="1120" height="680"/>
+  <text x="30" y="38" class="title">FlightCore v1.0 — Modular ESP32 Telemetry &amp; Sensor Architecture</text>
+  <rect x="650" y="16" width="440" height="32" class="badge"/>
+  <text x="668" y="37" class="warn">SAFETY: TELEMETRY ONLY — ZERO MOTOR / ESC PWM</text>
+
+  <rect x="30" y="75" width="270" height="170" class="pwr"/>
+  <text x="45" y="100" class="blk">Power &amp; Shunt Rail (2S–6S LiPo)</text>
+  <text x="45" y="122" class="pin">J1 (XT60 IN) ─[R11 1mΩ 3W]─► J2 (PDB)</text>
+  <text x="45" y="142" class="pin">F1 (1.5A PTC) + D1 (SS34) + D3 (SMBJ28A)</text>
+  <text x="45" y="162" class="pin">U7 Buck (VBAT→+5V_BUS 3A) → ESP VIN</text>
+  <text x="45" y="182" class="pin">U6 AMS1117 (+5V→+3V3_BUS 1A Sensors/RF)</text>
+  <text x="45" y="204" class="pin">U5 INA180A2 (50V/V) → R10/C7 → GPIO35</text>
+  <text x="45" y="224" class="pin">R7/R8 (100k/10k) + D2 BAT54S → GPIO34</text>
+
+  <rect x="30" y="275" width="270" height="135" class="card"/>
+  <text x="45" y="300" class="blk">Hall RPM &amp; NTC Thermal Probes</text>
+  <text x="45" y="324" class="pin">J3: A3144 Hall (VCC=+5V, Pullup=+3V3)</text>
+  <text x="45" y="344" class="pin">    R5 10k + R6 1k + C5 100nF → GPIO33</text>
+  <text x="45" y="370" class="pin">J4: 10k NTC B3950 (RT1)</text>
+  <text x="45" y="390" class="pin">    R9 10k (+3V3) + C8 100nF → GPIO36</text>
+
+  <rect x="30" y="440" width="270" height="145" class="card"/>
+  <text x="45" y="465" class="blk">Ground &amp; Safety Controls</text>
+  <text x="45" y="490" class="pin">SW1 Tactile Calibrate → GPIO4 (PULL_UP)</text>
+  <text x="45" y="512" class="pin">D4 Status LED + R12 330Ω → GPIO2</text>
+  <text x="45" y="534" class="pin">JP1 Bench 3V3 Bridge (OPEN on Battery)</text>
+  <text x="45" y="556" class="pin">H1..H4 M3 Standoffs (89×61 mm GND)</text>
+
+  <rect x="385" y="95" width="320" height="470" class="mcu"/>
+  <text x="435" y="128" class="title">U1: ESP32 DevKit v1</text>
+  <text x="445" y="148" class="sub">ESP-WROOM-32 (30-Pin)</text>
+  <text x="405" y="182" class="pin">GPIO34 (ADC1_CH6) ◄── VBAT_ADC (11:1)</text>
+  <text x="405" y="206" class="pin">GPIO35 (ADC1_CH7) ◄── IBAT_ADC (50mV/A)</text>
+  <text x="405" y="230" class="pin">GPIO36 (ADC1_CH0) ◄── NTC_ADC (10k SH)</text>
+  <text x="405" y="264" class="pin">GPIO33 (ISR FALL) ◄── HALL_SIG (RPM)</text>
+  <text x="405" y="288" class="pin">GPIO04 (INPUT_PU) ◄── CAL_BTN (SW1)</text>
+  <text x="405" y="312" class="pin">GPIO02 (OUTPUT)   ──► STATUS_LED (D4)</text>
+  <text x="405" y="350" class="pin">GPIO21 (I2C_SDA)  ◄─► Shared I2C 400kHz</text>
+  <text x="405" y="374" class="pin">GPIO22 (I2C_SCL)  ──► (4.7k R1/R2 to 3V3)</text>
+  <text x="405" y="398" class="pin">GPIO26 / GPIO25   ──► VL53L0X XSHUT/INT</text>
+  <text x="405" y="422" class="pin">GPIO32 (INPUT)    ◄── MPU6050 INT</text>
+  <text x="405" y="458" class="pin">GPIO18/19/23/5    ◄─► VSPI (SX1278 LoRa)</text>
+  <text x="405" y="482" class="pin">GPIO14 / GPIO27   ◄─► LoRa RST / DIO0</text>
+  <text x="405" y="518" class="pin">GPIO16/17 (UART2) ◄─► ESP32-CAM Stub (J6)</text>
+  <text x="405" y="544" class="pin">USB UART0         ◄─► 115200 CLI / Debug</text>
+
+  <rect x="790" y="75" width="295" height="145" class="card"/>
+  <text x="808" y="102" class="blk">U2: MPU6050 6-Axis IMU (0x68)</text>
+  <text x="808" y="126" class="pin">I2C SDA=21, SCL=22, INT=32, AD0=GND</text>
+  <text x="808" y="148" class="pin">200Hz Complementary Roll/Pitch Filter</text>
+  <text x="808" y="170" class="pin">Startup 250-sample Zero-Bias Cal</text>
+  <text x="808" y="192" class="pin">32-sample AC Frame Vibration RMS (mg)</text>
+
+  <rect x="790" y="240" width="295" height="130" class="card"/>
+  <text x="808" y="266" class="blk">U3: VL53L0X ToF Ranging (0x29)</text>
+  <text x="808" y="290" class="pin">I2C SDA=21, SCL=22, XSHUT=26, INT=25</text>
+  <text x="808" y="312" class="pin">30–2000 mm Downward Laser Altitude</text>
+  <text x="808" y="334" class="pin">5-Tap Median + EMA Glitch Filter</text>
+  <text x="808" y="356" class="pin">Tray Cutout Window Directly Beneath U3</text>
+
+  <rect x="790" y="390" width="295" height="155" class="rf"/>
+  <text x="808" y="416" class="blk">U4: SX1278 Ra-02 433MHz LoRa</text>
+  <text x="808" y="440" class="pin">VSPI SCK=18 MISO=19 MOSI=23 NSS=5</text>
+  <text x="808" y="462" class="pin">RST=14, DIO0=27 | J5 50Ω SMA Edge Ant</text>
+  <text x="808" y="484" class="pin">SF7 / BW125kHz / CR4-5 / +17dBm</text>
+  <text x="808" y="506" class="pin">37B Frame (0xFC 0x01 + CRC-16-CCITT)</text>
+  <text x="808" y="528" class="pin">Auto-Retry + RSSI/SNR Diagnostics</text>
+
+  <rect x="790" y="565" width="295" height="80" class="card"/>
+  <text x="808" y="590" class="blk">J6: ESP32-CAM UART2 Bridge Stub</text>
+  <text x="808" y="614" class="pin">TX2=17, RX2=16, +5V_BUS, GND @ 115200</text>
+  <text x="808" y="634" class="pin">Non-blocking FC:TELEM / CAM:READY sync</text>
+
+  <path class="wire-pwr" d="M 300 170 L 385 170"/>
+  <path class="wire-ana" d="M 300 212 L 385 200"/>
+  <path class="wire-ana" d="M 300 338 L 340 338 L 340 260 L 385 260"/>
+  <path class="wire-ana" d="M 300 385 L 352 385 L 352 225 L 385 225"/>
+  <path class="wire-dig" d="M 300 500 L 385 500" opacity="0.7"/>
+  <path class="wire-i2c" d="M 705 358 L 750 358 L 750 140 L 790 140"/>
+  <path class="wire-i2c" d="M 750 300 L 790 300"/>
+  <path class="wire-spi" d="M 705 466 L 790 466"/>
+  <path class="wire-dig" d="M 705 520 L 750 520 L 750 605 L 790 605"/>
+
+  <text x="30" y="656" class="sub">FlightCore Hardware Rev 1.0 | 96×68 mm 2-Layer FR4 | M3 89×61 mm Mount | Generated 2026-11-18</text>
+</svg>
