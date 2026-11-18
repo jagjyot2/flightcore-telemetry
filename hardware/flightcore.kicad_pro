@@ -2,17 +2,56 @@
   "board": {
     "design_settings": {
       "defaults": {
-        "board_outline_line_width": 0.1,
+        "board_outline_line_width": 0.15,
         "copper_line_width": 0.25,
-        "silk_line_width": 0.12
+        "copper_text_size_h": 1.2,
+        "copper_text_size_v": 1.2,
+        "copper_text_thickness": 0.2,
+        "silk_line_width": 0.12,
+        "silk_text_size_h": 0.9,
+        "silk_text_size_v": 0.9,
+        "silk_text_thickness": 0.15
       },
+      "diff_pair_dimensions": [],
+      "drc_exclusions": [],
       "rules": {
         "min_clearance": 0.2,
+        "min_copper_edge_clearance": 0.5,
+        "min_hole_clearance": 0.25,
+        "min_silk_clearance": 0.1,
         "min_track_width": 0.2,
+        "min_via_annular_width": 0.125,
         "min_via_diameter": 0.6,
-        "min_via_drill": 0.3
-      }
+        "min_through_hole_diameter": 0.3
+      },
+      "track_widths": [
+        0.0,
+        0.25,
+        0.5,
+        1.0,
+        2.0,
+        3.0
+      ],
+      "via_dimensions": [
+        {
+          "diameter": 0.0,
+          "drill": 0.0
+        },
+        {
+          "diameter": 0.7,
+          "drill": 0.35
+        },
+        {
+          "diameter": 0.8,
+          "drill": 0.4
+        }
+      ]
     }
+  },
+  "boards": [],
+  "libraries": {
+    "pinned_footprint_libs": [],
+    "pinned_symbol_libs": []
   },
   "meta": {
     "filename": "flightcore.kicad_pro",
@@ -21,45 +60,73 @@
   "net_settings": {
     "classes": [
       {
-        "name": "Default",
+        "bus_width": 12,
         "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_track_width": 0.2,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "Default",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.25,
-        "via_diameter": 0.6,
-        "via_drill": 0.3
+        "via_diameter": 0.7,
+        "via_drill": 0.35,
+        "wire_width": 6
       },
       {
-        "name": "Power_Bus",
+        "bus_width": 12,
         "clearance": 0.25,
+        "diff_pair_gap": 0.25,
+        "diff_pair_track_width": 0.25,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "Power_Logic",
+        "pcb_color": "rgba(255, 165, 0, 0.500)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.5,
         "via_diameter": 0.8,
-        "via_drill": 0.4
+        "via_drill": 0.4,
+        "wire_width": 6
       },
       {
-        "name": "VBAT_HighCurrent",
-        "clearance": 0.35,
-        "track_width": 2.5,
-        "via_diameter": 1.0,
-        "via_drill": 0.5
-      },
-      {
-        "name": "RF_50Ohm",
+        "bus_width": 12,
         "clearance": 0.3,
-        "track_width": 0.95,
-        "via_diameter": 0.6,
-        "via_drill": 0.3
+        "diff_pair_gap": 0.25,
+        "diff_pair_track_width": 0.25,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "Power_HighCurrent",
+        "pcb_color": "rgba(220, 40, 40, 0.600)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 2.0,
+        "via_diameter": 1.0,
+        "via_drill": 0.5,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.2,
+        "diff_pair_track_width": 0.25,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "HighSpeed_Bus",
+        "pcb_color": "rgba(60, 180, 255, 0.500)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.25,
+        "via_diameter": 0.7,
+        "via_drill": 0.35,
+        "wire_width": 6
       }
-    ]
-  },
-  "schematic": {
-    "legacy_lib_dir": "",
+    ],
     "meta": {
-      "version": 1
+      "version": 2
     }
   },
-  "sheets": [
-    [
-      "e8f9a1b0-0001-4000-8000-000000000001",
-      "Root"
-    ]
-  ]
+  "pcbnew": {
+    "page_layout_descr_file": ""
+  },
+  "sheets": [],
+  "text_variables": {}
 }

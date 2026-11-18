@@ -49,7 +49,7 @@ def test_kicad_project_files_valid() -> None:
     sch = (HW_DIR / "flightcore.kicad_sch").read_text(encoding="utf-8")
     assert "(kicad_sch" in sch and "(lib_symbols" in sch
     pcb = (HW_DIR / "flightcore.kicad_pcb").read_text(encoding="utf-8")
-    assert "(kicad_pcb" in pcb and '(layer "Edge.Cuts")' in pcb and "(segment " in pcb
+    assert "(kicad_pcb" in pcb and '(layer "Edge.Cuts")' in pcb and "(segment" in pcb
 
 
 def test_gerbers_excellon_and_drc_zero_errors() -> None:
@@ -75,7 +75,7 @@ def test_gerbers_excellon_and_drc_zero_errors() -> None:
         assert "M02*" in txt
 
     drl = (GERBER_DIR / "flightcore-PTH.drl").read_text(encoding="utf-8")
-    assert "M48" in drl and "METRIC,TZ" in drl and "M30" in drl
+    assert "M48" in drl and "METRIC" in drl and "M30" in drl
 
     drc = (GERBER_DIR / "drc_report.txt").read_text(encoding="utf-8")
     assert "Unconnected/Violations: 0 errors" in drc

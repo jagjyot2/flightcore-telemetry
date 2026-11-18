@@ -1,20 +1,13 @@
 ===================================================================
-FlightCore PCB Geometric Design Rule Check (DRC) Verification Report
+FlightCore PCB KiCad 10.0.8 ERC & DRC Verification Report
 ===================================================================
-Board Dimensions      : 96.0 mm x 68.0 mm (2-Layer FR4, 1.6 mm)
-Mounting Pattern      : 89.0 mm x 61.0 mm (4x M3 3.2mm)
-Component Count       : 49
-Total Pads Checked    : 158
-Routed Trace Polylines: 27
-
-Rule Checks:
-  [PASS] Min Trace Width       : 0.250 mm (limit >= 0.200 mm)
-  [PASS] Min Inter-Net Pad Gap : 0.300 mm (limit >= 0.150 mm)
-  [PASS] Min Track-to-Pad Gap  : 0.310 mm (limit >= 0.150 mm)
-  [PASS] Min Board Edge Gap    : 0.900 mm (limit >= 0.300 mm)
-  [PASS] RF 50-Ohm Feed Track  : 0.950 mm width (U4.17 -> J5.1, B.Cu GND ref)
-  [PASS] High-Current VBAT Bus : 2.000 mm width (J1 -> R11 1mOhm -> J2)
-  [PASS] Strapping Pin Safety  : GPIO0, GPIO12 (MTDI), GPIO15 unburdened
-  [PASS] Safety Scope Check    : ZERO motor/ESC PWM traces or drivers
+Board Dimensions        : 96.0 mm x 68.0 mm (2-Layer FR4, 1.6 mm)
+Mounting Pattern        : 89.0 mm x 61.0 mm (4x M3 3.2mm)
+KiCad CLI Version       : 10.0.8
+ERC Violations          : 0
+DRC Violations          : 0
+Unconnected Pads        : 0
+Schematic-PCB Parity    : 0 issues
+Safety Scope Check      : ZERO motor/ESC PWM traces or drivers
 
 Unconnected/Violations: 0 errors

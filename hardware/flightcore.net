@@ -1,561 +1,5993 @@
-(export (version "E")
-  (design
-    (source "flightcore.kicad_sch")
-    (date "2026-11-18T08:30:00+05:30")
-    (tool "Eeschema 8.0.0")
-    (sheet (number "1") (name "/") (tstamps "/")
-      (title_block (title "FlightCore Drone Telemetry & Sensor Carrier") (rev "1.0") (company "Jagjyot Portfolio"))))
-  (components
-    (comp (ref "U1")
-      (value "ESP32-DevKit-V1-30P")
-      (footprint "FlightCore:ESP32_DevKit_V1_30P")
-      (description "DOIT ESP32-WROOM-32 DevKit v1 (30-pin). Strapping pins GPIO0/12/15 kept safe.")
-      (libsource (lib "FlightCore") (part "ESP32_DevKit_V1") (description "MCU Module"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-947534610857"))
-    (comp (ref "U2")
-      (value "MPU6050-GY521")
-      (footprint "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical")
-      (description "GY-521 MPU6050 breakout (AD0=GND -> 0x68). Use 3.3V native or LDO-bypass.")
-      (libsource (lib "FlightCore") (part "MPU6050_GY521") (description "6-Axis IMU"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-955233508975"))
-    (comp (ref "U3")
-      (value "VL53L0X-ToF")
-      (footprint "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical")
-      (description "GY-VL53L0XV2 carrier, 30-2000 mm ranging, XSHUT controlled via GPIO26.")
-      (libsource (lib "FlightCore") (part "VL53L0X_Module") (description "ToF Laser Ranging"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-525553099681"))
-    (comp (ref "U4")
-      (value "SX1278-Ra02-433MHz")
-      (footprint "RF_Module:Ai-Thinker_Ra-02")
-      (description "AI-Thinker Ra-02 SX1278 433MHz SPI LoRa module; keep 433MHz antenna attached.")
-      (libsource (lib "FlightCore") (part "Ra02_SX1278") (description "433MHz LoRa RF"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-335142116770"))
-    (comp (ref "U5")
-      (value "INA180A2IDBVR")
-      (footprint "Package_TO_SOT_SMD:SOT-23-5")
-      (description "High-side current sense amp across 1mOhm shunt (50 mV/A output to GPIO35).")
-      (libsource (lib "FlightCore") (part "INA180A2") (description "Current Sense Amp"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-628251947367"))
-    (comp (ref "U6")
-      (value "AMS1117-3.3")
-      (footprint "Package_TO_SOT_SMD:SOT-223-3_TabPin2")
-      (description "Dedicated 3.3V sensor/RF rail isolated from DevKit LDO (thermal tab -> +3V3_BUS).")
-      (libsource (lib "FlightCore") (part "AMS1117-3.3") (description "LDO Regulator"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-707572374663"))
-    (comp (ref "U7")
-      (value "MP1584-5V-3A-Buck")
-      (footprint "FlightCore:Buck_5V_3A_Module")
-      (description "Step-down BEC supplying +5V_BUS from protected 2S-6S LiPo VBAT_PROT.")
-      (libsource (lib "FlightCore") (part "Buck_5V_3A") (description "DC-DC Buck Module"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-355058305493"))
-    (comp (ref "J1")
-      (value "XT60-VBAT-IN")
-      (footprint "Connector_AMASS:AMASS_XT60-M_1x02_P7.20mm_Vertical")
-      (description "Main LiPo battery XT60 input feeding high-side 1mOhm shunt.")
-      (libsource (lib "FlightCore") (part "Conn_01x02_Power") (description "Power Input Conn"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-192591177749"))
-    (comp (ref "J2")
-      (value "XT60-PDB-OUT")
-      (footprint "Connector_AMASS:AMASS_XT60-F_1x02_P7.20mm_Vertical")
-      (description "Pass-through XT60 to drone PDB/ESCs (telemetry inline sense only).")
-      (libsource (lib "FlightCore") (part "Conn_01x02_Power") (description "PDB Pass-Through"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-210268166417"))
-    (comp (ref "J3")
-      (value "JST-XH-3P-HALL")
-      (footprint "Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical")
-      (description "3-pin JST-XH to remote A3144EUA-T Hall-effect RPM sensor (5V supply, 3.3V pull-up sig).")
-      (libsource (lib "FlightCore") (part "Conn_01x03") (description "Hall RPM Harness"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-299381931744"))
-    (comp (ref "J4")
-      (value "JST-XH-2P-NTC")
-      (footprint "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical")
-      (description "2-pin JST-XH for external 10k B3950 NTC probe (RT1).")
-      (libsource (lib "FlightCore") (part "Conn_01x02") (description "NTC Probe Header"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-140340830799"))
-    (comp (ref "J5")
-      (value "SMA-433MHz-ANT")
-      (footprint "Connector_Coaxial:SMA_Amphenol_132289_EdgeMount")
-      (description "50-ohm edge SMA connector for quarter-wave 433MHz telemetry antenna.")
-      (libsource (lib "FlightCore") (part "Conn_Coaxial") (description "RF Edge SMA"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-018833660675"))
-    (comp (ref "J6")
-      (value "JST-XH-4P-CAM")
-      (footprint "Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical")
-      (description "4-pin UART2 bridge to ESP32-CAM (5V, GND, TX2->RX, RX2<-TX).")
-      (libsource (lib "FlightCore") (part "Conn_01x04") (description "ESP32-CAM UART2"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-754834131010"))
-    (comp (ref "F1")
-      (value "1.5A-Polyfuse")
-      (footprint "Fuse:Fuse_1206_3216Metric")
-      (description "Protects FlightCore buck & divider tap against downstream shorts.")
-      (libsource (lib "FlightCore") (part "Polyfuse") (description "PTC Fuse"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-248791453542"))
-    (comp (ref "D1")
-      (value "SS34-Schottky")
-      (footprint "Diode_SMD:D_SMA")
-      (description "Reverse-polarity protection on FlightCore power tap.")
-      (libsource (lib "FlightCore") (part "D_Schottky") (description "Reverse Polarity"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-955954200801"))
-    (comp (ref "D2")
-      (value "BAT54S-Clamp")
-      (footprint "Package_TO_SOT_SMD:SOT-23")
-      (description "Dual Schottky clamping VBAT_ADC within [GND, +3V3_BUS] against surge.")
-      (libsource (lib "FlightCore") (part "BAT54S") (description "ADC Clamp Diode"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-664185618536"))
-    (comp (ref "D3")
-      (value "SMBJ28A-TVS")
-      (footprint "Diode_SMD:D_SMB")
-      (description "Suppresses hot-plug LiPo inductive transients on VBAT_PROT.")
-      (libsource (lib "FlightCore") (part "D_TVS") (description "TVS Surge Clamp"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-938048985037"))
-    (comp (ref "D4")
-      (value "LED-Green-0805")
-      (footprint "LED_SMD:LED_0805_2012Metric")
-      (description "Heartbeat & calibration visual indicator driven by GPIO2.")
-      (libsource (lib "FlightCore") (part "LED") (description "Status LED"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-699582115547"))
-    (comp (ref "SW1")
-      (value "Tactile-CAL-Btn")
-      (footprint "Button_Switch_SMD:SW_SPST_PTS645")
-      (description "Momentary tactile button on GPIO4 for on-ground IMU re-calibration.")
-      (libsource (lib "FlightCore") (part "SW_Push") (description "Calibrate Button"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-551128544643"))
-    (comp (ref "JP1")
-      (value "Jumper-2P-3V3-Bench")
-      (footprint "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical")
-      (description "OPEN for battery BEC mode; close ONLY for USB-only bench testing without 5V BEC.")
-      (libsource (lib "FlightCore") (part "Jumper_2_Open") (description "Bench 3V3 Jumper"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-934537559734"))
-    (comp (ref "R11")
-      (value "0.001R-3W-Shunt")
-      (footprint "Resistor_SMD:R_2512_6332Metric")
-      (description "Kelvin-connected 2512 high-side shunt between VBAT_IN (J1) and VBAT_LOAD (J2).")
-      (libsource (lib "FlightCore") (part "R_Shunt") (description "Current Shunt"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-305979405584"))
-    (comp (ref "R1")
-      (value "4.7k")
-      (footprint "Resistor_SMD:R_0805_2012Metric")
-      (description "I2C SDA pull-up (400kHz)")
-      (libsource (lib "FlightCore") (part "R") (description "Resistor 0805 1%"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-719330013132"))
-    (comp (ref "R2")
-      (value "4.7k")
-      (footprint "Resistor_SMD:R_0805_2012Metric")
-      (description "I2C SCL pull-up (400kHz)")
-      (libsource (lib "FlightCore") (part "R") (description "Resistor 0805 1%"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-211340956629"))
-    (comp (ref "R3")
-      (value "10k")
-      (footprint "Resistor_SMD:R_0805_2012Metric")
-      (description "VL53L0X XSHUT boot pull-up")
-      (libsource (lib "FlightCore") (part "R") (description "Resistor 0805 1%"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-428751568061"))
-    (comp (ref "R4")
-      (value "10k")
-      (footprint "Resistor_SMD:R_0805_2012Metric")
-      (description "SX1278 NSS pull-up")
-      (libsource (lib "FlightCore") (part "R") (description "Resistor 0805 1%"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-255701489355"))
-    (comp (ref "R5")
-      (value "10k")
-      (footprint "Resistor_SMD:R_0805_2012Metric")
-      (description "A3144 open-collector pull-up to 3.3V")
-      (libsource (lib "FlightCore") (part "R") (description "Resistor 0805 1%"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-902578094401"))
-    (comp (ref "R6")
-      (value "1k")
-      (footprint "Resistor_SMD:R_0805_2012Metric")
-      (description "Hall sensor RC filter & ESD limit")
-      (libsource (lib "FlightCore") (part "R") (description "Resistor 0805 1%"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-759183042916"))
-    (comp (ref "R7")
-      (value "100k")
-      (footprint "Resistor_SMD:R_0805_2012Metric")
-      (description "VBAT divider top leg (1%, 100k/10k = 11:1)")
-      (libsource (lib "FlightCore") (part "R") (description "Resistor 0805 1%"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-565471903768"))
-    (comp (ref "R8")
-      (value "10k")
-      (footprint "Resistor_SMD:R_0805_2012Metric")
-      (description "VBAT divider bottom leg (1%)")
-      (libsource (lib "FlightCore") (part "R") (description "Resistor 0805 1%"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-507109946632"))
-    (comp (ref "R9")
-      (value "10k")
-      (footprint "Resistor_SMD:R_0805_2012Metric")
-      (description "NTC thermistor reference pull-up (1%)")
-      (libsource (lib "FlightCore") (part "R") (description "Resistor 0805 1%"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-546918058069"))
-    (comp (ref "R10")
-      (value "100R")
-      (footprint "Resistor_SMD:R_0805_2012Metric")
-      (description "INA180 output RC anti-alias resistor")
-      (libsource (lib "FlightCore") (part "R") (description "Resistor 0805 1%"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-536955899807"))
-    (comp (ref "R12")
-      (value "330R")
-      (footprint "Resistor_SMD:R_0805_2012Metric")
-      (description "Status LED D4 current limiter (~5mA)")
-      (libsource (lib "FlightCore") (part "R") (description "Resistor 0805 1%"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-865686131319"))
-    (comp (ref "C1")
-      (value "100uF-35V")
-      (footprint "Capacitor_THT:CP_Radial_D6.3mm_P2.50mm")
-      (description "Buck converter input bulk electrolytic")
-      (libsource (lib "FlightCore") (part "C_Polarized") (description "Capacitor"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-320144920004"))
-    (comp (ref "C2")
-      (value "10uF-16V")
-      (footprint "Capacitor_SMD:C_0805_2012Metric")
-      (description "5V buck output decoupling")
-      (libsource (lib "FlightCore") (part "C") (description "Capacitor"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-610668909875"))
-    (comp (ref "C3")
-      (value "10uF-16V")
-      (footprint "Capacitor_SMD:C_0805_2012Metric")
-      (description "AMS1117-3.3 input capacitor")
-      (libsource (lib "FlightCore") (part "C") (description "Capacitor"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-149087063435"))
-    (comp (ref "C4")
-      (value "22uF-10V")
-      (footprint "Capacitor_SMD:C_0805_2012Metric")
-      (description "AMS1117-3.3 output stability capacitor")
-      (libsource (lib "FlightCore") (part "C") (description "Capacitor"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-568367724773"))
-    (comp (ref "C5")
-      (value "100nF-25V")
-      (footprint "Capacitor_SMD:C_0805_2012Metric")
-      (description "Hall RPM RC debounce cap")
-      (libsource (lib "FlightCore") (part "C") (description "Capacitor"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-269603296137"))
-    (comp (ref "C6")
-      (value "100nF-25V")
-      (footprint "Capacitor_SMD:C_0805_2012Metric")
-      (description "VBAT ADC anti-aliasing filter cap")
-      (libsource (lib "FlightCore") (part "C") (description "Capacitor"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-209073439799"))
-    (comp (ref "C7")
-      (value "100nF-25V")
-      (footprint "Capacitor_SMD:C_0805_2012Metric")
-      (description "IBAT ADC anti-aliasing filter cap")
-      (libsource (lib "FlightCore") (part "C") (description "Capacitor"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-432672279678"))
-    (comp (ref "C8")
-      (value "100nF-25V")
-      (footprint "Capacitor_SMD:C_0805_2012Metric")
-      (description "NTC ADC noise filter cap")
-      (libsource (lib "FlightCore") (part "C") (description "Capacitor"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-598222558934"))
-    (comp (ref "C9")
-      (value "100nF-25V")
-      (footprint "Capacitor_SMD:C_0805_2012Metric")
-      (description "MPU6050 local VCC bypass")
-      (libsource (lib "FlightCore") (part "C") (description "Capacitor"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-012978535245"))
-    (comp (ref "C10")
-      (value "100nF-25V")
-      (footprint "Capacitor_SMD:C_0805_2012Metric")
-      (description "VL53L0X local VCC bypass")
-      (libsource (lib "FlightCore") (part "C") (description "Capacitor"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-038626719861"))
-    (comp (ref "C11")
-      (value "10uF-10V")
-      (footprint "Capacitor_SMD:C_0805_2012Metric")
-      (description "SX1278 PA TX burst bulk bypass")
-      (libsource (lib "FlightCore") (part "C") (description "Capacitor"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-527970806067"))
-    (comp (ref "C12")
-      (value "100nF-25V")
-      (footprint "Capacitor_SMD:C_0805_2012Metric")
-      (description "SX1278 HF VCC decoupling")
-      (libsource (lib "FlightCore") (part "C") (description "Capacitor"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-541178084262"))
-    (comp (ref "C13")
-      (value "100nF-25V")
-      (footprint "Capacitor_SMD:C_0805_2012Metric")
-      (description "INA180A2 VS supply bypass")
-      (libsource (lib "FlightCore") (part "C") (description "Capacitor"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-018651124738"))
-    (comp (ref "H1")
-      (value "M3-Mount-Hole")
-      (footprint "MountingHole:MountingHole_3.2mm_M3_Pad_Via")
-      (description "3.2mm M3 standoff hole (89.0mm x 61.0mm carrier grid).")
-      (libsource (lib "FlightCore") (part "MountingHole_Pad") (description "Mounting Hole"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-600888314888"))
-    (comp (ref "H2")
-      (value "M3-Mount-Hole")
-      (footprint "MountingHole:MountingHole_3.2mm_M3_Pad_Via")
-      (description "3.2mm M3 standoff hole (89.0mm x 61.0mm carrier grid).")
-      (libsource (lib "FlightCore") (part "MountingHole_Pad") (description "Mounting Hole"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-468483140485"))
-    (comp (ref "H3")
-      (value "M3-Mount-Hole")
-      (footprint "MountingHole:MountingHole_3.2mm_M3_Pad_Via")
-      (description "3.2mm M3 standoff hole (89.0mm x 61.0mm carrier grid).")
-      (libsource (lib "FlightCore") (part "MountingHole_Pad") (description "Mounting Hole"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-618685331575"))
-    (comp (ref "H4")
-      (value "M3-Mount-Hole")
-      (footprint "MountingHole:MountingHole_3.2mm_M3_Pad_Via")
-      (description "3.2mm M3 standoff hole (89.0mm x 61.0mm carrier grid).")
-      (libsource (lib "FlightCore") (part "MountingHole_Pad") (description "Mounting Hole"))
-      (sheetpath (names "/") (tstamps "/"))
-      (tstamps "00000000-0000-0000-0000-261926514988"))
-  )
-  (nets
-    (net (code "1") (name "+3V3_BUS")
-      (node (ref "U2") (pin "1") (pinfunction "VCC") (pintype "bidirectional"))
-      (node (ref "U3") (pin "1") (pinfunction "VIN") (pintype "bidirectional"))
-      (node (ref "U4") (pin "3") (pinfunction "3V3") (pintype "bidirectional"))
-      (node (ref "U5") (pin "5") (pinfunction "VS") (pintype "bidirectional"))
-      (node (ref "U6") (pin "2") (pinfunction "VOUT") (pintype "bidirectional"))
-      (node (ref "D2") (pin "2") (pinfunction "K") (pintype "bidirectional"))
-      (node (ref "JP1") (pin "2") (pinfunction "BUS_3V3") (pintype "bidirectional"))
-      (node (ref "R1") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "R2") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "R3") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "R4") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "R5") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "R9") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-      (node (ref "C4") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-      (node (ref "C9") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-      (node (ref "C10") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-      (node (ref "C11") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-      (node (ref "C12") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-      (node (ref "C13") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-    )
-    (net (code "2") (name "+5V_BUS")
-      (node (ref "U1") (pin "15") (pinfunction "VIN") (pintype "bidirectional"))
-      (node (ref "U6") (pin "3") (pinfunction "VIN") (pintype "bidirectional"))
-      (node (ref "U7") (pin "4") (pinfunction "VOUT_5V") (pintype "bidirectional"))
-      (node (ref "J3") (pin "1") (pinfunction "VCC_5V") (pintype "bidirectional"))
-      (node (ref "J6") (pin "1") (pinfunction "VCC_5V") (pintype "bidirectional"))
-      (node (ref "C2") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-      (node (ref "C3") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-    )
-    (net (code "3") (name "CAL_BTN")
-      (node (ref "U1") (pin "20") (pinfunction "D4/GPIO4") (pintype "bidirectional"))
-      (node (ref "SW1") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-    )
-    (net (code "4") (name "CAM_UART_RX")
-      (node (ref "U1") (pin "21") (pinfunction "RX2/GPIO16") (pintype "bidirectional"))
-      (node (ref "J6") (pin "4") (pinfunction "RX2") (pintype "bidirectional"))
-    )
-    (net (code "5") (name "CAM_UART_TX")
-      (node (ref "U1") (pin "22") (pinfunction "TX2/GPIO17") (pintype "bidirectional"))
-      (node (ref "J6") (pin "3") (pinfunction "TX2") (pintype "bidirectional"))
-    )
-    (net (code "6") (name "ESP32_3V3")
-      (node (ref "U1") (pin "16") (pinfunction "3V3") (pintype "bidirectional"))
-      (node (ref "JP1") (pin "1") (pinfunction "ESP_3V3") (pintype "bidirectional"))
-    )
-    (net (code "7") (name "GND")
-      (node (ref "U1") (pin "14") (pinfunction "GND") (pintype "bidirectional"))
-      (node (ref "U1") (pin "17") (pinfunction "GND") (pintype "bidirectional"))
-      (node (ref "U2") (pin "2") (pinfunction "GND") (pintype "bidirectional"))
-      (node (ref "U2") (pin "7") (pinfunction "AD0") (pintype "bidirectional"))
-      (node (ref "U3") (pin "2") (pinfunction "GND") (pintype "bidirectional"))
-      (node (ref "U4") (pin "1") (pinfunction "GND1") (pintype "bidirectional"))
-      (node (ref "U4") (pin "2") (pinfunction "GND2") (pintype "bidirectional"))
-      (node (ref "U4") (pin "11") (pinfunction "GND3") (pintype "bidirectional"))
-      (node (ref "U4") (pin "16") (pinfunction "GND4") (pintype "bidirectional"))
-      (node (ref "U5") (pin "2") (pinfunction "GND") (pintype "bidirectional"))
-      (node (ref "U6") (pin "1") (pinfunction "GND") (pintype "bidirectional"))
-      (node (ref "U7") (pin "2") (pinfunction "GND_IN") (pintype "bidirectional"))
-      (node (ref "U7") (pin "3") (pinfunction "GND_OUT") (pintype "bidirectional"))
-      (node (ref "J1") (pin "2") (pinfunction "GND") (pintype "bidirectional"))
-      (node (ref "J2") (pin "2") (pinfunction "GND") (pintype "bidirectional"))
-      (node (ref "J3") (pin "3") (pinfunction "GND") (pintype "bidirectional"))
-      (node (ref "J4") (pin "2") (pinfunction "GND") (pintype "bidirectional"))
-      (node (ref "J5") (pin "2") (pinfunction "GND1") (pintype "bidirectional"))
-      (node (ref "J5") (pin "3") (pinfunction "GND2") (pintype "bidirectional"))
-      (node (ref "J6") (pin "2") (pinfunction "GND") (pintype "bidirectional"))
-      (node (ref "D2") (pin "1") (pinfunction "A") (pintype "bidirectional"))
-      (node (ref "D3") (pin "2") (pinfunction "A") (pintype "bidirectional"))
-      (node (ref "SW1") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "R8") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "R12") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "C1") (pin "2") (pinfunction "-") (pintype "bidirectional"))
-      (node (ref "C2") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "C3") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "C4") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "C5") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "C6") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "C7") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "C8") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "C9") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "C10") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "C11") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "C12") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "C13") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "H1") (pin "1") (pinfunction "GND") (pintype "bidirectional"))
-      (node (ref "H2") (pin "1") (pinfunction "GND") (pintype "bidirectional"))
-      (node (ref "H3") (pin "1") (pinfunction "GND") (pintype "bidirectional"))
-      (node (ref "H4") (pin "1") (pinfunction "GND") (pintype "bidirectional"))
-    )
-    (net (code "8") (name "HALL_SIG")
-      (node (ref "U1") (pin "7") (pinfunction "D33/GPIO33") (pintype "bidirectional"))
-      (node (ref "R5") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-      (node (ref "R6") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "C5") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-    )
-    (net (code "9") (name "HALL_SIG_EXT")
-      (node (ref "J3") (pin "2") (pinfunction "SIG") (pintype "bidirectional"))
-      (node (ref "R6") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-    )
-    (net (code "10") (name "I2C_SCL")
-      (node (ref "U1") (pin "29") (pinfunction "D22/GPIO22") (pintype "bidirectional"))
-      (node (ref "U2") (pin "3") (pinfunction "SCL") (pintype "bidirectional"))
-      (node (ref "U3") (pin "3") (pinfunction "SCL") (pintype "bidirectional"))
-      (node (ref "R2") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-    )
-    (net (code "11") (name "I2C_SDA")
-      (node (ref "U1") (pin "26") (pinfunction "D21/GPIO21") (pintype "bidirectional"))
-      (node (ref "U2") (pin "4") (pinfunction "SDA") (pintype "bidirectional"))
-      (node (ref "U3") (pin "4") (pinfunction "SDA") (pintype "bidirectional"))
-      (node (ref "R1") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-    )
-    (net (code "12") (name "IBAT_ADC")
-      (node (ref "U1") (pin "5") (pinfunction "D35/GPIO35") (pintype "bidirectional"))
-      (node (ref "R10") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "C7") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-    )
-    (net (code "13") (name "IBAT_SENSE_RAW")
-      (node (ref "U5") (pin "1") (pinfunction "OUT") (pintype "bidirectional"))
-      (node (ref "R10") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-    )
-    (net (code "14") (name "LORA_CS")
-      (node (ref "U1") (pin "23") (pinfunction "D5/GPIO5") (pintype "bidirectional"))
-      (node (ref "U4") (pin "15") (pinfunction "NSS") (pintype "bidirectional"))
-      (node (ref "R4") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-    )
-    (net (code "15") (name "LORA_DIO0")
-      (node (ref "U1") (pin "10") (pinfunction "D27/GPIO27") (pintype "bidirectional"))
-      (node (ref "U4") (pin "5") (pinfunction "DIO0") (pintype "bidirectional"))
-    )
-    (net (code "16") (name "LORA_RF_ANT")
-      (node (ref "U4") (pin "17") (pinfunction "ANT_RF") (pintype "bidirectional"))
-      (node (ref "J5") (pin "1") (pinfunction "RF_IN") (pintype "bidirectional"))
-    )
-    (net (code "17") (name "LORA_RST")
-      (node (ref "U1") (pin "11") (pinfunction "D14/GPIO14") (pintype "bidirectional"))
-      (node (ref "U4") (pin "4") (pinfunction "RST") (pintype "bidirectional"))
-    )
-    (net (code "18") (name "MPU_INT")
-      (node (ref "U1") (pin "6") (pinfunction "D32/GPIO32") (pintype "bidirectional"))
-      (node (ref "U2") (pin "8") (pinfunction "INT") (pintype "bidirectional"))
-    )
-    (net (code "19") (name "NTC_ADC")
-      (node (ref "U1") (pin "2") (pinfunction "VP/GPIO36") (pintype "bidirectional"))
-      (node (ref "J4") (pin "1") (pinfunction "NTC_SENSE") (pintype "bidirectional"))
-      (node (ref "R9") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "C8") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-    )
-    (net (code "20") (name "STATUS_LED")
-      (node (ref "U1") (pin "19") (pinfunction "D2/GPIO2") (pintype "bidirectional"))
-      (node (ref "D4") (pin "1") (pinfunction "A") (pintype "bidirectional"))
-    )
-    (net (code "21") (name "STATUS_LED_K")
-      (node (ref "D4") (pin "2") (pinfunction "K") (pintype "bidirectional"))
-      (node (ref "R12") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-    )
-    (net (code "22") (name "TOF_INT")
-      (node (ref "U1") (pin "8") (pinfunction "D25/GPIO25") (pintype "bidirectional"))
-      (node (ref "U3") (pin "5") (pinfunction "GPIO1") (pintype "bidirectional"))
-    )
-    (net (code "23") (name "TOF_XSHUT")
-      (node (ref "U1") (pin "9") (pinfunction "D26/GPIO26") (pintype "bidirectional"))
-      (node (ref "U3") (pin "6") (pinfunction "XSHUT") (pintype "bidirectional"))
-      (node (ref "R3") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-    )
-    (net (code "24") (name "VBAT_ADC")
-      (node (ref "U1") (pin "4") (pinfunction "D34/GPIO34") (pintype "bidirectional"))
-      (node (ref "D2") (pin "3") (pinfunction "COM") (pintype "bidirectional"))
-      (node (ref "R7") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "R8") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-      (node (ref "C6") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-    )
-    (net (code "25") (name "VBAT_FUSED")
-      (node (ref "F1") (pin "2") (pinfunction "2") (pintype "bidirectional"))
-      (node (ref "D1") (pin "2") (pinfunction "A") (pintype "bidirectional"))
-    )
-    (net (code "26") (name "VBAT_IN")
-      (node (ref "U5") (pin "3") (pinfunction "IN+") (pintype "bidirectional"))
-      (node (ref "J1") (pin "1") (pinfunction "VBAT+") (pintype "bidirectional"))
-      (node (ref "F1") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-      (node (ref "R11") (pin "1") (pinfunction "IN+") (pintype "bidirectional"))
-    )
-    (net (code "27") (name "VBAT_LOAD")
-      (node (ref "U5") (pin "4") (pinfunction "IN-") (pintype "bidirectional"))
-      (node (ref "J2") (pin "1") (pinfunction "VBAT_OUT+") (pintype "bidirectional"))
-      (node (ref "R11") (pin "2") (pinfunction "IN-") (pintype "bidirectional"))
-    )
-    (net (code "28") (name "VBAT_PROT")
-      (node (ref "U7") (pin "1") (pinfunction "VIN+") (pintype "bidirectional"))
-      (node (ref "D1") (pin "1") (pinfunction "K") (pintype "bidirectional"))
-      (node (ref "D3") (pin "1") (pinfunction "K") (pintype "bidirectional"))
-      (node (ref "R7") (pin "1") (pinfunction "1") (pintype "bidirectional"))
-      (node (ref "C1") (pin "1") (pinfunction "+") (pintype "bidirectional"))
-    )
-    (net (code "29") (name "VSPI_MISO")
-      (node (ref "U1") (pin "25") (pinfunction "D19/GPIO19") (pintype "bidirectional"))
-      (node (ref "U4") (pin "13") (pinfunction "MISO") (pintype "bidirectional"))
-    )
-    (net (code "30") (name "VSPI_MOSI")
-      (node (ref "U1") (pin "30") (pinfunction "D23/GPIO23") (pintype "bidirectional"))
-      (node (ref "U4") (pin "14") (pinfunction "MOSI") (pintype "bidirectional"))
-    )
-    (net (code "31") (name "VSPI_SCK")
-      (node (ref "U1") (pin "24") (pinfunction "D18/GPIO18") (pintype "bidirectional"))
-      (node (ref "U4") (pin "12") (pinfunction "SCK") (pintype "bidirectional"))
-    )
-  )
+(export
+	(version "E")
+	(design
+		(source "S:\\Projects\\Multi projects\\ENGINEERING-PORTFOLIO\\04-FLIGHTCORE\\hardware\\flightcore.kicad_sch")
+		(date "2026-11-18T18:44:56")
+		(tool "Eeschema 10.0.8")
+		(sheet
+			(number "1")
+			(name "/")
+			(tstamps "/")
+			(title_block
+				(title "FlightCore ESP32 Drone Telemetry Expansion Board (No ESC/Motor Control)")
+				(company "Jagjyot Engineering Portfolio")
+				(rev "1.1")
+				(date "2026-11-18")
+				(source "flightcore.kicad_sch")
+				(comment
+					(number "1")
+					(value "")
+				)
+				(comment
+					(number "2")
+					(value "")
+				)
+				(comment
+					(number "3")
+					(value "")
+				)
+				(comment
+					(number "4")
+					(value "")
+				)
+				(comment
+					(number "5")
+					(value "")
+				)
+				(comment
+					(number "6")
+					(value "")
+				)
+				(comment
+					(number "7")
+					(value "")
+				)
+				(comment
+					(number "8")
+					(value "")
+				)
+				(comment
+					(number "9")
+					(value "")
+				)
+			)
+		)
+	)
+	(components
+		(comp
+			(ref "C1")
+			(value "100uF-35V")
+			(footprint "FlightCore:CP_Radial_D6.3mm")
+			(fields
+				(field
+					(name "Rating") "35V / 100uF")
+				(field
+					(name "Footprint") "FlightCore:CP_Radial_D6.3mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_C1_100uF_35V")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "35V / 100uF")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "e0836f67-e42d-50f8-98e0-951199204852")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C2")
+			(value "10uF-16V")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "16V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_C2_10uF_16V")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "16V")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "5dc6ec38-f893-57f9-b4fa-c27d9f2208f0")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C3")
+			(value "10uF-16V")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "16V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_C3_10uF_16V")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "16V")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "8ba240d9-a6bd-5966-bbfb-be4fa4ea3ec3")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C4")
+			(value "22uF-10V")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "10V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_C4_22uF_10V")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "10V")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "317e6a26-aee2-50f6-b65a-5c411cb13d5c")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C5")
+			(value "100nF-25V")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_C5_100nF_25V")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "25V")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "6aba993f-c3fd-5460-8f5e-b580d2c1a596")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C6")
+			(value "100nF-25V")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_C6_100nF_25V")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "25V")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "c1dc5200-c83b-5fd1-a0a8-be28964026e5")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C7")
+			(value "100nF-25V")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_C7_100nF_25V")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "25V")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "6b6f1462-97f8-5234-aa91-e94e21b24676")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C8")
+			(value "100nF-25V")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_C8_100nF_25V")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "25V")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "55486cab-b487-58d8-a60b-7b59c9f79480")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C9")
+			(value "100nF-25V")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_C9_100nF_25V")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "25V")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "a4efc146-0b3b-5fda-8098-3a5ba1824fb9")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C10")
+			(value "100nF-25V")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_C10_100nF_25V")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "25V")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "0e2038fc-4d35-510f-aa8e-adf5fe4e0ec4")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C11")
+			(value "10uF-10V")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "10V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_C11_10uF_10V")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "10V")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "20322b8c-3e00-5de7-82a0-8bbf5e672e95")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C12")
+			(value "100nF-25V")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_C12_100nF_25V")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "25V")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "77c57ef8-2d27-5b28-beb3-631635eba92c")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C13")
+			(value "100nF-25V")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_C13_100nF_25V")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "25V")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "dd458fba-808c-5aea-a7fa-69ff3d559460")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "D1")
+			(value "SS34-Schottky")
+			(footprint "FlightCore:D_SMA")
+			(fields
+				(field
+					(name "MPN") "SS34")
+				(field
+					(name "Manufacturer") "Vishay")
+				(field
+					(name "Rating") "40V / 3A")
+				(field
+					(name "Footprint") "FlightCore:D_SMA")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_D1_SS34_Schottky")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "SS34")
+			)
+			(property
+				(name "Manufacturer")
+				(value "Vishay")
+			)
+			(property
+				(name "Rating")
+				(value "40V / 3A")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "69f840a4-f223-57c9-aaa0-30fc18060fd8")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "D2")
+			(value "BAT54S-Clamp")
+			(footprint "FlightCore:SOT-23")
+			(fields
+				(field
+					(name "MPN") "BAT54S")
+				(field
+					(name "Manufacturer") "Diodes Inc")
+				(field
+					(name "Rating") "30V / 200mA")
+				(field
+					(name "Footprint") "FlightCore:SOT-23")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_D2_BAT54S_Clamp")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "BAT54S")
+			)
+			(property
+				(name "Manufacturer")
+				(value "Diodes Inc")
+			)
+			(property
+				(name "Rating")
+				(value "30V / 200mA")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "4178fbf6-1a43-5972-9b0c-bc01a9223ea1")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "D3")
+			(value "SMBJ28A-TVS")
+			(footprint "FlightCore:D_SMB")
+			(fields
+				(field
+					(name "MPN") "SMBJ28A")
+				(field
+					(name "Manufacturer") "Littelfuse")
+				(field
+					(name "Rating") "28V / 600W")
+				(field
+					(name "Footprint") "FlightCore:D_SMB")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_D3_SMBJ28A_TVS")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "SMBJ28A")
+			)
+			(property
+				(name "Manufacturer")
+				(value "Littelfuse")
+			)
+			(property
+				(name "Rating")
+				(value "28V / 600W")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "961b009a-3b33-5c1d-9dbc-96f7ba84f555")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "D4")
+			(value "LED-Green-0805")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "MPN") "APT2012CGCK")
+				(field
+					(name "Manufacturer") "Kingbright")
+				(field
+					(name "Rating") "2.1V / 20mA")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_D4_LED_Green_0805")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "APT2012CGCK")
+			)
+			(property
+				(name "Manufacturer")
+				(value "Kingbright")
+			)
+			(property
+				(name "Rating")
+				(value "2.1V / 20mA")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "317da996-8c67-596d-96fa-9ee31d11438e")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "F1")
+			(value "1.5A-Polyfuse")
+			(footprint "FlightCore:SMD_1206")
+			(fields
+				(field
+					(name "MPN") "1206L150")
+				(field
+					(name "Manufacturer") "Littelfuse")
+				(field
+					(name "Rating") "30V / 1.5A")
+				(field
+					(name "Footprint") "FlightCore:SMD_1206")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_F1_1_5A_Polyfuse")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "1206L150")
+			)
+			(property
+				(name "Manufacturer")
+				(value "Littelfuse")
+			)
+			(property
+				(name "Rating")
+				(value "30V / 1.5A")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "12109bef-aafc-5f68-a72e-8a230db236f0")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "H1")
+			(value "M3-Mount-Hole")
+			(footprint "FlightCore:MountingHole_3.2mm_M3_Pad_Via")
+			(fields
+				(field
+					(name "Rating") "M3")
+				(field
+					(name "Footprint") "FlightCore:MountingHole_3.2mm_M3_Pad_Via")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_H1_M3_Mount_Hole")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "M3")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "cbd7a795-c580-5f91-ae49-0a1d22c1c84f")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "H2")
+			(value "M3-Mount-Hole")
+			(footprint "FlightCore:MountingHole_3.2mm_M3_Pad_Via")
+			(fields
+				(field
+					(name "Rating") "M3")
+				(field
+					(name "Footprint") "FlightCore:MountingHole_3.2mm_M3_Pad_Via")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_H2_M3_Mount_Hole")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "M3")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "9b33fc1c-752e-5818-b478-bc69003fbfa4")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "H3")
+			(value "M3-Mount-Hole")
+			(footprint "FlightCore:MountingHole_3.2mm_M3_Pad_Via")
+			(fields
+				(field
+					(name "Rating") "M3")
+				(field
+					(name "Footprint") "FlightCore:MountingHole_3.2mm_M3_Pad_Via")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_H3_M3_Mount_Hole")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "M3")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "d515c3ac-9e92-5673-8840-98642268e7e7")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "H4")
+			(value "M3-Mount-Hole")
+			(footprint "FlightCore:MountingHole_3.2mm_M3_Pad_Via")
+			(fields
+				(field
+					(name "Rating") "M3")
+				(field
+					(name "Footprint") "FlightCore:MountingHole_3.2mm_M3_Pad_Via")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_H4_M3_Mount_Hole")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "M3")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "8eb8154b-2cef-5284-9c7d-2643d25a79a3")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J1")
+			(value "XT60-VBAT-IN")
+			(footprint "FlightCore:AMASS_XT60_Vertical")
+			(fields
+				(field
+					(name "MPN") "XT60-M")
+				(field
+					(name "Manufacturer") "Amass")
+				(field
+					(name "Rating") "60A / 25.2V")
+				(field
+					(name "Footprint") "FlightCore:AMASS_XT60_Vertical")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_J1_XT60_VBAT_IN")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "XT60-M")
+			)
+			(property
+				(name "Manufacturer")
+				(value "Amass")
+			)
+			(property
+				(name "Rating")
+				(value "60A / 25.2V")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "01599d59-a32b-5dff-a953-bdb6a14577c6")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J2")
+			(value "XT60-PDB-OUT")
+			(footprint "FlightCore:AMASS_XT60_Vertical")
+			(fields
+				(field
+					(name "MPN") "XT60-F")
+				(field
+					(name "Manufacturer") "Amass")
+				(field
+					(name "Rating") "60A / 25.2V")
+				(field
+					(name "Footprint") "FlightCore:AMASS_XT60_Vertical")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_J2_XT60_PDB_OUT")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "XT60-F")
+			)
+			(property
+				(name "Manufacturer")
+				(value "Amass")
+			)
+			(property
+				(name "Rating")
+				(value "60A / 25.2V")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "bdfa00a0-a7f9-5395-a1b3-e89dac0768a4")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J3")
+			(value "JST-XH-3P-HALL")
+			(footprint "FlightCore:PinHeader_1x03_P2.54mm")
+			(fields
+				(field
+					(name "MPN") "B3B-XH-A")
+				(field
+					(name "Manufacturer") "JST")
+				(field
+					(name "Rating") "5V / 1A")
+				(field
+					(name "Footprint") "FlightCore:PinHeader_1x03_P2.54mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_J3_JST_XH_3P_HALL")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "B3B-XH-A")
+			)
+			(property
+				(name "Manufacturer")
+				(value "JST")
+			)
+			(property
+				(name "Rating")
+				(value "5V / 1A")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "fdc350c6-5e57-5c5e-a069-42965d20dcc8")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J4")
+			(value "JST-XH-2P-NTC")
+			(footprint "FlightCore:PinHeader_1x02_P2.54mm")
+			(fields
+				(field
+					(name "MPN") "B2B-XH-A")
+				(field
+					(name "Manufacturer") "JST")
+				(field
+					(name "Rating") "3.3V / 1A")
+				(field
+					(name "Footprint") "FlightCore:PinHeader_1x02_P2.54mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_J4_JST_XH_2P_NTC")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "B2B-XH-A")
+			)
+			(property
+				(name "Manufacturer")
+				(value "JST")
+			)
+			(property
+				(name "Rating")
+				(value "3.3V / 1A")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "daf44559-7d1f-5d85-b80e-c24a1f1e8ce3")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J5")
+			(value "SMA-433MHz-ANT")
+			(footprint "FlightCore:SMA_EdgeMount")
+			(fields
+				(field
+					(name "MPN") "132289")
+				(field
+					(name "Manufacturer") "Amphenol")
+				(field
+					(name "Rating") "50 Ohm / 433MHz")
+				(field
+					(name "Footprint") "FlightCore:SMA_EdgeMount")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_J5_SMA_433MHz_ANT")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "132289")
+			)
+			(property
+				(name "Manufacturer")
+				(value "Amphenol")
+			)
+			(property
+				(name "Rating")
+				(value "50 Ohm / 433MHz")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "449e3acc-e475-56f3-9419-5d756de20d7f")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J6")
+			(value "JST-XH-4P-CAM")
+			(footprint "FlightCore:PinHeader_1x04_P2.54mm")
+			(fields
+				(field
+					(name "MPN") "B4B-XH-A")
+				(field
+					(name "Manufacturer") "JST")
+				(field
+					(name "Rating") "5V / 500mA")
+				(field
+					(name "Footprint") "FlightCore:PinHeader_1x04_P2.54mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_J6_JST_XH_4P_CAM")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "B4B-XH-A")
+			)
+			(property
+				(name "Manufacturer")
+				(value "JST")
+			)
+			(property
+				(name "Rating")
+				(value "5V / 500mA")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "754ae130-f27e-56d0-b6a5-a56708129877")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "JP1")
+			(value "Jumper-2P-3V3-Bench")
+			(footprint "FlightCore:PinHeader_1x02_P2.54mm")
+			(fields
+				(field
+					(name "MPN") "PinHeader_1x02")
+				(field
+					(name "Manufacturer") "Generic")
+				(field
+					(name "Rating") "3.3V / 1A")
+				(field
+					(name "Footprint") "FlightCore:PinHeader_1x02_P2.54mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_JP1_Jumper_2P_3V3_Bench")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "PinHeader_1x02")
+			)
+			(property
+				(name "Manufacturer")
+				(value "Generic")
+			)
+			(property
+				(name "Rating")
+				(value "3.3V / 1A")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "3e2bda61-710b-5f34-b77f-e5a2d2be743a")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R1")
+			(value "4.7k")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "50V / 0.125W")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_R1_4_7k")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "50V / 0.125W")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "0d3bbb8a-e00f-53e9-9b7c-191d318f59f4")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R2")
+			(value "4.7k")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "50V / 0.125W")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_R2_4_7k")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "50V / 0.125W")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "c20bdfc9-a0f6-5d09-b697-600f26af85c3")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R3")
+			(value "10k")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "50V / 0.125W")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_R3_10k")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "50V / 0.125W")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "0d7fbbae-4c35-504e-b43b-48f786e912ed")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R4")
+			(value "10k")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "50V / 0.125W")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_R4_10k")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "50V / 0.125W")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "335b60a5-42a5-5b1f-a6fb-02055f530a36")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R5")
+			(value "10k")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "50V / 0.125W")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_R5_10k")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "50V / 0.125W")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "86d7a4e9-6b42-58a7-bea0-25f3def8eaad")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R6")
+			(value "1k")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "50V / 0.125W")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_R6_1k")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "50V / 0.125W")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "d4d0e3bf-2301-5c57-9cf6-a44834a4ddf4")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R7")
+			(value "100k")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "50V / 0.125W")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_R7_100k")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "50V / 0.125W")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "0d8bcfe7-948b-5eae-a23e-c34a13797cdd")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R8")
+			(value "10k")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "50V / 0.125W")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_R8_10k")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "50V / 0.125W")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "d1b8fc50-9be2-52cb-9a3c-e8d114f527d4")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R9")
+			(value "10k")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "50V / 0.125W")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_R9_10k")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "50V / 0.125W")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "31b82545-9736-58fb-936f-77417a70790f")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R10")
+			(value "100R")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "50V / 0.125W")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_R10_100R")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "50V / 0.125W")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "86fd3637-b10c-5225-9f9a-542cfa2b882b")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R11")
+			(value "0.001R-3W-Shunt")
+			(footprint "FlightCore:R_2512_Shunt")
+			(fields
+				(field
+					(name "MPN") "WSL25121L000FEA")
+				(field
+					(name "Manufacturer") "Vishay")
+				(field
+					(name "Rating") "1mOhm / 3W")
+				(field
+					(name "Footprint") "FlightCore:R_2512_Shunt")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_R11_0_001R_3W_Shunt")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "WSL25121L000FEA")
+			)
+			(property
+				(name "Manufacturer")
+				(value "Vishay")
+			)
+			(property
+				(name "Rating")
+				(value "1mOhm / 3W")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "2674b8bd-1505-5b3d-b5a6-d0f4271d328f")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R12")
+			(value "330R")
+			(footprint "FlightCore:SMD_0805")
+			(fields
+				(field
+					(name "Rating") "50V / 0.125W")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_R12_330R")
+				(description "")
+			)
+			(property
+				(name "Rating")
+				(value "50V / 0.125W")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "f82ab07f-b34e-5ee0-ae57-0dcbef95ac6b")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "SW1")
+			(value "Tactile-CAL-Btn")
+			(footprint "FlightCore:SW_SPST_SMD")
+			(fields
+				(field
+					(name "MPN") "PTS645")
+				(field
+					(name "Manufacturer") "C&K")
+				(field
+					(name "Rating") "12V / 50mA")
+				(field
+					(name "Footprint") "FlightCore:SW_SPST_SMD")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_SW1_Tactile_CAL_Btn")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "PTS645")
+			)
+			(property
+				(name "Manufacturer")
+				(value "C&K")
+			)
+			(property
+				(name "Rating")
+				(value "12V / 50mA")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "d537a2ae-cfe8-50b7-b4c4-1189d0da9769")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U1")
+			(value "ESP32-DevKit-V1-30P")
+			(footprint "FlightCore:ESP32_DevKit_V1_30P")
+			(fields
+				(field
+					(name "MPN") "ESP32-DevKit-V1-30P")
+				(field
+					(name "Manufacturer") "Espressif")
+				(field
+					(name "Rating") "3.3V IO / 5V VIN")
+				(field
+					(name "Footprint") "FlightCore:ESP32_DevKit_V1_30P")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_U1_ESP32_DevKit_V1_30P")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "ESP32-DevKit-V1-30P")
+			)
+			(property
+				(name "Manufacturer")
+				(value "Espressif")
+			)
+			(property
+				(name "Rating")
+				(value "3.3V IO / 5V VIN")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "7e5726a0-43c0-5646-aae1-97fbedf632e6")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "7")
+						)
+						(pin
+							(num "8")
+						)
+						(pin
+							(num "9")
+						)
+						(pin
+							(num "10")
+						)
+						(pin
+							(num "11")
+						)
+						(pin
+							(num "12")
+						)
+						(pin
+							(num "13")
+						)
+						(pin
+							(num "14")
+						)
+						(pin
+							(num "15")
+						)
+						(pin
+							(num "16")
+						)
+						(pin
+							(num "17")
+						)
+						(pin
+							(num "18")
+						)
+						(pin
+							(num "19")
+						)
+						(pin
+							(num "20")
+						)
+						(pin
+							(num "21")
+						)
+						(pin
+							(num "22")
+						)
+						(pin
+							(num "23")
+						)
+						(pin
+							(num "24")
+						)
+						(pin
+							(num "25")
+						)
+						(pin
+							(num "26")
+						)
+						(pin
+							(num "27")
+						)
+						(pin
+							(num "28")
+						)
+						(pin
+							(num "29")
+						)
+						(pin
+							(num "30")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U2")
+			(value "MPU6050-GY521")
+			(footprint "FlightCore:PinHeader_1x08_P2.54mm")
+			(fields
+				(field
+					(name "MPN") "GY-521")
+				(field
+					(name "Manufacturer") "InvenSense")
+				(field
+					(name "Rating") "3.3V / I2C 400kHz")
+				(field
+					(name "Footprint") "FlightCore:PinHeader_1x08_P2.54mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_U2_MPU6050_GY521")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "GY-521")
+			)
+			(property
+				(name "Manufacturer")
+				(value "InvenSense")
+			)
+			(property
+				(name "Rating")
+				(value "3.3V / I2C 400kHz")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "c5acdd4e-0d2e-5032-bdea-73e3fa2ccc72")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "7")
+						)
+						(pin
+							(num "8")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U3")
+			(value "VL53L0X-ToF")
+			(footprint "FlightCore:PinHeader_1x06_P2.54mm")
+			(fields
+				(field
+					(name "MPN") "GY-VL53L0XV2")
+				(field
+					(name "Manufacturer") "STMicroelectronics")
+				(field
+					(name "Rating") "3.3V / I2C 0x29")
+				(field
+					(name "Footprint") "FlightCore:PinHeader_1x06_P2.54mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_U3_VL53L0X_ToF")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "GY-VL53L0XV2")
+			)
+			(property
+				(name "Manufacturer")
+				(value "STMicroelectronics")
+			)
+			(property
+				(name "Rating")
+				(value "3.3V / I2C 0x29")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "5c7d4f4f-dd72-59e0-b36e-b160e8ee7adb")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "6")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U4")
+			(value "SX1278-Ra02-433MHz")
+			(footprint "FlightCore:Ai_Thinker_Ra02")
+			(fields
+				(field
+					(name "MPN") "Ra-02-SX1278")
+				(field
+					(name "Manufacturer") "Ai-Thinker")
+				(field
+					(name "Rating") "3.3V / +20dBm")
+				(field
+					(name "Footprint") "FlightCore:Ai_Thinker_Ra02")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_U4_SX1278_Ra02_433MHz")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "Ra-02-SX1278")
+			)
+			(property
+				(name "Manufacturer")
+				(value "Ai-Thinker")
+			)
+			(property
+				(name "Rating")
+				(value "3.3V / +20dBm")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "f1e3acbe-695b-5174-b946-c371dc1f1116")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "7")
+						)
+						(pin
+							(num "8")
+						)
+						(pin
+							(num "9")
+						)
+						(pin
+							(num "10")
+						)
+						(pin
+							(num "11")
+						)
+						(pin
+							(num "12")
+						)
+						(pin
+							(num "13")
+						)
+						(pin
+							(num "14")
+						)
+						(pin
+							(num "15")
+						)
+						(pin
+							(num "16")
+						)
+						(pin
+							(num "17")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U5")
+			(value "INA180A2IDBVR")
+			(footprint "FlightCore:SOT-23-5")
+			(fields
+				(field
+					(name "MPN") "INA180A2IDBVR")
+				(field
+					(name "Manufacturer") "Texas Instruments")
+				(field
+					(name "Rating") "50V/V, Vcm 26V")
+				(field
+					(name "Footprint") "FlightCore:SOT-23-5")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_U5_INA180A2IDBVR")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "INA180A2IDBVR")
+			)
+			(property
+				(name "Manufacturer")
+				(value "Texas Instruments")
+			)
+			(property
+				(name "Rating")
+				(value "50V/V, Vcm 26V")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "2d3c1a86-41ab-54af-a596-d1e588d87e5e")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U6")
+			(value "AMS1117-3.3")
+			(footprint "FlightCore:SOT-223-3_TabPin2")
+			(fields
+				(field
+					(name "MPN") "AMS1117-3.3")
+				(field
+					(name "Manufacturer") "AMS")
+				(field
+					(name "Rating") "3.3V / 1.0A")
+				(field
+					(name "Footprint") "FlightCore:SOT-223-3_TabPin2")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_U6_AMS1117_3_3")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "AMS1117-3.3")
+			)
+			(property
+				(name "Manufacturer")
+				(value "AMS")
+			)
+			(property
+				(name "Rating")
+				(value "3.3V / 1.0A")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "bbee8c68-d7ff-5cab-ba9d-b31fe1e5ede1")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U7")
+			(value "MP1584-5V-3A-Buck")
+			(footprint "FlightCore:Buck_5V_3A_Module")
+			(fields
+				(field
+					(name "MPN") "MP1584EN-5V")
+				(field
+					(name "Manufacturer") "MPS")
+				(field
+					(name "Rating") "7-28V -> 5V/3A")
+				(field
+					(name "Footprint") "FlightCore:Buck_5V_3A_Module")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "FlightCore")
+				(part "SYM_U7_MP1584_5V_3A_Buck")
+				(description "")
+			)
+			(property
+				(name "MPN")
+				(value "MP1584EN-5V")
+			)
+			(property
+				(name "Manufacturer")
+				(value "MPS")
+			)
+			(property
+				(name "Rating")
+				(value "7-28V -> 5V/3A")
+			)
+			(property
+				(name "Sheetname")
+				(value "flightcore")
+			)
+			(property
+				(name "Sheetfile")
+				(value "flightcore.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "15ec3a80-1d34-5297-8d33-ae13e52fd861")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+					)
+				)
+			)
+		)
+	)
+	(groups)
+	(variants)
+	(libparts
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_C10_100nF_25V")
+			(fields
+				(field
+					(name "Reference") "C")
+				(field
+					(name "Value") "100nF-25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_C11_10uF_10V")
+			(fields
+				(field
+					(name "Reference") "C")
+				(field
+					(name "Value") "10uF-10V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_C12_100nF_25V")
+			(fields
+				(field
+					(name "Reference") "C")
+				(field
+					(name "Value") "100nF-25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_C13_100nF_25V")
+			(fields
+				(field
+					(name "Reference") "C")
+				(field
+					(name "Value") "100nF-25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_C1_100uF_35V")
+			(fields
+				(field
+					(name "Reference") "C")
+				(field
+					(name "Value") "100uF-35V")
+				(field
+					(name "Footprint") "FlightCore:CP_Radial_D6.3mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "+")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "-")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_C2_10uF_16V")
+			(fields
+				(field
+					(name "Reference") "C")
+				(field
+					(name "Value") "10uF-16V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_C3_10uF_16V")
+			(fields
+				(field
+					(name "Reference") "C")
+				(field
+					(name "Value") "10uF-16V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_C4_22uF_10V")
+			(fields
+				(field
+					(name "Reference") "C")
+				(field
+					(name "Value") "22uF-10V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_C5_100nF_25V")
+			(fields
+				(field
+					(name "Reference") "C")
+				(field
+					(name "Value") "100nF-25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_C6_100nF_25V")
+			(fields
+				(field
+					(name "Reference") "C")
+				(field
+					(name "Value") "100nF-25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_C7_100nF_25V")
+			(fields
+				(field
+					(name "Reference") "C")
+				(field
+					(name "Value") "100nF-25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_C8_100nF_25V")
+			(fields
+				(field
+					(name "Reference") "C")
+				(field
+					(name "Value") "100nF-25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_C9_100nF_25V")
+			(fields
+				(field
+					(name "Reference") "C")
+				(field
+					(name "Value") "100nF-25V")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_D1_SS34_Schottky")
+			(fields
+				(field
+					(name "Reference") "D")
+				(field
+					(name "Value") "SS34-Schottky")
+				(field
+					(name "Footprint") "FlightCore:D_SMA")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "A")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "K")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_D2_BAT54S_Clamp")
+			(fields
+				(field
+					(name "Reference") "D")
+				(field
+					(name "Value") "BAT54S-Clamp")
+				(field
+					(name "Footprint") "FlightCore:SOT-23")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "A")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "K")
+					(type "bidirectional")
+				)
+				(pin
+					(num "3")
+					(name "COM")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_D3_SMBJ28A_TVS")
+			(fields
+				(field
+					(name "Reference") "D")
+				(field
+					(name "Value") "SMBJ28A-TVS")
+				(field
+					(name "Footprint") "FlightCore:D_SMB")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "K")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "A")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_D4_LED_Green_0805")
+			(fields
+				(field
+					(name "Reference") "D")
+				(field
+					(name "Value") "LED-Green-0805")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "A")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "K")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_F1_1_5A_Polyfuse")
+			(fields
+				(field
+					(name "Reference") "F")
+				(field
+					(name "Value") "1.5A-Polyfuse")
+				(field
+					(name "Footprint") "FlightCore:SMD_1206")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_H1_M3_Mount_Hole")
+			(fields
+				(field
+					(name "Reference") "H")
+				(field
+					(name "Value") "M3-Mount-Hole")
+				(field
+					(name "Footprint") "FlightCore:MountingHole_3.2mm_M3_Pad_Via")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "GND")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_H2_M3_Mount_Hole")
+			(fields
+				(field
+					(name "Reference") "H")
+				(field
+					(name "Value") "M3-Mount-Hole")
+				(field
+					(name "Footprint") "FlightCore:MountingHole_3.2mm_M3_Pad_Via")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "GND")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_H3_M3_Mount_Hole")
+			(fields
+				(field
+					(name "Reference") "H")
+				(field
+					(name "Value") "M3-Mount-Hole")
+				(field
+					(name "Footprint") "FlightCore:MountingHole_3.2mm_M3_Pad_Via")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "GND")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_H4_M3_Mount_Hole")
+			(fields
+				(field
+					(name "Reference") "H")
+				(field
+					(name "Value") "M3-Mount-Hole")
+				(field
+					(name "Footprint") "FlightCore:MountingHole_3.2mm_M3_Pad_Via")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "GND")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_J1_XT60_VBAT_IN")
+			(fields
+				(field
+					(name "Reference") "J")
+				(field
+					(name "Value") "XT60-VBAT-IN")
+				(field
+					(name "Footprint") "FlightCore:AMASS_XT60_Vertical")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "VBAT+")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "GND")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_J2_XT60_PDB_OUT")
+			(fields
+				(field
+					(name "Reference") "J")
+				(field
+					(name "Value") "XT60-PDB-OUT")
+				(field
+					(name "Footprint") "FlightCore:AMASS_XT60_Vertical")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "VBAT+")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "GND")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_J3_JST_XH_3P_HALL")
+			(fields
+				(field
+					(name "Reference") "J")
+				(field
+					(name "Value") "JST-XH-3P-HALL")
+				(field
+					(name "Footprint") "FlightCore:PinHeader_1x03_P2.54mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "VCC_5V")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "SIG")
+					(type "bidirectional")
+				)
+				(pin
+					(num "3")
+					(name "GND")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_J4_JST_XH_2P_NTC")
+			(fields
+				(field
+					(name "Reference") "J")
+				(field
+					(name "Value") "JST-XH-2P-NTC")
+				(field
+					(name "Footprint") "FlightCore:PinHeader_1x02_P2.54mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "NTC")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "GND")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_J5_SMA_433MHz_ANT")
+			(fields
+				(field
+					(name "Reference") "J")
+				(field
+					(name "Value") "SMA-433MHz-ANT")
+				(field
+					(name "Footprint") "FlightCore:SMA_EdgeMount")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "RF")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "GND1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "3")
+					(name "GND2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_J6_JST_XH_4P_CAM")
+			(fields
+				(field
+					(name "Reference") "J")
+				(field
+					(name "Value") "JST-XH-4P-CAM")
+				(field
+					(name "Footprint") "FlightCore:PinHeader_1x04_P2.54mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "VCC_5V")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "GND")
+					(type "bidirectional")
+				)
+				(pin
+					(num "3")
+					(name "TX2")
+					(type "bidirectional")
+				)
+				(pin
+					(num "4")
+					(name "RX2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_JP1_Jumper_2P_3V3_Bench")
+			(fields
+				(field
+					(name "Reference") "JP")
+				(field
+					(name "Value") "Jumper-2P-3V3-Bench")
+				(field
+					(name "Footprint") "FlightCore:PinHeader_1x02_P2.54mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "ESP_3V3")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "BUS_3V3")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_R10_100R")
+			(fields
+				(field
+					(name "Reference") "R")
+				(field
+					(name "Value") "100R")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_R11_0_001R_3W_Shunt")
+			(fields
+				(field
+					(name "Reference") "R")
+				(field
+					(name "Value") "0.001R-3W-Shunt")
+				(field
+					(name "Footprint") "FlightCore:R_2512_Shunt")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "IN+")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "IN-")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_R12_330R")
+			(fields
+				(field
+					(name "Reference") "R")
+				(field
+					(name "Value") "330R")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_R1_4_7k")
+			(fields
+				(field
+					(name "Reference") "R")
+				(field
+					(name "Value") "4.7k")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_R2_4_7k")
+			(fields
+				(field
+					(name "Reference") "R")
+				(field
+					(name "Value") "4.7k")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_R3_10k")
+			(fields
+				(field
+					(name "Reference") "R")
+				(field
+					(name "Value") "10k")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_R4_10k")
+			(fields
+				(field
+					(name "Reference") "R")
+				(field
+					(name "Value") "10k")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_R5_10k")
+			(fields
+				(field
+					(name "Reference") "R")
+				(field
+					(name "Value") "10k")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_R6_1k")
+			(fields
+				(field
+					(name "Reference") "R")
+				(field
+					(name "Value") "1k")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_R7_100k")
+			(fields
+				(field
+					(name "Reference") "R")
+				(field
+					(name "Value") "100k")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_R8_10k")
+			(fields
+				(field
+					(name "Reference") "R")
+				(field
+					(name "Value") "10k")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_R9_10k")
+			(fields
+				(field
+					(name "Reference") "R")
+				(field
+					(name "Value") "10k")
+				(field
+					(name "Footprint") "FlightCore:SMD_0805")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_SW1_Tactile_CAL_Btn")
+			(fields
+				(field
+					(name "Reference") "SW")
+				(field
+					(name "Value") "Tactile-CAL-Btn")
+				(field
+					(name "Footprint") "FlightCore:SW_SPST_SMD")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "2")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_U1_ESP32_DevKit_V1_30P")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "ESP32-DevKit-V1-30P")
+				(field
+					(name "Footprint") "FlightCore:ESP32_DevKit_V1_30P")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "EN")
+					(type "no_connect")
+				)
+				(pin
+					(num "2")
+					(name "VP/GPIO36")
+					(type "bidirectional")
+				)
+				(pin
+					(num "3")
+					(name "VN/GPIO39")
+					(type "no_connect")
+				)
+				(pin
+					(num "4")
+					(name "D34/GPIO34")
+					(type "bidirectional")
+				)
+				(pin
+					(num "5")
+					(name "D35/GPIO35")
+					(type "bidirectional")
+				)
+				(pin
+					(num "6")
+					(name "D32/GPIO32")
+					(type "bidirectional")
+				)
+				(pin
+					(num "7")
+					(name "D33/GPIO33")
+					(type "bidirectional")
+				)
+				(pin
+					(num "8")
+					(name "D25/GPIO25")
+					(type "bidirectional")
+				)
+				(pin
+					(num "9")
+					(name "D26/GPIO26")
+					(type "bidirectional")
+				)
+				(pin
+					(num "10")
+					(name "D27/GPIO27")
+					(type "bidirectional")
+				)
+				(pin
+					(num "11")
+					(name "D14/GPIO14")
+					(type "bidirectional")
+				)
+				(pin
+					(num "12")
+					(name "D12/GPIO12")
+					(type "no_connect")
+				)
+				(pin
+					(num "13")
+					(name "D13/GPIO13")
+					(type "no_connect")
+				)
+				(pin
+					(num "14")
+					(name "GND1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "15")
+					(name "VIN")
+					(type "bidirectional")
+				)
+				(pin
+					(num "16")
+					(name "3V3")
+					(type "bidirectional")
+				)
+				(pin
+					(num "17")
+					(name "GND2")
+					(type "bidirectional")
+				)
+				(pin
+					(num "18")
+					(name "D15/GPIO15")
+					(type "no_connect")
+				)
+				(pin
+					(num "19")
+					(name "D2/GPIO2")
+					(type "bidirectional")
+				)
+				(pin
+					(num "20")
+					(name "D4/GPIO4")
+					(type "bidirectional")
+				)
+				(pin
+					(num "21")
+					(name "RX2/GPIO16")
+					(type "bidirectional")
+				)
+				(pin
+					(num "22")
+					(name "TX2/GPIO17")
+					(type "bidirectional")
+				)
+				(pin
+					(num "23")
+					(name "D5/GPIO5")
+					(type "bidirectional")
+				)
+				(pin
+					(num "24")
+					(name "D18/GPIO18")
+					(type "bidirectional")
+				)
+				(pin
+					(num "25")
+					(name "D19/GPIO19")
+					(type "bidirectional")
+				)
+				(pin
+					(num "26")
+					(name "D21/GPIO21")
+					(type "bidirectional")
+				)
+				(pin
+					(num "27")
+					(name "RX0/GPIO3")
+					(type "no_connect")
+				)
+				(pin
+					(num "28")
+					(name "TX0/GPIO1")
+					(type "no_connect")
+				)
+				(pin
+					(num "29")
+					(name "D22/GPIO22")
+					(type "bidirectional")
+				)
+				(pin
+					(num "30")
+					(name "D23/GPIO23")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_U2_MPU6050_GY521")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "MPU6050-GY521")
+				(field
+					(name "Footprint") "FlightCore:PinHeader_1x08_P2.54mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "VCC")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "GND")
+					(type "bidirectional")
+				)
+				(pin
+					(num "3")
+					(name "SCL")
+					(type "bidirectional")
+				)
+				(pin
+					(num "4")
+					(name "SDA")
+					(type "bidirectional")
+				)
+				(pin
+					(num "5")
+					(name "XDA")
+					(type "no_connect")
+				)
+				(pin
+					(num "6")
+					(name "XCL")
+					(type "no_connect")
+				)
+				(pin
+					(num "7")
+					(name "AD0")
+					(type "bidirectional")
+				)
+				(pin
+					(num "8")
+					(name "INT")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_U3_VL53L0X_ToF")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "VL53L0X-ToF")
+				(field
+					(name "Footprint") "FlightCore:PinHeader_1x06_P2.54mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "VIN")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "GND")
+					(type "bidirectional")
+				)
+				(pin
+					(num "3")
+					(name "SCL")
+					(type "bidirectional")
+				)
+				(pin
+					(num "4")
+					(name "SDA")
+					(type "bidirectional")
+				)
+				(pin
+					(num "5")
+					(name "GPIO1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "6")
+					(name "XSHUT")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_U4_SX1278_Ra02_433MHz")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "SX1278-Ra02-433MHz")
+				(field
+					(name "Footprint") "FlightCore:Ai_Thinker_Ra02")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "GND1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "GND2")
+					(type "bidirectional")
+				)
+				(pin
+					(num "3")
+					(name "3V3")
+					(type "bidirectional")
+				)
+				(pin
+					(num "4")
+					(name "RST")
+					(type "bidirectional")
+				)
+				(pin
+					(num "5")
+					(name "DIO0")
+					(type "bidirectional")
+				)
+				(pin
+					(num "6")
+					(name "DIO1")
+					(type "no_connect")
+				)
+				(pin
+					(num "7")
+					(name "DIO2")
+					(type "no_connect")
+				)
+				(pin
+					(num "8")
+					(name "DIO3")
+					(type "no_connect")
+				)
+				(pin
+					(num "9")
+					(name "DIO4")
+					(type "no_connect")
+				)
+				(pin
+					(num "10")
+					(name "DIO5")
+					(type "no_connect")
+				)
+				(pin
+					(num "11")
+					(name "GND3")
+					(type "bidirectional")
+				)
+				(pin
+					(num "12")
+					(name "SCK")
+					(type "bidirectional")
+				)
+				(pin
+					(num "13")
+					(name "MISO")
+					(type "bidirectional")
+				)
+				(pin
+					(num "14")
+					(name "MOSI")
+					(type "bidirectional")
+				)
+				(pin
+					(num "15")
+					(name "NSS")
+					(type "bidirectional")
+				)
+				(pin
+					(num "16")
+					(name "GND4")
+					(type "bidirectional")
+				)
+				(pin
+					(num "17")
+					(name "ANT")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_U5_INA180A2IDBVR")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "INA180A2IDBVR")
+				(field
+					(name "Footprint") "FlightCore:SOT-23-5")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "OUT")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "GND")
+					(type "bidirectional")
+				)
+				(pin
+					(num "3")
+					(name "IN+")
+					(type "bidirectional")
+				)
+				(pin
+					(num "4")
+					(name "IN-")
+					(type "bidirectional")
+				)
+				(pin
+					(num "5")
+					(name "VS")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_U6_AMS1117_3_3")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "AMS1117-3.3")
+				(field
+					(name "Footprint") "FlightCore:SOT-223-3_TabPin2")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "GND")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "VOUT")
+					(type "bidirectional")
+				)
+				(pin
+					(num "3")
+					(name "VIN")
+					(type "bidirectional")
+				)
+			)
+		)
+		(libpart
+			(lib "FlightCore")
+			(part "SYM_U7_MP1584_5V_3A_Buck")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "MP1584-5V-3A-Buck")
+				(field
+					(name "Footprint") "FlightCore:Buck_5V_3A_Module")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "VIN+")
+					(type "bidirectional")
+				)
+				(pin
+					(num "2")
+					(name "GND_IN")
+					(type "bidirectional")
+				)
+				(pin
+					(num "3")
+					(name "GND_OUT")
+					(type "bidirectional")
+				)
+				(pin
+					(num "4")
+					(name "VOUT_5V")
+					(type "bidirectional")
+				)
+			)
+		)
+	)
+	(libraries
+		(library
+			(logical "FlightCore")
+			(uri "${KIPRJMOD}/symbols/FlightCore.kicad_sym")
+		)
+	)
+	(nets
+		(net
+			(code "1")
+			(name "+3V3_BUS")
+			(class "Default")
+			(node
+				(ref "C10")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C11")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C12")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C13")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C4")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C9")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "D2")
+				(pin "2")
+				(pinfunction "K_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "JP1")
+				(pin "2")
+				(pinfunction "BUS_3V3_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R1")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R2")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R3")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R4")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R5")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R9")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U2")
+				(pin "1")
+				(pinfunction "VCC_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U3")
+				(pin "1")
+				(pinfunction "VIN_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U4")
+				(pin "3")
+				(pinfunction "3V3_3")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U5")
+				(pin "5")
+				(pinfunction "VS_5")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U6")
+				(pin "2")
+				(pinfunction "VOUT_2")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "2")
+			(name "+5V_BUS")
+			(class "Default")
+			(node
+				(ref "C2")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C3")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "J3")
+				(pin "1")
+				(pinfunction "VCC_5V_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "J6")
+				(pin "1")
+				(pinfunction "VCC_5V_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "15")
+				(pinfunction "VIN_15")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U6")
+				(pin "3")
+				(pinfunction "VIN_3")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U7")
+				(pin "4")
+				(pinfunction "VOUT_5V_4")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "3")
+			(name "CAL_BTN")
+			(class "Default")
+			(node
+				(ref "SW1")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "20")
+				(pinfunction "D4/GPIO4_20")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "4")
+			(name "CAM_UART_RX")
+			(class "Default")
+			(node
+				(ref "J6")
+				(pin "4")
+				(pinfunction "RX2_4")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "21")
+				(pinfunction "RX2/GPIO16_21")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "5")
+			(name "CAM_UART_TX")
+			(class "Default")
+			(node
+				(ref "J6")
+				(pin "3")
+				(pinfunction "TX2_3")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "22")
+				(pinfunction "TX2/GPIO17_22")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "6")
+			(name "ESP32_3V3")
+			(class "Default")
+			(node
+				(ref "JP1")
+				(pin "1")
+				(pinfunction "ESP_3V3_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "16")
+				(pinfunction "3V3_16")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "7")
+			(name "GND")
+			(class "Default")
+			(node
+				(ref "C1")
+				(pin "2")
+				(pinfunction "-_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C10")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C11")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C12")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C13")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C2")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C3")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C4")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C5")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C6")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C7")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C8")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "C9")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "D2")
+				(pin "1")
+				(pinfunction "A_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "D3")
+				(pin "2")
+				(pinfunction "A_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "H1")
+				(pin "1")
+				(pinfunction "GND_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "H2")
+				(pin "1")
+				(pinfunction "GND_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "H3")
+				(pin "1")
+				(pinfunction "GND_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "H4")
+				(pin "1")
+				(pinfunction "GND_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "J1")
+				(pin "2")
+				(pinfunction "GND_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "J2")
+				(pin "2")
+				(pinfunction "GND_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "J3")
+				(pin "3")
+				(pinfunction "GND_3")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "J4")
+				(pin "2")
+				(pinfunction "GND_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "J5")
+				(pin "2")
+				(pinfunction "GND1_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "J5")
+				(pin "3")
+				(pinfunction "GND2_3")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "J6")
+				(pin "2")
+				(pinfunction "GND_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R12")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R8")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "SW1")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "14")
+				(pinfunction "GND1_14")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "17")
+				(pinfunction "GND2_17")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U2")
+				(pin "2")
+				(pinfunction "GND_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U2")
+				(pin "7")
+				(pinfunction "AD0_7")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U3")
+				(pin "2")
+				(pinfunction "GND_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U4")
+				(pin "1")
+				(pinfunction "GND1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U4")
+				(pin "11")
+				(pinfunction "GND3_11")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U4")
+				(pin "16")
+				(pinfunction "GND4_16")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U4")
+				(pin "2")
+				(pinfunction "GND2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U5")
+				(pin "2")
+				(pinfunction "GND_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U6")
+				(pin "1")
+				(pinfunction "GND_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U7")
+				(pin "2")
+				(pinfunction "GND_IN_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U7")
+				(pin "3")
+				(pinfunction "GND_OUT_3")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "8")
+			(name "HALL_SIG")
+			(class "Default")
+			(node
+				(ref "C5")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R5")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R6")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "7")
+				(pinfunction "D33/GPIO33_7")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "9")
+			(name "HALL_SIG_EXT")
+			(class "Default")
+			(node
+				(ref "J3")
+				(pin "2")
+				(pinfunction "SIG_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R6")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "10")
+			(name "I2C_SCL")
+			(class "Default")
+			(node
+				(ref "R2")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "29")
+				(pinfunction "D22/GPIO22_29")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U2")
+				(pin "3")
+				(pinfunction "SCL_3")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U3")
+				(pin "3")
+				(pinfunction "SCL_3")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "11")
+			(name "I2C_SDA")
+			(class "Default")
+			(node
+				(ref "R1")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "26")
+				(pinfunction "D21/GPIO21_26")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U2")
+				(pin "4")
+				(pinfunction "SDA_4")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U3")
+				(pin "4")
+				(pinfunction "SDA_4")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "12")
+			(name "IBAT_ADC")
+			(class "Default")
+			(node
+				(ref "C7")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R10")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "5")
+				(pinfunction "D35/GPIO35_5")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "13")
+			(name "IBAT_SENSE_RAW")
+			(class "Default")
+			(node
+				(ref "R10")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U5")
+				(pin "1")
+				(pinfunction "OUT_1")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "14")
+			(name "LORA_CS")
+			(class "Default")
+			(node
+				(ref "R4")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "23")
+				(pinfunction "D5/GPIO5_23")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U4")
+				(pin "15")
+				(pinfunction "NSS_15")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "15")
+			(name "LORA_DIO0")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "10")
+				(pinfunction "D27/GPIO27_10")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U4")
+				(pin "5")
+				(pinfunction "DIO0_5")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "16")
+			(name "LORA_RF_ANT")
+			(class "Default")
+			(node
+				(ref "J5")
+				(pin "1")
+				(pinfunction "RF_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U4")
+				(pin "17")
+				(pinfunction "ANT_17")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "17")
+			(name "LORA_RST")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "11")
+				(pinfunction "D14/GPIO14_11")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U4")
+				(pin "4")
+				(pinfunction "RST_4")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "18")
+			(name "MPU_INT")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "6")
+				(pinfunction "D32/GPIO32_6")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U2")
+				(pin "8")
+				(pinfunction "INT_8")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "19")
+			(name "NTC_ADC")
+			(class "Default")
+			(node
+				(ref "C8")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "J4")
+				(pin "1")
+				(pinfunction "NTC_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R9")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "2")
+				(pinfunction "VP/GPIO36_2")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "20")
+			(name "STATUS_LED")
+			(class "Default")
+			(node
+				(ref "D4")
+				(pin "1")
+				(pinfunction "A_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "19")
+				(pinfunction "D2/GPIO2_19")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "21")
+			(name "STATUS_LED_K")
+			(class "Default")
+			(node
+				(ref "D4")
+				(pin "2")
+				(pinfunction "K_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R12")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "22")
+			(name "TOF_INT")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "8")
+				(pinfunction "D25/GPIO25_8")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U3")
+				(pin "5")
+				(pinfunction "GPIO1_5")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "23")
+			(name "TOF_XSHUT")
+			(class "Default")
+			(node
+				(ref "R3")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "9")
+				(pinfunction "D26/GPIO26_9")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U3")
+				(pin "6")
+				(pinfunction "XSHUT_6")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "24")
+			(name "VBAT_ADC")
+			(class "Default")
+			(node
+				(ref "C6")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "D2")
+				(pin "3")
+				(pinfunction "COM_3")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R7")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R8")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U1")
+				(pin "4")
+				(pinfunction "D34/GPIO34_4")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "25")
+			(name "VBAT_FUSED")
+			(class "Default")
+			(node
+				(ref "D1")
+				(pin "1")
+				(pinfunction "A_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "F1")
+				(pin "2")
+				(pinfunction "2_2")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "26")
+			(name "VBAT_IN")
+			(class "Default")
+			(node
+				(ref "F1")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "J1")
+				(pin "1")
+				(pinfunction "VBAT+_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R11")
+				(pin "1")
+				(pinfunction "IN+_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U5")
+				(pin "3")
+				(pinfunction "IN+_3")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "27")
+			(name "VBAT_LOAD")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "1")
+				(pinfunction "VBAT+_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R11")
+				(pin "2")
+				(pinfunction "IN-_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U5")
+				(pin "4")
+				(pinfunction "IN-_4")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "28")
+			(name "VBAT_PROT")
+			(class "Default")
+			(node
+				(ref "C1")
+				(pin "1")
+				(pinfunction "+_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "D1")
+				(pin "2")
+				(pinfunction "K_2")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "D3")
+				(pin "1")
+				(pinfunction "K_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R7")
+				(pin "1")
+				(pinfunction "1_1")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U7")
+				(pin "1")
+				(pinfunction "VIN+_1")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "29")
+			(name "VSPI_MISO")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "25")
+				(pinfunction "D19/GPIO19_25")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U4")
+				(pin "13")
+				(pinfunction "MISO_13")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "30")
+			(name "VSPI_MOSI")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "30")
+				(pinfunction "D23/GPIO23_30")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U4")
+				(pin "14")
+				(pinfunction "MOSI_14")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "31")
+			(name "VSPI_SCK")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "24")
+				(pinfunction "D18/GPIO18_24")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U4")
+				(pin "12")
+				(pinfunction "SCK_12")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "32")
+			(name "unconnected-(U1-D12{slash}GPIO12-Pad12)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "12")
+				(pinfunction "D12/GPIO12_12")
+				(pintype "no_connect")
+			)
+		)
+		(net
+			(code "33")
+			(name "unconnected-(U1-D13{slash}GPIO13-Pad13)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "13")
+				(pinfunction "D13/GPIO13_13")
+				(pintype "no_connect")
+			)
+		)
+		(net
+			(code "34")
+			(name "unconnected-(U1-D15{slash}GPIO15-Pad18)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "18")
+				(pinfunction "D15/GPIO15_18")
+				(pintype "no_connect")
+			)
+		)
+		(net
+			(code "35")
+			(name "unconnected-(U1-EN-Pad1)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "1")
+				(pinfunction "EN_1")
+				(pintype "no_connect")
+			)
+		)
+		(net
+			(code "36")
+			(name "unconnected-(U1-RX0{slash}GPIO3-Pad27)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "27")
+				(pinfunction "RX0/GPIO3_27")
+				(pintype "no_connect")
+			)
+		)
+		(net
+			(code "37")
+			(name "unconnected-(U1-TX0{slash}GPIO1-Pad28)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "28")
+				(pinfunction "TX0/GPIO1_28")
+				(pintype "no_connect")
+			)
+		)
+		(net
+			(code "38")
+			(name "unconnected-(U1-VN{slash}GPIO39-Pad3)")
+			(class "Default")
+			(node
+				(ref "U1")
+				(pin "3")
+				(pinfunction "VN/GPIO39_3")
+				(pintype "no_connect")
+			)
+		)
+		(net
+			(code "39")
+			(name "unconnected-(U2-XCL-Pad6)")
+			(class "Default")
+			(node
+				(ref "U2")
+				(pin "6")
+				(pinfunction "XCL_6")
+				(pintype "no_connect")
+			)
+		)
+		(net
+			(code "40")
+			(name "unconnected-(U2-XDA-Pad5)")
+			(class "Default")
+			(node
+				(ref "U2")
+				(pin "5")
+				(pinfunction "XDA_5")
+				(pintype "no_connect")
+			)
+		)
+		(net
+			(code "41")
+			(name "unconnected-(U4-DIO1-Pad6)")
+			(class "Default")
+			(node
+				(ref "U4")
+				(pin "6")
+				(pinfunction "DIO1_6")
+				(pintype "no_connect")
+			)
+		)
+		(net
+			(code "42")
+			(name "unconnected-(U4-DIO2-Pad7)")
+			(class "Default")
+			(node
+				(ref "U4")
+				(pin "7")
+				(pinfunction "DIO2_7")
+				(pintype "no_connect")
+			)
+		)
+		(net
+			(code "43")
+			(name "unconnected-(U4-DIO3-Pad8)")
+			(class "Default")
+			(node
+				(ref "U4")
+				(pin "8")
+				(pinfunction "DIO3_8")
+				(pintype "no_connect")
+			)
+		)
+		(net
+			(code "44")
+			(name "unconnected-(U4-DIO4-Pad9)")
+			(class "Default")
+			(node
+				(ref "U4")
+				(pin "9")
+				(pinfunction "DIO4_9")
+				(pintype "no_connect")
+			)
+		)
+		(net
+			(code "45")
+			(name "unconnected-(U4-DIO5-Pad10)")
+			(class "Default")
+			(node
+				(ref "U4")
+				(pin "10")
+				(pinfunction "DIO5_10")
+				(pintype "no_connect")
+			)
+		)
+	)
 )

@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "FlightCore")(type "KiCad")(uri "${KIPRJMOD}/symbols/FlightCore.kicad_sym")(options "")(descr "FlightCore project symbols"))
+)
