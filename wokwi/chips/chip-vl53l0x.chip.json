@@ -1,0 +1,22 @@
+{
+  "name": "chip-vl53l0x",
+  "author": "Jagjyot Singh",
+  "pins": [
+    "VCC",
+    "GND",
+    "SCL",
+    "SDA",
+    "XSHUT",
+    "INT"
+  ],
+  "controls": [
+    {
+      "id": "range_mm",
+      "label": "ToF Range (mm)",
+      "type": "range",
+      "min": 30,
+      "max": 2000,
+      "step": 10
+    }
+  ]
+}

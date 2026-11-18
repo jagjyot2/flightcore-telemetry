@@ -53,8 +53,11 @@ flowchart LR
   - Byte-exact Python implementation ([protocol.py](ground_station/protocol.py), [receiver_cli.py](ground_station/receiver_cli.py)) supporting live serial (`--serial`), hex dump (`--hex`), binary log playback (`--file`), and synthetic noisy stream simulation (`--simulate --inject-noise`).
 - **Manufacturing-Ready KiCad 8 Hardware (`hardware/`)**:
   - Complete schematic, 2-layer `96.0 × 68.0 mm` PCB, netlist, RS-274X Gerbers + Excellon drill (`hardware/gerbers/`), geometric DRC report (`0 errors`), verified BOM ([BOM.csv](hardware/BOM.csv)), [PIN-MAPPING.md](hardware/PIN-MAPPING.md), [POWER-ARCHITECTURE.md](hardware/POWER-ARCHITECTURE.md), and [ASSEMBLY-GUIDE.md](hardware/ASSEMBLY-GUIDE.md).
-- **BenchTwin & 3D CAD Staging (`benchtwin/`)**:
-  - Structured circuit graph (`flightcore-benchtwin.json`, `flightcore.btw`), vector schematic (`schematic_preview.svg`), simulation notes ([BENCHTWIN-SIMULATION-NOTES.md](benchtwin/BENCHTWIN-SIMULATION-NOTES.md)), and watertight closed-manifold 3D-printable mount (`enclosure_mount.stl`).
+- **Simulator-Independent Abstraction & Wokwi Simulation (`simulation/`, `wokwi/`)**:
+  - Canonical simulator-agnostic sensor/transport interface ([sensor_bus_adapter.h](simulation/adapters/common/sensor_bus_adapter.h), [sensor_bus_adapter.py](simulation/adapters/common/sensor_bus_adapter.py)), deterministic flight/fault scenarios (`simulation/scenarios/`), and explicit [COMPONENT-SUPPORT-MATRIX.md](simulation/documentation/COMPONENT-SUPPORT-MATRIX.md).
+  - **Active Wokwi Configuration (`wokwi/`)**: `board-esp32-devkit-c-v4` wired to `wokwi-mpu6050`, `wokwi-ntc-temperature-sensor`, `wokwi-potentiometer` (`VBAT`/`IBAT`), `wokwi-pushbutton` (`HALL_PULSE`/`CAL`), `wokwi-led`, and custom Wokwi chip stubs `chip-vl53l0x` and `chip-sx1278` executing `firmware/.pio/build/esp32dev/firmware.elf`.
+- **BenchTwin & 3D CAD Staging (`benchtwin/` — Preserved)**:
+  - Structured circuit graph (`flightcore-benchtwin.json`, `flightcore.btw`), vector schematic (`schematic_preview.svg`), simulation notes ([BENCHTWIN-SIMULATION-NOTES.md](benchtwin/BENCHTWIN-SIMULATION-NOTES.md)), and watertight closed-manifold 3D-printable mount (`enclosure_mount.stl`), indexed via [benchtwin_adapter_manifest.json](simulation/adapters/benchtwin/benchtwin_adapter_manifest.json) for future reactivation.
 
 ---
 
@@ -65,8 +68,10 @@ flowchart LR
 ├── firmware/           # PlatformIO ESP32 C++17 modular drivers, main loop & native C++ tests
 ├── ground_station/     # Python binary CRC-16-CCITT telemetry decoder & CLI
 ├── hardware/           # KiCad 8 project, Gerbers, DRC report, BOM & hardware guides
-├── benchtwin/          # BenchTwin circuit graph/bundle, STL enclosure mount & SVG preview
-├── tests/              # Automated pytest verification (protocol, math, C++ native, KiCad/Gerber/STL)
+├── simulation/         # Simulator-agnostic adapters (common, wokwi, benchtwin), scenarios & matrix
+├── wokwi/              # Active Wokwi diagram.json, wokwi.toml & custom chip stubs (VL53L0X/SX1278)
+├── benchtwin/          # Preserved BenchTwin circuit graph/bundle, STL mount & SVG preview
+├── tests/              # Automated pytest verification (protocol, math, C++ native, Wokwi, KiCad/STL)
 ├── docs/               # Detailed system architecture & protocol specs
 ├── ROADMAP.md          # Engineering phases & passive telemetry roadmap
 └── LICENSE             # MIT License
@@ -93,6 +98,23 @@ Verifies CRC-16-CCITT, binary encode/decode roundtrips, stream resynchronization
 ```powershell
 python -m ground_station.receiver_cli --simulate --count 6 --inject-noise --format table
 ```
+
+### 4. Run Active Wokwi Simulation
+1. Build firmware (`pio run -e esp32dev` in `firmware/`).
+2. Open `wokwi/` in VS Code with the Wokwi extension (or run `wokwi-cli wokwi` with `$env:WOKWI_CLI_TOKEN` set). See [wokwi/README.md](wokwi/README.md) and [simulation/documentation/COMPONENT-SUPPORT-MATRIX.md](simulation/documentation/COMPONENT-SUPPORT-MATRIX.md).
+
+#### Wokwi Component Support Summary
+| Component | Wokwi Status | Simulation Representation |
+|---|---|---|
+| `ESP32 DevKit v1` (`U1`) | Native | `board-esp32-devkit-c-v4` |
+| `MPU6050` (`U2`) | Native | `wokwi-mpu6050` (`I2C 0x68`) |
+| `10k NTC` (`RT1`) & `SW1` / `D4` | Native | `wokwi-ntc-temperature-sensor`, `wokwi-pushbutton`, `wokwi-led` |
+| `VBAT` Divider / `INA180A2` | Analog Stand-In | `wokwi-potentiometer` (`GPIO34` / `GPIO35`) |
+| `VL53L0X` (`U3`) & `SX1278` (`U4`) | Unsupported Natively -> Custom Chip Stubs | `wokwi/chips/chip-vl53l0x.*` & `chip-sx1278.*` |
+| `A3144` Hall (`U8`) & `ESP32-CAM` (`J6`) | Unsupported Natively -> Pulse/SW Stubs | `wokwi-pushbutton` (`GPIO33`) & UART2 software stub |
+
+#### Future BenchTwin Reactivation
+`benchtwin/` is preserved untouched. To reactivate BenchTwin for electrical/3D inspection, open `benchtwin/flightcore.btw` (see [simulation/adapters/benchtwin/README.md](simulation/adapters/benchtwin/README.md)).
 
 ---
 

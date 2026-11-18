@@ -1,0 +1,18 @@
+{
+  "schema": "flightcore/benchtwin-adapter-v1",
+  "status": "preserved_inactive",
+  "active_simulator": "wokwi",
+  "benchtwin_root": "../../../benchtwin",
+  "artifacts": {
+    "project_bundle": "../../../benchtwin/flightcore.btw",
+    "circuit_graph": "../../../benchtwin/flightcore-benchtwin.json",
+    "netlist": "../../../benchtwin/flightcore.net",
+    "bom": "../../../benchtwin/BOM.csv",
+    "enclosure_stl": "../../../benchtwin/enclosure_mount.stl",
+    "schematic_svg": "../../../benchtwin/schematic_preview.svg",
+    "simulation_notes": "../../../benchtwin/BENCHTWIN-SIMULATION-NOTES.md"
+  },
+  "firmware_pin_source_of_truth": "../../../firmware/include/config.h",
+  "hardware_pin_source_of_truth": "../../../hardware/PIN-MAPPING.md",
+  "reactivation_notes": "Load benchtwin/flightcore.btw in BenchTwin without modifying firmware/ or hardware/."
+}

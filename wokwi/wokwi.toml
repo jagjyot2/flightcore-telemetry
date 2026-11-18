@@ -1,0 +1,12 @@
+[wokwi]
+version = 1
+firmware = '../firmware/.pio/build/esp32dev/firmware.bin'
+elf = '../firmware/.pio/build/esp32dev/firmware.elf'
+
+[[chip]]
+name = 'chip-vl53l0x'
+binary = 'chips/chip-vl53l0x.chip.wasm'
+
+[[chip]]
+name = 'chip-sx1278'
+binary = 'chips/chip-sx1278.chip.wasm'

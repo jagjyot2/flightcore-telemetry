@@ -1,0 +1,66 @@
+{
+  "schema": "flightcore/scenario-v1",
+  "name": "nominal_flight",
+  "description": "Nominal 4S LiPo hover telemetry profile (15.6V, 16.5A, 7800 RPM, 850mm ToF, low vibration).",
+  "safety_constraint": "STRICTLY_TELEMETRY_ONLY",
+  "fault_injection": {
+    "inject_crc_flip": false,
+    "inject_tof_timeout": false,
+    "inject_ntc_fault": false,
+    "vbat_sag_mv": 0,
+    "forced_tx_retries": 0
+  },
+  "samples": [
+    {
+      "timestamp_ms": 1000,
+      "roll_deg": 0.45,
+      "pitch_deg": -0.30,
+      "vib_rms_mg": 16,
+      "tof_mm": 850,
+      "tof_valid": true,
+      "rpm": 7800,
+      "vbat_mv": 15620,
+      "ibat_a": 16.40,
+      "consumed_mah": 120,
+      "ntc_temp_c": 33.85,
+      "imu_temp_c": 29.50,
+      "lora_rssi_dbm": -68,
+      "tx_retries": 0,
+      "cam_status": 1
+    },
+    {
+      "timestamp_ms": 1200,
+      "roll_deg": 0.62,
+      "pitch_deg": -0.18,
+      "vib_rms_mg": 18,
+      "tof_mm": 854,
+      "tof_valid": true,
+      "rpm": 7825,
+      "vbat_mv": 15600,
+      "ibat_a": 16.55,
+      "consumed_mah": 121,
+      "ntc_temp_c": 33.90,
+      "imu_temp_c": 29.55,
+      "lora_rssi_dbm": -68,
+      "tx_retries": 0,
+      "cam_status": 1
+    },
+    {
+      "timestamp_ms": 1400,
+      "roll_deg": 0.38,
+      "pitch_deg": -0.25,
+      "vib_rms_mg": 17,
+      "tof_mm": 848,
+      "tof_valid": true,
+      "rpm": 7790,
+      "vbat_mv": 15590,
+      "ibat_a": 16.48,
+      "consumed_mah": 122,
+      "ntc_temp_c": 33.92,
+      "imu_temp_c": 29.58,
+      "lora_rssi_dbm": -69,
+      "tx_retries": 0,
+      "cam_status": 1
+    }
+  ]
+}

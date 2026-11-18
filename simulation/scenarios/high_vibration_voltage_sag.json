@@ -1,0 +1,49 @@
+{
+  "schema": "flightcore/scenario-v1",
+  "name": "high_vibration_voltage_sag",
+  "description": "High-vibration climb with 2400 mV 4S battery voltage sag, 42.5 A draw, and elevated 64.5 C NTC temperature.",
+  "safety_constraint": "STRICTLY_TELEMETRY_ONLY",
+  "fault_injection": {
+    "inject_crc_flip": false,
+    "inject_tof_timeout": false,
+    "inject_ntc_fault": false,
+    "vbat_sag_mv": 2400,
+    "forced_tx_retries": 1
+  },
+  "samples": [
+    {
+      "timestamp_ms": 5000,
+      "roll_deg": 8.20,
+      "pitch_deg": -12.40,
+      "vib_rms_mg": 315,
+      "tof_mm": 1420,
+      "tof_valid": true,
+      "rpm": 14200,
+      "vbat_mv": 15600,
+      "ibat_a": 42.50,
+      "consumed_mah": 840,
+      "ntc_temp_c": 64.50,
+      "imu_temp_c": 41.20,
+      "lora_rssi_dbm": -84,
+      "tx_retries": 1,
+      "cam_status": 1
+    },
+    {
+      "timestamp_ms": 5200,
+      "roll_deg": 9.10,
+      "pitch_deg": -11.90,
+      "vib_rms_mg": 342,
+      "tof_mm": 1465,
+      "tof_valid": true,
+      "rpm": 14350,
+      "vbat_mv": 15540,
+      "ibat_a": 43.10,
+      "consumed_mah": 842,
+      "ntc_temp_c": 64.80,
+      "imu_temp_c": 41.35,
+      "lora_rssi_dbm": -85,
+      "tx_retries": 1,
+      "cam_status": 1
+    }
+  ]
+}

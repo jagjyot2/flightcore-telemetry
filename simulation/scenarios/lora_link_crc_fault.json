@@ -1,0 +1,51 @@
+{
+  "schema": "flightcore/scenario-v1",
+  "name": "lora_link_crc_fault",
+  "description": "Weak 433 MHz RF link (-116 dBm), max retries, ToF timeout sentinel (0xFFFF), NTC open-circuit fault, and CRC-16-CCITT bit-flip fault injection.",
+  "safety_constraint": "STRICTLY_TELEMETRY_ONLY",
+  "fault_injection": {
+    "inject_crc_flip": true,
+    "crc_flip_byte_index": 15,
+    "crc_flip_mask": 4,
+    "inject_tof_timeout": true,
+    "inject_ntc_fault": true,
+    "vbat_sag_mv": 0,
+    "forced_tx_retries": 3
+  },
+  "samples": [
+    {
+      "timestamp_ms": 9000,
+      "roll_deg": 1.25,
+      "pitch_deg": 0.90,
+      "vib_rms_mg": 45,
+      "tof_mm": 900,
+      "tof_valid": true,
+      "rpm": 6200,
+      "vbat_mv": 14800,
+      "ibat_a": 12.00,
+      "consumed_mah": 1150,
+      "ntc_temp_c": 38.00,
+      "imu_temp_c": 31.00,
+      "lora_rssi_dbm": -116,
+      "tx_retries": 3,
+      "cam_status": 2
+    },
+    {
+      "timestamp_ms": 9200,
+      "roll_deg": 1.10,
+      "pitch_deg": 0.85,
+      "vib_rms_mg": 42,
+      "tof_mm": 910,
+      "tof_valid": true,
+      "rpm": 6180,
+      "vbat_mv": 14790,
+      "ibat_a": 11.90,
+      "consumed_mah": 1151,
+      "ntc_temp_c": 38.05,
+      "imu_temp_c": 31.02,
+      "lora_rssi_dbm": -117,
+      "tx_retries": 3,
+      "cam_status": 2
+    }
+  ]
+}

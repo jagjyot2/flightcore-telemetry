@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "author": "Jagjyot Singh",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp32",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-mpu6050",
+      "id": "imu_mpu6050",
+      "top": -140,
+      "left": 230,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-ntc-temperature-sensor",
+      "id": "ntc_probe",
+      "top": -140,
+      "left": -180,
+      "attrs": {
+        "temperature": "33.9"
+      }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "pot_vbat",
+      "top": -20,
+      "left": -180,
+      "attrs": {
+        "value": "43"
+      }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "pot_ibat",
+      "top": 100,
+      "left": -180,
+      "attrs": {
+        "value": "25"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_hall",
+      "top": 210,
+      "left": -170,
+      "attrs": {
+        "color": "blue",
+        "label": "HALL_PULSE"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_cal",
+      "top": 210,
+      "left": 230,
+      "attrs": {
+        "color": "yellow",
+        "label": "CAL_IMU"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_status",
+      "top": 270,
+      "left": 250,
+      "attrs": {
+        "color": "green"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_led",
+      "top": 310,
+      "left": 250,
+      "attrs": {
+        "value": "330"
+      }
+    },
+    {
+      "type": "chip-vl53l0x",
+      "id": "tof_vl53l0x",
+      "top": -20,
+      "left": 250,
+      "attrs": {
+        "range_mm": "850"
+      }
+    },
+    {
+      "type": "chip-sx1278",
+      "id": "lora_sx1278",
+      "top": 100,
+      "left": 250,
+      "attrs": {
+        "rssi_dbm": "-68"
+      }
+    }
+  ],
+  "connections": [
+    [ "esp32:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp32:RX", "$serialMonitor:TX", "", [] ],
+
+    [ "imu_mpu6050:VCC", "esp32:3V3", "red", [ "v0" ] ],
+    [ "imu_mpu6050:GND", "esp32:GND.1", "black", [ "v0" ] ],
+    [ "esp32:21", "imu_mpu6050:SDA", "green", [ "h0" ] ],
+    [ "esp32:22", "imu_mpu6050:SCL", "blue", [ "h0" ] ],
+    [ "esp32:32", "imu_mpu6050:INT", "orange", [ "h0" ] ],
+
+    [ "ntc_probe:VCC", "esp32:3V3", "red", [ "v0" ] ],
+    [ "ntc_probe:GND", "esp32:GND.1", "black", [ "v0" ] ],
+    [ "esp32:VP", "ntc_probe:OUT", "purple", [ "h0" ] ],
+
+    [ "pot_vbat:VCC", "esp32:3V3", "red", [ "v0" ] ],
+    [ "pot_vbat:GND", "esp32:GND.1", "black", [ "v0" ] ],
+    [ "esp32:34", "pot_vbat:SIG", "gold", [ "h0" ] ],
+
+    [ "pot_ibat:VCC", "esp32:3V3", "red", [ "v0" ] ],
+    [ "pot_ibat:GND", "esp32:GND.1", "black", [ "v0" ] ],
+    [ "esp32:35", "pot_ibat:SIG", "cyan", [ "h0" ] ],
+
+    [ "esp32:33", "btn_hall:1.l", "blue", [ "h0" ] ],
+    [ "btn_hall:2.l", "esp32:GND.2", "black", [ "h0" ] ],
+
+    [ "esp32:4", "btn_cal:1.l", "yellow", [ "h0" ] ],
+    [ "btn_cal:2.l", "esp32:GND.2", "black", [ "h0" ] ],
+
+    [ "esp32:2", "led_status:A", "green", [ "h0" ] ],
+    [ "led_status:C", "r_led:1", "black", [ "v0" ] ],
+    [ "r_led:2", "esp32:GND.2", "black", [ "v0" ] ],
+
+    [ "tof_vl53l0x:VCC", "esp32:3V3", "red", [ "v0" ] ],
+    [ "tof_vl53l0x:GND", "esp32:GND.1", "black", [ "v0" ] ],
+    [ "esp32:21", "tof_vl53l0x:SDA", "green", [ "h0" ] ],
+    [ "esp32:22", "tof_vl53l0x:SCL", "blue", [ "h0" ] ],
+    [ "esp32:26", "tof_vl53l0x:XSHUT", "brown", [ "h0" ] ],
+    [ "esp32:25", "tof_vl53l0x:INT", "orange", [ "h0" ] ],
+
+    [ "lora_sx1278:VCC", "esp32:3V3", "red", [ "v0" ] ],
+    [ "lora_sx1278:GND", "esp32:GND.3", "black", [ "v0" ] ],
+    [ "esp32:18", "lora_sx1278:SCK", "blue", [ "h0" ] ],
+    [ "esp32:19", "lora_sx1278:MISO", "green", [ "h0" ] ],
+    [ "esp32:23", "lora_sx1278:MOSI", "yellow", [ "h0" ] ],
+    [ "esp32:5", "lora_sx1278:NSS", "orange", [ "h0" ] ],
+    [ "esp32:14", "lora_sx1278:RST", "brown", [ "h0" ] ],
+    [ "esp32:27", "lora_sx1278:DIO0", "purple", [ "h0" ] ]
+  ],
+  "dependencies": {}
+}

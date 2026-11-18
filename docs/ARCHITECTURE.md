@@ -112,3 +112,18 @@ flowchart TD
 - **Raw Packet Airtime (`37 bytes`, 8-symbol preamble, explicit header, CRC on)**: `~71.9 ms`.
 - **Default Rate (`5 Hz` / `200 ms`)**: `~36%` airtime utilization for dedicated bench/range tests; configurable via CLI `interval <ms>` up to `10000 ms` (`0.7%` duty cycle for ISM regulatory compliance).
 - **Receiver Sensitivity (SX1278 @ SF7/125kHz)**: `~ -123 dBm`; with `+17 dBm` TX and `~2 dBi` dipoles, free-space link budget exceeds `135 dB`.
+
+---
+
+## 5. Simulator-Independent Abstraction & Wokwi Architecture
+
+FlightCore decouples hardware pin definitions (`firmware/include/config.h` and `hardware/PIN-MAPPING.md`) from any single simulator backend via `simulation/`:
+
+- **Canonical Adapter (`simulation/adapters/common/`)**: `sensor_bus_adapter.h` (C++17) and `sensor_bus_adapter.py` (Python) define `SimSensorSnapshot` / `SensorSnapshot`, `FaultInjectionConfig`, and `CanonicalScenarioAdapter` for deterministic flight and fault-injection replay (`simulation/scenarios/`).
+- **Active Simulator — Wokwi (`wokwi/` & `simulation/adapters/wokwi/`)**:
+  - `wokwi/wokwi.toml` loads `../firmware/.pio/build/esp32dev/firmware.bin` and `firmware.elf`.
+  - `wokwi/diagram.json` wires `board-esp32-devkit-c-v4` to native `wokwi-mpu6050`, `wokwi-ntc-temperature-sensor`, `wokwi-potentiometer` (`VBAT`/`IBAT`), `wokwi-pushbutton` (`HALL_PULSE`/`CAL`), `wokwi-led`, and custom Wokwi chips `chip-vl53l0x` and `chip-sx1278` (`wokwi/chips/`).
+  - Unsupported peripherals are explicitly documented in `simulation/documentation/COMPONENT-SUPPORT-MATRIX.md` and never silently substituted.
+- **Preserved Simulator — BenchTwin (`benchtwin/` & `simulation/adapters/benchtwin/`)**:
+  - `benchtwin/` (`flightcore.btw`, `flightcore-benchtwin.json`, `flightcore.net`, `BOM.csv`, `enclosure_mount.stl`, `schematic_preview.svg`) remains untouched.
+  - To reactivate BenchTwin for analog node or 3D enclosure inspection, open `benchtwin/flightcore.btw` as described in `simulation/adapters/benchtwin/README.md`.

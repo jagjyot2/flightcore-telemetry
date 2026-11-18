@@ -1,0 +1,68 @@
+{
+  "schema": "flightcore/test-data-v1",
+  "frames": [
+    {
+      "scenario": "nominal_flight",
+      "seq": 0,
+      "hex": "fc0101011e0000e80300002d00e2ff10005203781e043d68067800390d860bbc7f00013c2e",
+      "length": 37,
+      "crc_valid": true,
+      "corrupted": false,
+      "error": null
+    },
+    {
+      "scenario": "nominal_flight",
+      "seq": 1,
+      "hex": "fc0101011e0100b00400003e00eeff12005603911ef03c770679003e0d8b0bbc7f0001b0f9",
+      "length": 37,
+      "crc_valid": true,
+      "corrupted": false,
+      "error": null
+    },
+    {
+      "scenario": "nominal_flight",
+      "seq": 2,
+      "hex": "fc0101011e0200780500002600e7ff110050036e1ee63c70067a00400d8e0bbb7f0001745a",
+      "length": 37,
+      "crc_valid": true,
+      "corrupted": false,
+      "error": null
+    },
+    {
+      "scenario": "high_vibration_voltage_sag",
+      "seq": 0,
+      "hex": "fc0101011e000088130000340328fb3b018c05783790339a10480332191810ac7f0101553b",
+      "length": 37,
+      "crc_valid": true,
+      "corrupted": false,
+      "error": null
+    },
+    {
+      "scenario": "high_vibration_voltage_sag",
+      "seq": 1,
+      "hex": "fc0101011e0100501400008e035afb5601b9050e385433d6104a0350192710ab7f01013a5d",
+      "length": 37,
+      "crc_valid": true,
+      "corrupted": false,
+      "error": null
+    },
+    {
+      "scenario": "lora_link_crc_fault",
+      "seq": 0,
+      "hex": "fc0101011e0000282300007d005a002900ffff3818d039b0047e0400801c0c8c5303022dcd",
+      "length": 37,
+      "crc_valid": false,
+      "corrupted": true,
+      "error": "CRC-16 mismatch: wire=0xCD2D, expected=0x1BE1"
+    },
+    {
+      "scenario": "lora_link_crc_fault",
+      "seq": 1,
+      "hex": "fc0101011e0100f02300006e0055002e00ffff2418c639a6047f0400801e0c8b530302a57d",
+      "length": 37,
+      "crc_valid": false,
+      "corrupted": true,
+      "error": "CRC-16 mismatch: wire=0x7DA5, expected=0xAB69"
+    }
+  ]
+}

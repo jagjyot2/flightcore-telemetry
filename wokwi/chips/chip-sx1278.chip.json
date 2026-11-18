@@ -1,0 +1,24 @@
+{
+  "name": "chip-sx1278",
+  "author": "Jagjyot Singh",
+  "pins": [
+    "VCC",
+    "GND",
+    "SCK",
+    "MISO",
+    "MOSI",
+    "NSS",
+    "RST",
+    "DIO0"
+  ],
+  "controls": [
+    {
+      "id": "rssi_dbm",
+      "label": "Simulated RSSI (dBm)",
+      "type": "range",
+      "min": -125,
+      "max": -40,
+      "step": 1
+    }
+  ]
+}
