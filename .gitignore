@@ -1,0 +1,40 @@
+# Environment & Secrets
+.env
+*.local
+
+# PlatformIO & C/C++ Build Artifacts
+.pio/
+firmware/.pio/
+.pioenvs/
+.piolibdeps/
+*.o
+*.obj
+*.exe
+*.out
+*.pdb
+*.ilk
+*.bin
+*.elf
+
+# Python & Pytest
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# KiCad Transient & Lock Files
+hardware/*-backups/
+hardware/*.lck
+hardware/*.kicad_prl
+hardware/*~
+*.bak
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
