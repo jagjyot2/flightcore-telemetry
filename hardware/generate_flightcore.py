@@ -155,8 +155,8 @@ def build() -> None:
             [
                 kt.SchPin("1", "OUT", "IBAT_SENSE_RAW", "left"),
                 kt.SchPin("2", "GND", "GND", "left"),
-                kt.SchPin("3", "IN+", "VBAT_IN", "left"),
-                kt.SchPin("4", "IN-", "VBAT_LOAD", "right"),
+                kt.SchPin("3", "IN+", "SHUNT_SENSE_P", "left"),
+                kt.SchPin("4", "IN-", "SHUNT_SENSE_N", "right"),
                 kt.SchPin("5", "VS", "+3V3_BUS", "right"),
             ],
             mpn="INA180A2IDBVR",
@@ -199,10 +199,10 @@ def build() -> None:
     # Connectors & Protection
     sb.add_component(kt.SchComponent("J1", "XT60-VBAT-IN", f"{LIB}:AMASS_XT60_Vertical", [kt.SchPin("1", "VBAT+", "VBAT_IN", "left"), kt.SchPin("2", "GND", "GND", "right")], mpn="XT60-M", manufacturer="Amass", rating="60A / 25.2V"))
     sb.add_component(kt.SchComponent("J2", "XT60-PDB-OUT", f"{LIB}:AMASS_XT60_Vertical", [kt.SchPin("1", "VBAT+", "VBAT_LOAD", "left"), kt.SchPin("2", "GND", "GND", "right")], mpn="XT60-F", manufacturer="Amass", rating="60A / 25.2V"))
-    sb.add_component(kt.SchComponent("J3", "JST-XH-3P-HALL", f"{LIB}:PinHeader_1x03_P2.54mm", [kt.SchPin("1", "VCC_5V", "+5V_BUS", "left"), kt.SchPin("2", "SIG", "HALL_SIG_EXT", "left"), kt.SchPin("3", "GND", "GND", "right")], mpn="B3B-XH-A", manufacturer="JST", rating="5V / 1A"))
-    sb.add_component(kt.SchComponent("J4", "JST-XH-2P-NTC", f"{LIB}:PinHeader_1x02_P2.54mm", [kt.SchPin("1", "NTC", "NTC_ADC", "left"), kt.SchPin("2", "GND", "GND", "right")], mpn="B2B-XH-A", manufacturer="JST", rating="3.3V / 1A"))
+    sb.add_component(kt.SchComponent("J3", "JST-XH-3P-HALL", f"{LIB}:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical", [kt.SchPin("1", "VCC_5V", "+5V_BUS", "left"), kt.SchPin("2", "SIG", "HALL_SIG_EXT", "left"), kt.SchPin("3", "GND", "GND", "right")], mpn="B3B-XH-A", manufacturer="JST", rating="5V / 1A"))
+    sb.add_component(kt.SchComponent("J4", "JST-XH-2P-NTC", f"{LIB}:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical", [kt.SchPin("1", "NTC", "NTC_ADC", "left"), kt.SchPin("2", "GND", "GND", "right")], mpn="B2B-XH-A", manufacturer="JST", rating="3.3V / 1A"))
     sb.add_component(kt.SchComponent("J5", "SMA-433MHz-ANT", f"{LIB}:SMA_EdgeMount", [kt.SchPin("1", "RF", "LORA_RF_ANT", "left"), kt.SchPin("2", "GND1", "GND", "right"), kt.SchPin("3", "GND2", "GND", "right")], mpn="132289", manufacturer="Amphenol", rating="50 Ohm / 433MHz"))
-    sb.add_component(kt.SchComponent("J6", "JST-XH-4P-CAM", f"{LIB}:PinHeader_1x04_P2.54mm", [kt.SchPin("1", "VCC_5V", "+5V_BUS", "left"), kt.SchPin("2", "GND", "GND", "left"), kt.SchPin("3", "TX2", "CAM_UART_TX", "right"), kt.SchPin("4", "RX2", "CAM_UART_RX", "right")], mpn="B4B-XH-A", manufacturer="JST", rating="5V / 500mA"))
+    sb.add_component(kt.SchComponent("J6", "JST-XH-4P-CAM", f"{LIB}:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical", [kt.SchPin("1", "VCC_5V", "+5V_BUS", "left"), kt.SchPin("2", "GND", "GND", "left"), kt.SchPin("3", "TX2", "CAM_UART_TX", "right"), kt.SchPin("4", "RX2", "CAM_UART_RX", "right")], mpn="B4B-XH-A", manufacturer="JST", rating="5V / 500mA"))
 
     sb.add_component(kt.SchComponent("F1", "1.5A-Polyfuse", f"{LIB}:SMD_1206", [kt.SchPin("1", "1", "VBAT_IN", "left"), kt.SchPin("2", "2", "VBAT_FUSED", "right")], mpn="1206L150", manufacturer="Littelfuse", rating="30V / 1.5A"))
     sb.add_component(kt.SchComponent("D1", "SS34-Schottky", f"{LIB}:D_SMA", [kt.SchPin("1", "A", "VBAT_FUSED", "left"), kt.SchPin("2", "K", "VBAT_PROT", "right")], mpn="SS34", manufacturer="Vishay", rating="40V / 3A"))
@@ -229,7 +229,12 @@ def build() -> None:
     for ref, val, n1, n2 in resistors:
         sb.add_component(kt.SchComponent(ref, val, f"{LIB}:SMD_0805", [kt.SchPin("1", "1", n1, "left"), kt.SchPin("2", "2", n2, "right")], rating="50V / 0.125W"))
 
-    sb.add_component(kt.SchComponent("R11", "0.001R-3W-Shunt", f"{LIB}:R_2512_Shunt", [kt.SchPin("1", "IN+", "VBAT_IN", "left"), kt.SchPin("2", "IN-", "VBAT_LOAD", "right")], mpn="WSL25121L000FEA", manufacturer="Vishay", rating="1mOhm / 3W"))
+    sb.add_component(kt.SchComponent("R11", "0.001R-5W-Kelvin", f"{LIB}:R_Shunt_4Wire_CSS4J_4026", [
+        kt.SchPin("1", "I+", "VBAT_IN", "left"),
+        kt.SchPin("2", "I-", "VBAT_LOAD", "right"),
+        kt.SchPin("3", "S+", "SHUNT_SENSE_P", "left"),
+        kt.SchPin("4", "S-", "SHUNT_SENSE_N", "right"),
+    ], mpn="CSS4J-4026R-1L00F", manufacturer="Bourns", rating="1mOhm / 5W Kelvin"))
 
     # Capacitors
     sb.add_component(kt.SchComponent("C1", "100uF-35V", f"{LIB}:CP_Radial_D6.3mm", [kt.SchPin("1", "+", "VBAT_PROT", "left"), kt.SchPin("2", "-", "GND", "right")], rating="35V / 100uF"))
@@ -261,11 +266,12 @@ def build() -> None:
     fp_esp = kt.fp_dual_row_module("ESP32_DevKit_V1_30P", 15, 25.4)
     fp_h8 = kt.fp_pin_header_1xN("PinHeader_1x08_P2.54mm", 8)
     fp_h6 = kt.fp_pin_header_1xN("PinHeader_1x06_P2.54mm", 6)
-    fp_h4 = kt.fp_pin_header_1xN("PinHeader_1x04_P2.54mm", 4)
-    fp_h3 = kt.fp_pin_header_1xN("PinHeader_1x03_P2.54mm", 3)
+    fp_h4 = kt.fp_jst_xh_1xN("JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical", 4)
+    fp_h3 = kt.fp_jst_xh_1xN("JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical", 3)
+    fp_h2_xh = kt.fp_jst_xh_1xN("JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical", 2, horizontal=True)
     fp_h2 = kt.fp_pin_header_1xN("PinHeader_1x02_P2.54mm", 2)
     fp_xt = kt.fp_xt60("AMASS_XT60_Vertical")
-    fp_shunt = kt.fp_smd_2pin("R_2512_Shunt", 5.6, 2.2, 3.4, "Resistor_SMD.3dshapes/R_2512_6332Metric.step")
+    fp_shunt = kt.fp_kelvin_shunt_4wire("R_Shunt_4Wire_CSS4J_4026")
     fp_0805 = kt.fp_smd_2pin("SMD_0805", 1.825, 1.025, 1.4, "Resistor_SMD.3dshapes/R_0805_2012Metric.step")
     fp_1206 = kt.fp_smd_2pin("SMD_1206", 2.9, 1.4, 1.8, "Fuse.3dshapes/Fuse_1206_3216Metric.step")
     fp_sma = kt.fp_smd_2pin("D_SMA", 3.8, 1.8, 2.1, "Diode_SMD.3dshapes/D_SMA.step")
@@ -317,8 +323,8 @@ def build() -> None:
     fp_sw = kt.fp_smd_2pin("SW_SPST_SMD", 6.5, 1.6, 1.8)
     fp_mh = kt.fp_mounting_hole()
 
-    # Mounting holes (89x61 mm pattern on 96x68 mm board -> 3.5 mm inset)
-    for ref, (mx, my) in [("H1", (3.5, 3.5)), ("H2", (92.5, 3.5)), ("H3", (92.5, 64.5)), ("H4", (3.5, 64.5))]:
+    # Mounting holes (87x59 mm pattern on 96x68 mm board -> 4.5 mm inset -> 1.90 mm pad-to-edge copper clearance)
+    for ref, (mx, my) in [("H1", (4.5, 4.5)), ("H2", (91.5, 4.5)), ("H3", (91.5, 63.5)), ("H4", (4.5, 63.5))]:
         pb.add_component(kt.PcbComponent(ref, "M3-Mount-Hole", fp_mh, mx, my, 0.0, {"1": "GND"}))
 
     # Main MCU centered (x: 28.7..57.3, y: 11.9..52.1)
@@ -330,17 +336,21 @@ def build() -> None:
         "25": "VSPI_MISO", "26": "I2C_SDA", "29": "I2C_SCL", "30": "VSPI_MOSI",
     }))
 
-    # High-current input/shunt/power stage on left
-    pb.add_component(kt.PcbComponent("J1", "XT60-VBAT-IN", fp_xt, 7.5, 17.5, 0.0, {"1": "VBAT_IN", "2": "GND"}))
-    pb.add_component(kt.PcbComponent("J2", "XT60-PDB-OUT", fp_xt, 7.5, 36.5, 0.0, {"1": "VBAT_LOAD", "2": "GND"}))
-    pb.add_component(kt.PcbComponent("R11", "0.001R-3W-Shunt", fp_shunt, 20.0, 12.0, 0.0, {"1": "VBAT_IN", "2": "VBAT_LOAD"}))
-    pb.add_component(kt.PcbComponent("U5", "INA180A2IDBVR", fp_sot23_5, 20.0, 5.5, 0.0, {"1": "IBAT_SENSE_RAW", "2": "GND", "3": "VBAT_IN", "4": "VBAT_LOAD", "5": "+3V3_BUS"}))
-    pb.add_component(kt.PcbComponent("F1", "1.5A-Polyfuse", fp_1206, 18.5, 18.8, 0.0, {"1": "VBAT_IN", "2": "VBAT_FUSED"}))
-    pb.add_component(kt.PcbComponent("D1", "SS34-Schottky", fp_sma, 18.5, 24.8, 0.0, {"1": "VBAT_FUSED", "2": "VBAT_PROT"}))
-    pb.add_component(kt.PcbComponent("D3", "SMBJ28A-TVS", fp_smb, 18.5, 31.0, 0.0, {"1": "VBAT_PROT", "2": "GND"}))
-    pb.add_component(kt.PcbComponent("C1", "100uF-35V", fp_cp, 18.5, 38.8, 0.0, {"1": "VBAT_PROT", "2": "GND"}))
-    pb.add_component(kt.PcbComponent("U7", "MP1584-5V-3A-Buck", fp_buck, 13.5, 53.0, 0.0, {"1": "VBAT_PROT", "2": "GND", "3": "GND", "4": "+5V_BUS"}))
-    pb.add_component(kt.PcbComponent("U6", "AMS1117-3.3", fp_sot223, 31.0, 62.5, 0.0, {"1": "GND", "2": "+3V3_BUS", "3": "+5V_BUS"}))
+    # High-current input/shunt/power stage on left (clear of 4.5mm corner holes & R11 Kelvin shunt)
+    pb.add_component(kt.PcbComponent("J1", "XT60-VBAT-IN", fp_xt, 7.5, 18.2, 0.0, {"1": "VBAT_IN", "2": "GND"}))
+    pb.add_component(kt.PcbComponent("J2", "XT60-PDB-OUT", fp_xt, 7.5, 37.0, 0.0, {"1": "VBAT_LOAD", "2": "GND"}))
+    pb.add_component(kt.PcbComponent("R11", "0.001R-5W-Kelvin", fp_shunt, 21.5, 16.5, 0.0, {
+        "1": "VBAT_IN", "2": "VBAT_LOAD", "3": "SHUNT_SENSE_P", "4": "SHUNT_SENSE_N",
+    }))
+    pb.add_component(kt.PcbComponent("U5", "INA180A2IDBVR", fp_sot23_5, 21.5, 5.5, 0.0, {
+        "1": "IBAT_SENSE_RAW", "2": "GND", "3": "SHUNT_SENSE_P", "4": "SHUNT_SENSE_N", "5": "+3V3_BUS",
+    }))
+    pb.add_component(kt.PcbComponent("F1", "1.5A-Polyfuse", fp_1206, 24.8, 24.5, 0.0, {"1": "VBAT_IN", "2": "VBAT_FUSED"}))
+    pb.add_component(kt.PcbComponent("D1", "SS34-Schottky", fp_sma, 17.5, 24.5, 0.0, {"1": "VBAT_FUSED", "2": "VBAT_PROT"}))
+    pb.add_component(kt.PcbComponent("D3", "SMBJ28A-TVS", fp_smb, 17.5, 31.0, 0.0, {"1": "VBAT_PROT", "2": "GND"}))
+    pb.add_component(kt.PcbComponent("C1", "100uF-35V", fp_cp, 17.5, 38.8, 0.0, {"1": "VBAT_PROT", "2": "GND"}))
+    pb.add_component(kt.PcbComponent("U7", "MP1584-5V-3A-Buck", fp_buck, 16.0, 53.5, 0.0, {"1": "VBAT_PROT", "2": "GND", "3": "GND", "4": "+5V_BUS"}))
+    pb.add_component(kt.PcbComponent("U6", "AMS1117-3.3", fp_sot223, 35.0, 61.5, 0.0, {"1": "GND", "2": "+3V3_BUS", "3": "+5V_BUS"}))
 
     # Right side: IMU, ToF, LoRa, SMA, CAM
     pb.add_component(kt.PcbComponent("U2", "MPU6050-GY521", fp_h8, 64.5, 24.5, 0.0, {"1": "+3V3_BUS", "2": "GND", "3": "I2C_SCL", "4": "I2C_SDA", "7": "GND", "8": "MPU_INT"}))
@@ -352,11 +362,11 @@ def build() -> None:
     pb.add_component(kt.PcbComponent("J5", "SMA-433MHz-ANT", fp_sma_rf, 92.5, 50.0, 0.0, {"1": "LORA_RF_ANT", "2": "GND", "3": "GND"}))
     pb.add_component(kt.PcbComponent("J6", "JST-XH-4P-CAM", fp_h4, 86.0, 18.0, 0.0, {"1": "+5V_BUS", "2": "GND", "3": "CAM_UART_TX", "4": "CAM_UART_RX"}))
     pb.add_component(kt.PcbComponent("J3", "JST-XH-3P-HALL", fp_h3, 62.0, 58.2, 0.0, {"1": "+5V_BUS", "2": "HALL_SIG_EXT", "3": "GND"}))
-    pb.add_component(kt.PcbComponent("J4", "JST-XH-2P-NTC", fp_h2, 23.5, 64.2, 0.0, {"1": "NTC_ADC", "2": "GND"}))
-    pb.add_component(kt.PcbComponent("JP1", "Jumper-2P-3V3-Bench", fp_h2, 43.0, 59.5, 0.0, {"1": "ESP32_3V3", "2": "+3V3_BUS"}))
-    pb.add_component(kt.PcbComponent("SW1", "Tactile-CAL-Btn", fp_sw, 51.5, 62.0, 0.0, {"1": "CAL_BTN", "2": "GND"}))
-    pb.add_component(kt.PcbComponent("D2", "BAT54S-Clamp", fp_sot23, 25.5, 46.5, 0.0, {"1": "GND", "2": "+3V3_BUS", "3": "VBAT_ADC"}))
-    pb.add_component(kt.PcbComponent("D4", "LED-Green-0805", fp_0805, 62.0, 44.8, 0.0, {"1": "STATUS_LED", "2": "STATUS_LED_K"}))
+    pb.add_component(kt.PcbComponent("J4", "JST-XH-2P-NTC", fp_h2_xh, 19.5, 64.8, 0.0, {"1": "NTC_ADC", "2": "GND"}))
+    pb.add_component(kt.PcbComponent("JP1", "Jumper-2P-3V3-Bench", fp_h2, 43.0, 61.5, 0.0, {"1": "ESP32_3V3", "2": "+3V3_BUS"}))
+    pb.add_component(kt.PcbComponent("SW1", "Tactile-CAL-Btn", fp_sw, 52.5, 64.0, 0.0, {"1": "CAL_BTN", "2": "GND"}))
+    pb.add_component(kt.PcbComponent("D2", "BAT54S-Clamp", fp_sot23, 26.2, 47.2, 0.0, {"1": "GND", "2": "+3V3_BUS", "3": "VBAT_ADC"}))
+    pb.add_component(kt.PcbComponent("D4", "LED-Green-0805", fp_0805, 67.0, 45.0, 0.0, {"1": "STATUS_LED", "2": "STATUS_LED_K"}))
 
     # Passives cleanly spaced (>= 5.0 mm Y or X spacing)
     passives = [
@@ -366,18 +376,18 @@ def build() -> None:
         ("R4", "10k", fp_0805, 80.0, 3.8, {"1": "+3V3_BUS", "2": "LORA_CS"}),
         ("R5", "10k", fp_0805, 62.0, 39.8, {"1": "+3V3_BUS", "2": "HALL_SIG"}),
         ("R6", "1k", fp_0805, 62.0, 49.8, {"1": "HALL_SIG_EXT", "2": "HALL_SIG"}),
-        ("R7", "100k", fp_0805, 25.5, 36.0, {"1": "VBAT_PROT", "2": "VBAT_ADC"}),
-        ("R8", "10k", fp_0805, 25.5, 52.3, {"1": "VBAT_ADC", "2": "GND"}),
-        ("R9", "10k", fp_0805, 11.0, 64.0, {"1": "+3V3_BUS", "2": "NTC_ADC"}),
-        ("R10", "100R", fp_0805, 29.0, 5.5, {"1": "IBAT_SENSE_RAW", "2": "IBAT_ADC"}),
-        ("R12", "330R", fp_0805, 68.0, 66.0, {"1": "STATUS_LED_K", "2": "GND"}),
-        ("C2", "10uF-16V", fp_0805, 25.0, 57.6, {"1": "+5V_BUS", "2": "GND"}),
-        ("C3", "10uF-16V", fp_0805, 38.0, 57.5, {"1": "+5V_BUS", "2": "GND"}),
-        ("C4", "22uF-10V", fp_0805, 38.0, 64.5, {"1": "+3V3_BUS", "2": "GND"}),
-        ("C5", "100nF-25V", fp_0805, 68.0, 60.5, {"1": "HALL_SIG", "2": "GND"}),
-        ("C6", "100nF-25V", fp_0805, 25.5, 41.0, {"1": "VBAT_ADC", "2": "GND"}),
+        ("R7", "100k", fp_0805, 26.2, 30.2, {"1": "VBAT_PROT", "2": "VBAT_ADC"}),
+        ("R8", "10k", fp_0805, 26.2, 41.0, {"1": "VBAT_ADC", "2": "GND"}),
+        ("R9", "10k", fp_0805, 26.5, 64.8, {"1": "+3V3_BUS", "2": "NTC_ADC"}),
+        ("R10", "100R", fp_0805, 30.5, 5.5, {"1": "IBAT_SENSE_RAW", "2": "IBAT_ADC"}),
+        ("R12", "330R", fp_0805, 68.0, 64.5, {"1": "STATUS_LED_K", "2": "GND"}),
+        ("C2", "10uF-16V", fp_0805, 4.5, 53.5, {"1": "+5V_BUS", "2": "GND"}),
+        ("C3", "10uF-16V", fp_0805, 26.2, 54.5, {"1": "+5V_BUS", "2": "GND"}),
+        ("C4", "22uF-10V", fp_0805, 51.5, 56.5, {"1": "+3V3_BUS", "2": "GND"}),
+        ("C5", "100nF-25V", fp_0805, 67.2, 59.2, {"1": "HALL_SIG", "2": "GND"}),
+        ("C6", "100nF-25V", fp_0805, 26.2, 35.6, {"1": "VBAT_ADC", "2": "GND"}),
         ("C7", "100nF-25V", fp_0805, 36.0, 5.5, {"1": "IBAT_ADC", "2": "GND"}),
-        ("C8", "100nF-25V", fp_0805, 16.5, 64.0, {"1": "NTC_ADC", "2": "GND"}),
+        ("C8", "100nF-25V", fp_0805, 13.0, 64.8, {"1": "NTC_ADC", "2": "GND"}),
         ("C9", "100nF-25V", fp_0805, 64.5, 9.3, {"1": "+3V3_BUS", "2": "GND"}),
         ("C10", "100nF-25V", fp_0805, 72.0, 9.3, {"1": "+3V3_BUS", "2": "GND"}),
         ("C11", "10uF-10V", fp_0805, 74.0, 63.0, {"1": "+3V3_BUS", "2": "GND"}),
@@ -391,18 +401,34 @@ def build() -> None:
     overlaps = kt.check_courtyards(pb)
     assert not overlaps, f"Courtyard overlaps: {overlaps}"
 
-    # Explicit 50-Ohm RF feedline (short straight track from U4.17 to J5.1) + J6.2 right-side GND escape to H2
+    # High-current 3.5 mm dual-layer (F.Cu + B.Cu) Kelvin main power buses + 50-Ohm RF feedline + H2 GND escape
+    j1_p1 = pb.pad_abs_xy("J1", "1")
+    j2_p1 = pb.pad_abs_xy("J2", "1")
+    r11_p1 = pb.pad_abs_xy("R11", "1")
+    r11_p2 = pb.pad_abs_xy("R11", "2")
+    pb.add_track("VBAT_IN", 3.5, [j1_p1, (16.8, j1_p1[1]), r11_p1], "F.Cu")
+    pb.add_track("VBAT_IN", 3.5, [j1_p1, (16.8, j1_p1[1])], "B.Cu")
+    pb.add_via("VBAT_IN", 16.8, j1_p1[1], 1.1, 0.5)
+
+    pb.add_track("VBAT_LOAD", 3.5, [r11_p2, (25.7, 19.0)], "F.Cu")
+    pb.add_via("VBAT_LOAD", 25.7, 19.0, 1.1, 0.5)
+    pb.add_track("VBAT_LOAD", 3.5, [(25.7, 19.0), (25.7, j2_p1[1]), j2_p1], "B.Cu")
+    pb.add_track("VBAT_LOAD", 3.5, [(11.5, j2_p1[1]), j2_p1], "F.Cu")
+    pb.add_via("VBAT_LOAD", 11.5, j2_p1[1], 1.1, 0.5)
+
     pb.add_track("LORA_RF_ANT", 0.95, [pb.pad_abs_xy("U4", "17"), pb.pad_abs_xy("J5", "1")], "F.Cu")
-    pb.add_track("GND", 0.30, [pb.pad_abs_xy("J6", "2"), (90.5, 16.73), (90.5, 5.5), pb.pad_abs_xy("H2", "1")], "F.Cu")
+    pb.add_track("GND", 0.30, [pb.pad_abs_xy("J6", "2"), (90.5, 16.75), (90.5, 5.5), pb.pad_abs_xy("H2", "1")], "F.Cu")
+    pb.add_track("GND", 0.35, [pb.pad_abs_xy("U2", "7"), (67.5, 30.85), (67.5, 38.0), pb.pad_abs_xy("U4", "1"), pb.pad_abs_xy("U4", "2")], "F.Cu")
+    pb.add_track("GND", 0.35, [pb.pad_abs_xy("C9", "2"), (67.5, 9.3), (67.5, 18.15), pb.pad_abs_xy("U2", "2")], "F.Cu")
 
     router = kt.AutoRouter2Layer(pb, grid_mm=0.5, clearance_mm=0.22)
     route_res = router.route_all(net_widths={
-        "VBAT_IN": 0.7,
-        "VBAT_LOAD": 0.6,
-        "VBAT_FUSED": 0.6,
-        "VBAT_PROT": 0.6,
-        "+5V_BUS": 0.45,
-        "+3V3_BUS": 0.4,
+        "VBAT_IN": 1.2,
+        "VBAT_LOAD": 1.2,
+        "VBAT_FUSED": 0.8,
+        "VBAT_PROT": 0.8,
+        "+5V_BUS": 0.6,
+        "+3V3_BUS": 0.5,
     })
     print("FlightCore AutoRouter failed list:", route_res["failed"])
     pb.write(HW_DIR)
@@ -440,7 +466,7 @@ def build() -> None:
         "FlightCore PCB KiCad 10.0.8 ERC & DRC Verification Report\n"
         "===================================================================\n"
         "Board Dimensions        : 96.0 mm x 68.0 mm (2-Layer FR4, 1.6 mm)\n"
-        "Mounting Pattern        : 89.0 mm x 61.0 mm (4x M3 3.2mm)\n"
+        "Mounting Pattern        : 87.0 mm x 59.0 mm (4x M3 3.2mm, 4.5mm inset)\n"
         "KiCad CLI Version       : 10.0.8\n"
         f"ERC Violations          : {summary['erc_violations']}\n"
         f"DRC Violations          : {summary['drc_violations']}\n"

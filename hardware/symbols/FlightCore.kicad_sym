@@ -250,7 +250,7 @@
       (duplicate_pin_numbers_are_jumpers no)
       (property "Reference" "J" (at 0 5.08 0) (effects (font (size 1.27 1.27))))
       (property "Value" "JST-XH-3P-HALL" (at 0 -5.08 0) (effects (font (size 1.27 1.27))))
-      (property "Footprint" "FlightCore:PinHeader_1x03_P2.54mm" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
+      (property "Footprint" "FlightCore:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
       (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
       (property "Description" "" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
       (symbol "SYM_J3_JST_XH_3P_HALL_0_1"
@@ -271,7 +271,7 @@
       (duplicate_pin_numbers_are_jumpers no)
       (property "Reference" "J" (at 0 3.81 0) (effects (font (size 1.27 1.27))))
       (property "Value" "JST-XH-2P-NTC" (at 0 -3.81 0) (effects (font (size 1.27 1.27))))
-      (property "Footprint" "FlightCore:PinHeader_1x02_P2.54mm" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
+      (property "Footprint" "FlightCore:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
       (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
       (property "Description" "" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
       (symbol "SYM_J4_JST_XH_2P_NTC_0_1"
@@ -312,7 +312,7 @@
       (duplicate_pin_numbers_are_jumpers no)
       (property "Reference" "J" (at 0 5.08 0) (effects (font (size 1.27 1.27))))
       (property "Value" "JST-XH-4P-CAM" (at 0 -5.08 0) (effects (font (size 1.27 1.27))))
-      (property "Footprint" "FlightCore:PinHeader_1x04_P2.54mm" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
+      (property "Footprint" "FlightCore:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
       (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
       (property "Description" "" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
       (symbol "SYM_J6_JST_XH_4P_CAM_0_1"
@@ -686,24 +686,26 @@
         (pin bidirectional line (at 12.7 0.0 180) (length 2.54) (name "2" (effects (font (size 0.9 0.9)))) (number "2" (effects (font (size 0.9 0.9)))))
       )
     )
-    (symbol "SYM_R11_0_001R_3W_Shunt"
+    (symbol "SYM_R11_0_001R_5W_Kelvin"
       (pin_names (offset 1.016))
       (exclude_from_sim no)
       (in_bom yes)
       (on_board yes)
       (in_pos_files yes)
       (duplicate_pin_numbers_are_jumpers no)
-      (property "Reference" "R" (at 0 3.81 0) (effects (font (size 1.27 1.27))))
-      (property "Value" "0.001R-3W-Shunt" (at 0 -3.81 0) (effects (font (size 1.27 1.27))))
-      (property "Footprint" "FlightCore:R_2512_Shunt" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
+      (property "Reference" "R" (at 0 5.08 0) (effects (font (size 1.27 1.27))))
+      (property "Value" "0.001R-5W-Kelvin" (at 0 -5.08 0) (effects (font (size 1.27 1.27))))
+      (property "Footprint" "FlightCore:R_Shunt_4Wire_CSS4J_4026" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
       (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
       (property "Description" "" (at 0 0 0) (effects (font (size 1.0 1.0)) hide))
-      (symbol "SYM_R11_0_001R_3W_Shunt_0_1"
-        (rectangle (start -10.16 -2.54) (end 10.16 2.54) (stroke (width 0.254) (type default)) (fill (type background)))
+      (symbol "SYM_R11_0_001R_5W_Kelvin_0_1"
+        (rectangle (start -10.16 -3.81) (end 10.16 3.81) (stroke (width 0.254) (type default)) (fill (type background)))
       )
-      (symbol "SYM_R11_0_001R_3W_Shunt_1_1"
-        (pin bidirectional line (at -12.7 0.0 0) (length 2.54) (name "IN+" (effects (font (size 0.9 0.9)))) (number "1" (effects (font (size 0.9 0.9)))))
-        (pin bidirectional line (at 12.7 0.0 180) (length 2.54) (name "IN-" (effects (font (size 0.9 0.9)))) (number "2" (effects (font (size 0.9 0.9)))))
+      (symbol "SYM_R11_0_001R_5W_Kelvin_1_1"
+        (pin bidirectional line (at -12.7 1.27 0) (length 2.54) (name "I+" (effects (font (size 0.9 0.9)))) (number "1" (effects (font (size 0.9 0.9)))))
+        (pin bidirectional line (at -12.7 -1.27 0) (length 2.54) (name "S+" (effects (font (size 0.9 0.9)))) (number "3" (effects (font (size 0.9 0.9)))))
+        (pin bidirectional line (at 12.7 1.27 180) (length 2.54) (name "I-" (effects (font (size 0.9 0.9)))) (number "2" (effects (font (size 0.9 0.9)))))
+        (pin bidirectional line (at 12.7 -1.27 180) (length 2.54) (name "S-" (effects (font (size 0.9 0.9)))) (number "4" (effects (font (size 0.9 0.9)))))
       )
     )
     (symbol "SYM_C1_100uF_35V"

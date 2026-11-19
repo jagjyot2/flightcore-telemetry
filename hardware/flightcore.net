@@ -2,7 +2,7 @@
 	(version "E")
 	(design
 		(source "S:\\Projects\\Multi projects\\ENGINEERING-PORTFOLIO\\04-FLIGHTCORE\\hardware\\flightcore.kicad_sch")
-		(date "2026-11-18T18:44:56")
+		(date "2026-11-19T17:53:17")
 		(tool "Eeschema 10.0.8")
 		(sheet
 			(number "1")
@@ -1380,7 +1380,7 @@
 		(comp
 			(ref "J3")
 			(value "JST-XH-3P-HALL")
-			(footprint "FlightCore:PinHeader_1x03_P2.54mm")
+			(footprint "FlightCore:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical")
 			(fields
 				(field
 					(name "MPN") "B3B-XH-A")
@@ -1389,7 +1389,7 @@
 				(field
 					(name "Rating") "5V / 1A")
 				(field
-					(name "Footprint") "FlightCore:PinHeader_1x03_P2.54mm")
+					(name "Footprint") "FlightCore:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical")
 				(field
 					(name "Datasheet")
 				)
@@ -1447,7 +1447,7 @@
 		(comp
 			(ref "J4")
 			(value "JST-XH-2P-NTC")
-			(footprint "FlightCore:PinHeader_1x02_P2.54mm")
+			(footprint "FlightCore:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical")
 			(fields
 				(field
 					(name "MPN") "B2B-XH-A")
@@ -1456,7 +1456,7 @@
 				(field
 					(name "Rating") "3.3V / 1A")
 				(field
-					(name "Footprint") "FlightCore:PinHeader_1x02_P2.54mm")
+					(name "Footprint") "FlightCore:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical")
 				(field
 					(name "Datasheet")
 				)
@@ -1578,7 +1578,7 @@
 		(comp
 			(ref "J6")
 			(value "JST-XH-4P-CAM")
-			(footprint "FlightCore:PinHeader_1x04_P2.54mm")
+			(footprint "FlightCore:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical")
 			(fields
 				(field
 					(name "MPN") "B4B-XH-A")
@@ -1587,7 +1587,7 @@
 				(field
 					(name "Rating") "5V / 500mA")
 				(field
-					(name "Footprint") "FlightCore:PinHeader_1x04_P2.54mm")
+					(name "Footprint") "FlightCore:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical")
 				(field
 					(name "Datasheet")
 				)
@@ -2231,17 +2231,17 @@
 		)
 		(comp
 			(ref "R11")
-			(value "0.001R-3W-Shunt")
-			(footprint "FlightCore:R_2512_Shunt")
+			(value "0.001R-5W-Kelvin")
+			(footprint "FlightCore:R_Shunt_4Wire_CSS4J_4026")
 			(fields
 				(field
-					(name "MPN") "WSL25121L000FEA")
+					(name "MPN") "CSS4J-4026R-1L00F")
 				(field
-					(name "Manufacturer") "Vishay")
+					(name "Manufacturer") "Bourns")
 				(field
-					(name "Rating") "1mOhm / 3W")
+					(name "Rating") "1mOhm / 5W Kelvin")
 				(field
-					(name "Footprint") "FlightCore:R_2512_Shunt")
+					(name "Footprint") "FlightCore:R_Shunt_4Wire_CSS4J_4026")
 				(field
 					(name "Datasheet")
 				)
@@ -2251,20 +2251,20 @@
 			)
 			(libsource
 				(lib "FlightCore")
-				(part "SYM_R11_0_001R_3W_Shunt")
+				(part "SYM_R11_0_001R_5W_Kelvin")
 				(description "")
 			)
 			(property
 				(name "MPN")
-				(value "WSL25121L000FEA")
+				(value "CSS4J-4026R-1L00F")
 			)
 			(property
 				(name "Manufacturer")
-				(value "Vishay")
+				(value "Bourns")
 			)
 			(property
 				(name "Rating")
-				(value "1mOhm / 3W")
+				(value "1mOhm / 5W Kelvin")
 			)
 			(property
 				(name "Sheetname")
@@ -2287,7 +2287,13 @@
 							(num "1")
 						)
 						(pin
+							(num "3")
+						)
+						(pin
 							(num "2")
+						)
+						(pin
+							(num "4")
 						)
 					)
 				)
@@ -3752,7 +3758,7 @@
 				(field
 					(name "Value") "JST-XH-3P-HALL")
 				(field
-					(name "Footprint") "FlightCore:PinHeader_1x03_P2.54mm")
+					(name "Footprint") "FlightCore:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical")
 				(field
 					(name "Datasheet")
 				)
@@ -3787,7 +3793,7 @@
 				(field
 					(name "Value") "JST-XH-2P-NTC")
 				(field
-					(name "Footprint") "FlightCore:PinHeader_1x02_P2.54mm")
+					(name "Footprint") "FlightCore:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical")
 				(field
 					(name "Datasheet")
 				)
@@ -3852,7 +3858,7 @@
 				(field
 					(name "Value") "JST-XH-4P-CAM")
 				(field
-					(name "Footprint") "FlightCore:PinHeader_1x04_P2.54mm")
+					(name "Footprint") "FlightCore:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical")
 				(field
 					(name "Datasheet")
 				)
@@ -3945,14 +3951,14 @@
 		)
 		(libpart
 			(lib "FlightCore")
-			(part "SYM_R11_0_001R_3W_Shunt")
+			(part "SYM_R11_0_001R_5W_Kelvin")
 			(fields
 				(field
 					(name "Reference") "R")
 				(field
-					(name "Value") "0.001R-3W-Shunt")
+					(name "Value") "0.001R-5W-Kelvin")
 				(field
-					(name "Footprint") "FlightCore:R_2512_Shunt")
+					(name "Footprint") "FlightCore:R_Shunt_4Wire_CSS4J_4026")
 				(field
 					(name "Datasheet")
 				)
@@ -3963,12 +3969,22 @@
 			(pins
 				(pin
 					(num "1")
-					(name "IN+")
+					(name "I+")
 					(type "bidirectional")
 				)
 				(pin
 					(num "2")
-					(name "IN-")
+					(name "I-")
+					(type "bidirectional")
+				)
+				(pin
+					(num "3")
+					(name "S+")
+					(type "bidirectional")
+				)
+				(pin
+					(num "4")
+					(name "S-")
 					(type "bidirectional")
 				)
 			)
@@ -5573,6 +5589,40 @@
 		)
 		(net
 			(code "20")
+			(name "SHUNT_SENSE_N")
+			(class "Default")
+			(node
+				(ref "R11")
+				(pin "4")
+				(pinfunction "S-_4")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U5")
+				(pin "4")
+				(pinfunction "IN-_4")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "21")
+			(name "SHUNT_SENSE_P")
+			(class "Default")
+			(node
+				(ref "R11")
+				(pin "3")
+				(pinfunction "S+_3")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "U5")
+				(pin "3")
+				(pinfunction "IN+_3")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "22")
 			(name "STATUS_LED")
 			(class "Default")
 			(node
@@ -5589,7 +5639,7 @@
 			)
 		)
 		(net
-			(code "21")
+			(code "23")
 			(name "STATUS_LED_K")
 			(class "Default")
 			(node
@@ -5606,7 +5656,7 @@
 			)
 		)
 		(net
-			(code "22")
+			(code "24")
 			(name "TOF_INT")
 			(class "Default")
 			(node
@@ -5623,7 +5673,7 @@
 			)
 		)
 		(net
-			(code "23")
+			(code "25")
 			(name "TOF_XSHUT")
 			(class "Default")
 			(node
@@ -5646,7 +5696,7 @@
 			)
 		)
 		(net
-			(code "24")
+			(code "26")
 			(name "VBAT_ADC")
 			(class "Default")
 			(node
@@ -5681,7 +5731,7 @@
 			)
 		)
 		(net
-			(code "25")
+			(code "27")
 			(name "VBAT_FUSED")
 			(class "Default")
 			(node
@@ -5698,7 +5748,7 @@
 			)
 		)
 		(net
-			(code "26")
+			(code "28")
 			(name "VBAT_IN")
 			(class "Default")
 			(node
@@ -5716,18 +5766,12 @@
 			(node
 				(ref "R11")
 				(pin "1")
-				(pinfunction "IN+_1")
-				(pintype "bidirectional")
-			)
-			(node
-				(ref "U5")
-				(pin "3")
-				(pinfunction "IN+_3")
+				(pinfunction "I+_1")
 				(pintype "bidirectional")
 			)
 		)
 		(net
-			(code "27")
+			(code "29")
 			(name "VBAT_LOAD")
 			(class "Default")
 			(node
@@ -5739,18 +5783,12 @@
 			(node
 				(ref "R11")
 				(pin "2")
-				(pinfunction "IN-_2")
-				(pintype "bidirectional")
-			)
-			(node
-				(ref "U5")
-				(pin "4")
-				(pinfunction "IN-_4")
+				(pinfunction "I-_2")
 				(pintype "bidirectional")
 			)
 		)
 		(net
-			(code "28")
+			(code "30")
 			(name "VBAT_PROT")
 			(class "Default")
 			(node
@@ -5785,7 +5823,7 @@
 			)
 		)
 		(net
-			(code "29")
+			(code "31")
 			(name "VSPI_MISO")
 			(class "Default")
 			(node
@@ -5802,7 +5840,7 @@
 			)
 		)
 		(net
-			(code "30")
+			(code "32")
 			(name "VSPI_MOSI")
 			(class "Default")
 			(node
@@ -5819,7 +5857,7 @@
 			)
 		)
 		(net
-			(code "31")
+			(code "33")
 			(name "VSPI_SCK")
 			(class "Default")
 			(node
@@ -5836,7 +5874,7 @@
 			)
 		)
 		(net
-			(code "32")
+			(code "34")
 			(name "unconnected-(U1-D12{slash}GPIO12-Pad12)")
 			(class "Default")
 			(node
@@ -5847,7 +5885,7 @@
 			)
 		)
 		(net
-			(code "33")
+			(code "35")
 			(name "unconnected-(U1-D13{slash}GPIO13-Pad13)")
 			(class "Default")
 			(node
@@ -5858,7 +5896,7 @@
 			)
 		)
 		(net
-			(code "34")
+			(code "36")
 			(name "unconnected-(U1-D15{slash}GPIO15-Pad18)")
 			(class "Default")
 			(node
@@ -5869,7 +5907,7 @@
 			)
 		)
 		(net
-			(code "35")
+			(code "37")
 			(name "unconnected-(U1-EN-Pad1)")
 			(class "Default")
 			(node
@@ -5880,7 +5918,7 @@
 			)
 		)
 		(net
-			(code "36")
+			(code "38")
 			(name "unconnected-(U1-RX0{slash}GPIO3-Pad27)")
 			(class "Default")
 			(node
@@ -5891,7 +5929,7 @@
 			)
 		)
 		(net
-			(code "37")
+			(code "39")
 			(name "unconnected-(U1-TX0{slash}GPIO1-Pad28)")
 			(class "Default")
 			(node
@@ -5902,7 +5940,7 @@
 			)
 		)
 		(net
-			(code "38")
+			(code "40")
 			(name "unconnected-(U1-VN{slash}GPIO39-Pad3)")
 			(class "Default")
 			(node
@@ -5913,7 +5951,7 @@
 			)
 		)
 		(net
-			(code "39")
+			(code "41")
 			(name "unconnected-(U2-XCL-Pad6)")
 			(class "Default")
 			(node
@@ -5924,7 +5962,7 @@
 			)
 		)
 		(net
-			(code "40")
+			(code "42")
 			(name "unconnected-(U2-XDA-Pad5)")
 			(class "Default")
 			(node
@@ -5935,7 +5973,7 @@
 			)
 		)
 		(net
-			(code "41")
+			(code "43")
 			(name "unconnected-(U4-DIO1-Pad6)")
 			(class "Default")
 			(node
@@ -5946,7 +5984,7 @@
 			)
 		)
 		(net
-			(code "42")
+			(code "44")
 			(name "unconnected-(U4-DIO2-Pad7)")
 			(class "Default")
 			(node
@@ -5957,7 +5995,7 @@
 			)
 		)
 		(net
-			(code "43")
+			(code "45")
 			(name "unconnected-(U4-DIO3-Pad8)")
 			(class "Default")
 			(node
@@ -5968,7 +6006,7 @@
 			)
 		)
 		(net
-			(code "44")
+			(code "46")
 			(name "unconnected-(U4-DIO4-Pad9)")
 			(class "Default")
 			(node
@@ -5979,7 +6017,7 @@
 			)
 		)
 		(net
-			(code "45")
+			(code "47")
 			(name "unconnected-(U4-DIO5-Pad10)")
 			(class "Default")
 			(node

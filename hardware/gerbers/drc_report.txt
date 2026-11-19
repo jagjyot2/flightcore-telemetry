@@ -2,7 +2,7 @@
 FlightCore PCB KiCad 10.0.8 ERC & DRC Verification Report
 ===================================================================
 Board Dimensions        : 96.0 mm x 68.0 mm (2-Layer FR4, 1.6 mm)
-Mounting Pattern        : 89.0 mm x 61.0 mm (4x M3 3.2mm)
+Mounting Pattern        : 87.0 mm x 59.0 mm (4x M3 3.2mm, 4.5mm inset)
 KiCad CLI Version       : 10.0.8
 ERC Violations          : 0
 DRC Violations          : 0
